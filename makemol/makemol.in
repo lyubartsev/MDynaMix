@@ -1,0 +1,21 @@
+#  Example of input file for utility makemol
+#  Create .mmol file for DMPC lipid with Slipids force field
+#  Simple molecular file (.smol) should already exist (prepared by other tools)
+#
+#  Force field file
+Slipids-c36.ff
+#  simple molecular file .smol / .crd / .alc : 
+dmpc.smol
+# Format of the input file:
+#  0 - default (Xmol - like: .smol)
+#  1 - CHARMM-like (.crd)
+#  2 - Alchemy-like (.alc)
+0
+#  Include Urey-Bradley term?  (0/1)
+1
+#  Skip writing of non-present angles in .mmol?  (0/1)
+0
+#  Output .mmol file
+dmpc.mmol
+#
+#  Log will be written in makemol.log

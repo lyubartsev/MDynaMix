@@ -1,0 +1,38 @@
+Trajectory Analysis package from MDynaMix
+
+Version 5.3:  Support for Gromacs .trr and .xtc files included
+
+To compile everything:
+
+./setup.sh
+
+All executables can be found in "bin"
+
+Examples (templates) of input files can be found in "inputs"
+
+Modified / new utilities can be compiled using static libraries
+libtranal_base.a and libxdrfile.a in "lib",  for example:
+
+gfortran -o rdf-mod rdf-mof.f -Llib -ltranal_base -lxdrfile
+
+
+New features
+-----------------------------------------
+
+for reading .trr / .xtc trajectories, use statement
+
+NFORM = 'TRR'  or NFORM = 'XTC' 
+
+If only a single trajectory file is analysed, use
+
+NFBEG = -1
+
+Then the trajectory file name should correspond exactly to the nname in
+FNAME = 
+
+If NFBEG >= 0, it is supposed that trajectory files are numbered.
+The name given in parameter FNAME is complemented by a number changing from
+NFBEG to NFEND
+
+
+

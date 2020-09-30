@@ -1,0 +1,14 @@
+objects = aver.o cpu_mpi.o input.o forces.o main.o mdee.o mdstep.o \
+       restart.o mpi.o pimd.o service.o setup.o util.o 
+
+   FC = mpif77
+   FFLAGS = -O3 -fallow-argument-mismatch
+   LDFLAGS = 
+   TARGET = mdp
+
+default: $(objects) 
+	$(FC) $(LDFLAGS) -o $(TARGET) $(objects)
+   $(objects) : dimpar.h prcm.h
+
+clean: 
+	rm -f $(TARGET) *.o

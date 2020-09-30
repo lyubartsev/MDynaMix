@@ -1,0 +1,15 @@
+Makemol suite
+
+Compile:
+
+gfortran -o makemol makemol.f
+
+Usage:
+
+makemol <smol/mol2 file>  <force_field.ff>
+
+
+Other:
+
+char2mdx : convert CHARMM parameter file to MDynaMix force field file
+subs:  substitute atom coordinates in a .smol file

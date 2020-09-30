@@ -1,0 +1,275 @@
+v2.1
+NVT ensemble (v2.1)  
+Essential reorganisation of force calculations (v2.4)
+NPT ensemble (v3.0)            
+optimization of Ewald sum calculations (v3.3)
+complex DNA-like molecules (v3.5)                 
+non-cubic (rectangular) cell (v3.6)
+hydrogen bonds included (10-12 potential) (v3.7)
+first parallel version (v3.8)    
+universal code for sequential and parallel executions  (v3.9) 
+
+v4.0
+- fully parallelized code, including particle moving
+corrected small bug in calculations of type-type intermolecular energies.
+(there were different weight from the short and long forces) 
+
+v 4.1  
+- new format on the input file (free format with commentaries instead
+  of NAMELIST)
+- slightly changed format of .mol files 
+- readind of initial atom or molecular center of mass coordinates 
+  from a file included 
+- special LJ parameters for 1-4 intramolecular interactions   
+- Morse potential for arbitrary bonds       
+- Sum(cos(fi)**n) type of torsion potential (for hydrocarbon chains)
+- Improper dihedral angles potential 
+
+v.4.2
+
+- improved memory-saving algorithm. All two-dimensionl arrays A(NS,NS)
+where NS is the total number of different sites on molecules are removed 
+without noteciable increasing of computation time.
+
+- option for separate pressure control in each direction. 
+Components Pxx,Pyy,Pzz of the pressure tenzor are coupled to the 
+Nose-Hoover thermostat separately (non diagonal terms of the pressure 
+tensor are supposed to be 0). Do not use the option for isotropic systems
+in which nothing prevent the system to shrink the size in one direction and
+increase it in another while keeping the volume (and pressure) constant.
+
+- reaction field method for treatment of electrostatic interactions,
+including "generalised reaction field" method for non-zero ionic strength
+(I.G.Tironi, R.Sperb, P.E.Smith, W.F.van Gunsteren, 
+J.Chem.Phys.,102,5451(1995))
+
+- cell of truncated octahedron geometry:
+  |x| < L/2 ; |y| < L/2 ;  |z| < L/2 ; |x|+|y|+|z| < 0.75*L
+
+- cell oh hexagonal geometry
+
+- If Ewald method for electrostatic interactions is not used, the list
+of neighbours for atoms on small molecules (Natoms <= 5) is defined from
+the distance between molecular centre-of-mass, that is the whole molecules 
+occur within or out cut-off. In other cases, as before, list of neigbours
+for each atom is determined from distances between the atoms. 
+
+21.10.97  Bug in pressure calculations in the case of parallel implementation
+of constrain dynamics (SHAKE) is removed.  
+
+v.4.2 -> 4.3
+------------
+
+In v.4.3 most of the subroutines were essentially regrouped into new files
+See details in file README
+A lot of comments were inserted into the code.
+
+The MD algorithm for NVT or NPT ensemble was rewritten 
+according to "modular-invariant" version of the Nose-Hoover thermostat, see
+ 
+  of G.J.Martyna, D.J.Tobais and M.L.Klein,
+  J.Chem.Ohys., v.101(5), p.4177 (1994)
+  
+Some work has still to be done for the case of constrained dynamics 
+(it works now, but not in the complete correspondence to the paper 
+cited above)  
+
+
+04.03.98  Several small bugs were corrected:
+  in mpi.f procedure: addressing to NUMTASK (nonexistent) node which
+sometimes happened in SINHR subroutine is removed
+(this might cause crash of the program; otherwise it worked )
+  in supl.f, TESTCONF - did not catch before all bad configurations
+  "molecular" pressure in the double time step algorithm now calculated
+correctly.
+  Cray specific files were added  (mpi_cray.f, getcpucr.c and Makekefiles
+
+12.04.98 A new possibility to add options in the input file is introduced:
+  After lines defining unit vector (just before lines which defines RDFs)
+  one can write
+  
+ add <n>
+
+  where n is number of additional options. Then follows n lines defining
+  additional options
+  
+  Now following extra options difined:
+  
+ inputf   - read restart file in ASCII format 
+ outputf  - write restart file in ASCII format
+ 
+ no aver  - do not calculate averagre bond lenghts, angles and torsions. 
+            this may save a lot of memory while simulating large
+	    macromolecules
+	    
+More detailed description of additional options is in file Extra_param 
+
+
+11.01.99
+  Option "Cut large forces" (see "MD.input")  is now working
+  
+22.02.99
+  File prcm.h is divided into two parts:
+  
+  dimpar.h defines sizes of working arrays (may be customized)
+  prcm.h - the rest of old prcm.h file (should not be changed)
+
+26.04.99 
+  Utility "makemol" to generate .mol files from "simple molecule file"
+.smol and force field database is added. See Makemol.doc for details.
+
+22.06.99 
+  projections of time correlation functions may be now calculated both 
+  in the laboratory and in the molecular priuncipal coordinate systems
+  (flags 1 or 2 for corresponding tcf-s in the input file)
+  
+22.08.01
+  Kong combination rules for Lennard-Jones cross-interactions are introduced
+  (J. Kong, J.Chem.Phys., 59, 2464 (1973)). See ExtraParam file.
+  
+15.02.05
+  Option for reading start-up configuration has changed.
+  Value "0" now reads input coordinates in "XMOL" format while
+  value "-2" reads atom coordinates as three columnns X Y Z with
+  optional commentaries
+  
+
+v. 4.4    
+
+  Possibility of separate Nose thermostat for each molecular species.
+  Separate temperature control over species (Nose or velocity scaling) 
+  is now switched on by extra parameter  "T-sep" (see file Extra_param) 
+
+  Out-cutoff corrections for energy and pressure now correct.
+  They were too small (by factor between 2pi and 4pi) in older version
+
+  Thermostat/barostat algorithm with constraint dynamics - algorithm
+  rewritten. 
+
+  XMOL trajectory file includes now information on the box sizes
+  in the commentory lines
+  
+  Tranal:   now can read trajectories in MDynaMix binary format, XMOL format
+  (provided second line contains time in fs) and PDB trajectories from GROMACS
+  
+  2005-12-01
+  Expanded ensemble version of the program is updated (mdee). It now
+  implements most of the features of MDynaMix except parallelization
+  
+v. 5.0  2006-12-20
+
+  Completely new input:
+    - input file with keywords
+    - .mol files renamed to .mmol files
+    - information of 1-4 and some other features of force field in .mmol files
+    - extension for start-up configuration changed to .start
+  
+  Option for geometric combination rule for "Sigma"
+  
+  New tranal package
+  
+  New manual
+  
+v 5.0  2007-01-02  A bug in version frpm 2006-12-20 concerning definition 
+of 1-4 neighbours is corrected
+
+v.5.1 2007-03-12  Internal reorganization. Arrays for "non-bonded 
+interaction type" are introduced
+
+Option for "Geometrical average" for LJ parameter sigma
+
+2007-10-24 
+
+Path integral mode is implemented. For NVT-ensemble / flexible models  only
+
+2008-04-30
+
+Corrected anisotropic constant-pressure algorithm in the case of 
+constraint dynamics
+
+2008-05-20
+
+Option of separate barostat in XY-plane and along z-axis is added
+
+v. 5.2
+
+2008-09-20
+
+Option of gradual change of volume ( Change_V slow) is added
+
+2008-10-30
+
+Expanded ensemble mode is implemented within the main MDynaMix code.
+The stand-alone mdee program is no longer supported.
+
+Oct 2009
+v.5.2.1: Option for semianizotropic NPT ensemble, with separate pressure 
+control along Z-axis and in XY-plane, is introduced
+
+June 2010
+v.5.2.2: In the expanded ensemble mode, an automatic tuning of balancing 
+factors using Wang-Landau algorithm is implemented 
+(contribution by Nikolai Volkov)
+
+Oct 2010
+v.5.2.3: A bug corrected which lead to incorrect computations of solvation 
+free energies for large molecules due to incorrect computations of 
+intramolecular nonbonded electrostatic interaction (affect versions 5.2.1-5.2.2)
+
+June 2011
+v.5.2.4: Algorithm for WL iterations is changed. One WL interations is no 
+longer linked to parameter Serie_average , but is determined by requirement 
+that the system has walked at least Num_pass (default 2) times between 
+the end subensembles.
+
+Module restime.f , computing residense times, is added to the analysis suite.
+
+.mmol file are no longer necessary for some types of analysis of trajectories. 
+
+Dec 2012
+v. 5.2.5
+Soft-potentials implementation of the expanded ensemble methodology
+
+Option for "Gravitational" force acing on a certain type of atoms
+
+On-the-flight calculations of TCF is removed
+
+Jan-June 2014
+v. 5.2.6
+
+Special LJ pairs are introduced, both for 1-4 interactions (as part of .mmol files) and other 
+non-bonded interactions (using a separate Pair_list file)
+
+On-the-flight calculations of RDFs is removed
+
+Jan 2015
+v. 5.2.7
+
+The pair list describing special Lennard-Jones interactions (owerwriting 
+combination rules) can be automatically generated from the force field file
+(.ff) and atom types present in the molecular description files (.mmol).
+
+Extentions to the force field file format are added
+
+Support for TRIPOS .mol2 file format (as produced by the 
+antechamber package) in the makemol utility is added. 
+
+Changed interface to the makemol utility. 
+
+Aug 2017
+v 5.2.8
+
+Jan 2019
+v 5.3.0
+
+L2MC algorithm for changing of subemsembles
+
+The main input file name should be given as an argument to the 
+``md'' or ``mdp'' executable both in serial and parallel execution
+
+Flexible SPC water model accept internal bond parameters from the .mmol file
+
+Control of large temperature deviations became optional
+
+Other small fixes
+

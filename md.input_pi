@@ -1,0 +1,46 @@
+#
+#  Example of input file for simulation of 256 flexible SPC waters 
+#  by Path Integral MD
+#
+Main_filename 256spc_pi32
+Verbose_level 6
+Path_DB    ./moldb
+Read_restart no
+Dump_restart 2000
+Check_only no
+
+#
+Molecule_types 1
+H2O 256
+#
+#Box  10.  10.  10.
+Density 1.
+Change_V no
+Change_T no
+#
+PBC rect
+COM_check yes 0
+#
+Time_step 0.5
+Number_steps 240000
+Double_timestep  10
+R_cutoff 10.
+R_short 4.
+Neighbour_list 20
+Electrostatics Ewald 2.7 8.
+Cut_forces 1.
+#
+Startup FCC
+#
+Output 1
+Serie_avegare 20000
+Average_from 3
+Average_int yes
+Dump_XMOL yes
+
+PIMD 32
+PI_thermo 298. 5. 4
+
+Trajectory asccrd 10. 1000  all
+#
+End

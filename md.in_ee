@@ -1,0 +1,50 @@
+#
+#  Example of input file for computation of solvation free energy of
+#  lidocaine in 500 water by Expanded Ensemble
+#
+Main_filename lidocaine
+Verbose_level 5
+Path_DB    .
+Read_restart no
+Dump_restart 100000
+Check_only no
+
+#
+Molecule_types 2
+H2O      511
+lidocaine       1
+#
+#Box  20.  20.  20.
+Density 1.
+Change_V no
+Change_T no
+Nose_thermostat 298. 30.
+Barostate_NH 1. 1000.
+#Barostate_anisotropic no
+PBC rect
+COM_check yes 0
+#
+Time_step 2.
+Number_steps 5000000
+Double_timestep 10
+R_cutoff 11.
+R_short 5.
+Neighbour_list 10
+Electrostatics Ewald 2.8 8.
+Cut_forces 0.05
+#
+Startup FCC
+#
+Output 1000
+Serie_avegare 250000
+Average_from 1
+Average_int no
+Dump_XMOL yes
+
+#  EE
+MDEE  41  auto
+EE_type 2
+
+#Trajectory bincrd 1000. 1000  all
+#
+End

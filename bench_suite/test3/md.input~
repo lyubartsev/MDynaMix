@@ -1,0 +1,38 @@
+#
+#  Benchmark test for 256 flexible SPC water molecules
+#
+Main_filename H2O
+Verbose_level 5
+Path_DB    ../moldb
+Read_restart no
+#Dump_restart 10000
+Check_only f
+#
+Molecule_types 1
+H2O     256
+#
+Density 1.
+Nose_thermostat 298. 30.
+#Barostate_NH  1. 1000.
+#Barostate_anisotropic yes
+PBC rect
+COM_check yes 0
+#
+Time_step 2.
+Number_steps 50000
+Double_timestep 10
+#Constrain 0.0001 1 1
+R_cutoff 10.
+R_short 5.
+Neighbour_list 10
+Electrostatics Ewald 3. 9.
+Cut_forces 1.
+#
+Startup FCC
+#
+Output 1
+Serie_average 5000
+Average_from 3
+Average_int yes
+#
+End

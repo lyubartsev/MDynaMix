@@ -1,0 +1,45 @@
+#
+#  Benchmark test for 128 united atom DMPC lipids (45A3 GROMOS force field)
+#  and 3655 SPC water
+#  Constraint dynamics
+#
+Main_filename dmpc_UA
+Verbose_level 5
+Path_DB    ../moldb
+Read_restart no
+#Dump_restart 10000
+Check_only no
+#
+Molecule_types 2
+dmpc_45A3  128
+H2O       3655
+#
+Box  62. 62. 62.
+Change_V no
+Change_T no
+Nose_thermostat 303. 50.
+Barostate_NH  1. 1000.
+Barostate_anisotropic yes
+PBC rect
+COM_check yes 0
+#
+Time_step 2.
+# For benchmarking, set Number_steps and Serie_average equal
+Number_steps 1000
+Serie_average 1000
+#Double_timestep 10
+Constrain 0.0001 1 1
+R_cutoff 14.
+R_short 5.
+Neighbour_list 10
+Electrostatics Ewald 2.6 8.
+Cut_forces 1.
+#
+Startup xmol
+#
+Output 1
+Average_from 0
+Average_int no
+#
+End
+

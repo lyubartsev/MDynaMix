@@ -1,0 +1,24 @@
+ &TRAJ
+ NFORM='MDYN',
+ FNAME='../mdh2o/256cub',
+ PATHDB='.',
+ NTYPES=1,
+ NAMOL='H2O',
+ NFBEG=4,
+ NFEND=6,
+ NSPEC=256,
+ IPRINT=6,
+ LXMOL=.f.,
+ &END
+# computations
+ &RESTIM
+ NR1 = 1,
+ NR2 = 1,
+ IR1 = 1,
+ IR2 = 1,
+ NITT = 100,
+ RRX = 4.,
+ TTER= 2.,
+ TIMM = 100.,
+ FILOUT = "H2O_restim.out"
+ &END

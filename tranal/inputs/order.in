@@ -1,0 +1,136 @@
+#
+#  Example of input file for order parameter calculations
+# 
+#  trajectory parameters
+ &TRAJ
+ NFORM='MDYN',
+ FNAME='../work/dmpc_NewMod',
+ PATHDB='.',
+ NTYPES=2,
+ NAMOL='dmpc-2008','H2O',
+ NFBEG=100,
+ NFEND=500,
+ IPRINT=5
+ &END 
+#  output file
+dmpc_NM_ord.dat
+# type of lipids
+1
+#  First line - number of atom pairs for order parameter calculations = 
+#               number of subsequent lines with atom pairs 
+31
+#62   43   0
+#100
+#  for each line : 3 od 5 parameters 
+#  1 and 2 define atom pair (site numbers)
+#  3 parameter 0 or 1
+#    if 0 - just compute order parameters for this pair
+#    if 1 - distinguish possible enantiomers with symmetric atom 
+#           pair defined in the next line
+#           4-th and 5-th parameters on this line define
+#           "reference# atom pair relative to which enantiomers are 
+#           distinguished.
+#    Example for 5 order parameters in glycerol moiety of DMPC molecule 
+#   (see dmpc.mol file)
+#
+#  beta
+44  48  0
+44  49  0
+#  alpha
+59  60  0
+59  61  0
+#  g3
+67  68  0  70  72
+67  69  0
+#  g2
+70  71  0
+#  g1
+73  74  0  70  72
+73  75  0
+#   
+#   tail 1
+#  2
+3  4  0  1  2
+3  5  0
+#  3
+6  7  0
+6  8  0
+#  4
+9  10  0
+9  11  0
+#  5
+12  13  0
+12  14  0
+#  6
+15  16  0
+15  17  0
+#  7
+18  19  0
+18  20  0
+#  8
+21  22  0
+21  23  0
+#  9
+24  25  0
+24  26  0
+#  10
+27  28  0
+27  29  0
+#  11
+30  31  0
+30  32  0
+#  12
+33  34  0
+33  35  0
+#  13
+36  37  0
+36  38  0
+#  14
+39  40  0
+39  41  0
+39  42  0
+#   tail 2
+#  2
+79  80  1  77    78
+79  81
+#  3
+82  83  0
+82  84  0
+#  4
+85  86  0
+85  87  0
+#  5
+88  89  0
+88  90  0
+#  6
+91  92  0
+91  93  0
+#  7
+94  95  0
+94  96  0
+#  8
+97  98  0
+97  99  0
+#  9
+100 101  0
+100 102  0
+#  10
+103 104 0
+103 105 0
+#  11
+106 107 0
+106 108  0
+#  12
+109 110 0
+109 111 0
+#  13
+112 113  0
+112 114  0
+#  14
+115 116  0
+115 117  0
+115 118  0
+#
+# The last line shows whether to compute the distribution over Cos(theta)
+# If 0, do not calculate. If >0, set resolution of this distribution
+0

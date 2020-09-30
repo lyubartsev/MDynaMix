@@ -1,0 +1,1463 @@
+#>>>> CHARMM22 All-Hydrogen Parameter File for Proteins <<<<<<<<<<
+#>>>>>>>>>>>>>>>>>>>>>>> July 1997 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#>>>>>>> Direct comments to Alexander D. MacKerell Jr. <<<<<<<<<
+#>>>>>> 410-706-7442 or email: alex,mmiris.ab.umd.edu  <<<<<<<<<
+#
+#    Parameters rewritten for MDynaMix
+#    A.Lyubartsev (sasha@physc.su.se)
+#
+# references
+#
+#PROTEINS
+#
+#MacKerell, Jr., A. D.; Bashford, D.; Bellott, M.; Dunbrack Jr., R.L.;
+#Evanseck, J.D.; Field, M.J.; Fischer, S.; Gao, J.; Guo, H.; Ha, S.;
+#Joseph-McCarthy, D.; Kuchnir, L.; Kuczera, K.; Lau, F.T.K.; Mattos,
+#C.; Michnick, S.; Ngo, T.; Nguyen, D.T.; Prodhom, B.; Reiher, III,
+#W.E.; Roux, B.; Schlenkrich, M.; Smith, J.C.; Stote, R.; Straub, J.;
+#Watanabe, M.; Wiorkiewicz-Kuczera, J.; Yin, D.; Karplus, M.  All-atom
+#empirical potential for molecular modeling and dynamics Studies of
+#proteins.  Journal of Physical Chemistry B, 1998, 102, 3586-3616.
+#
+#PHOSPHOTYROSINE
+#
+#Feng, M.-H., Philippopoulos, M., MacKerell, Jr., A.D. and Lim, C.
+#Structural Characterization of the Phosphotyrosine Binding Region of a
+#High-Affinity aSH2 Domain-Phosphopeptide Complex by Molecular Dynamics
+#Simulation and Chemical Shift Calculations. Journal of the American
+#Chemical Society, 1996, 118: 11265-11277.
+#
+#IONS (see lipid and nucleic acid topology and parameter files for
+#additional ions
+#
+#ZINC
+#
+#Roland H. Stote and Martin Karplus, Zinc Binding in Proteins and
+#Solution: A Simple but Accurate Nonbonded Representation, PROTEINS:
+#Structure, Function, and Genetics 23:12-31 (1995)
+#
+#
+BONDS
+#
+#V(bond) = Kb(b - b0)**2
+#
+#Kb: kcal/mole/A**2
+#b0: A
+#
+#atom type Kb          b0
+#
+C     C      1.3350     2512.2  ! ALLOW ARO HE
+CA    CA     1.3750     1277.0  ! ALLOW   AR
+CE1   CE1    1.3400     1842.3  
+#
+CE1   CE2    1.3420     2093.5  
+#
+CE1   CT2    1.5020     1528.3  
+#
+CE1   CT3    1.5040     1603.6  
+#
+CE2   CE2    1.3300     2135.4  
+#
+CP1   C      1.4900     1046.8  ! ALLOW PR
+CP1   CC     1.4900     1046.8  ! ALLOW PR
+CP1   CD     1.4900      837.4  ! ALLOW PR
+CP2   CP1    1.5270      931.6  ! ALLOW PR
+CP2   CP2    1.5370      931.6  ! ALLOW PR
+CP3   CP2    1.5370      931.6  ! ALLOW PR
+CPB   C      1.3800     1884.1  ! ALLOW HE
+CPB   CPA    1.4432     1255.3  ! ALLOW HE
+CPB   CPB    1.3464     1426.5  ! ALLOW HE
+CPH1  CPH1   1.3600     1716.7  ! ALLOW AR
+CPM   CPA    1.3716     1507.3  ! ALLOW HE
+CPT   CA     1.3680     1277.0  ! ALLOW   AR
+CPT   CPT    1.4000     1507.3  ! ALLOW   AR
+!adm  jr.    1.4000       50.2  !adm jr., 12/30/91, for jw
+CT1   C      1.4900     1046.8  ! ALLOW   ALI PEP POL AR
+CT1   CC     1.5220      837.4  ! ALLOW   PO
+CT1   CD     1.5220      837.4  ! ALLOW   PO
+CT1   CT1    1.5000      931.6  ! ALLOW   AL
+CT2   C      1.4900     1046.8  ! ALLOW   ALI PEP POL AR
+CT2   CA     1.4900      963.0  ! ALLOW   ALI AR
+CT2   CC     1.5220      837.4  ! ALLOW   PO
+CT2   CD     1.5220      837.4  ! ALLOW   PO
+CT2   CPB    1.4900      963.0  ! ALLOW HE
+CT2   CPH1   1.5000      961.5  ! ALLOW AR
+CT2   CT1    1.5380      931.6  ! ALLOW   AL
+CT2   CT2    1.5300      931.6  ! ALLOW   AL
+CT3   C      1.4900     1046.8  ! ALLOW   ALI PEP POL AR
+CT3   CA     1.4900      963.0  ! ALLOW   ALI AR
+CT3   CC     1.5220      837.4  ! ALLOW   PO
+CT3   CD     1.5220      837.4  ! ALLOW   PO
+CT3   CPB    1.4900      963.0  ! ALLOW HE
+CT3   CPH1   1.5000      961.5  ! ALLOW AR
+CT3   CS     1.5310      795.5  ! ALLOW   SU
+!     ethy   0.0000        0.0  ! ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/9
+CT3   CT1    1.5380      931.6  ! ALLOW   AL
+CT3   CT2    1.5280      931.6  ! ALLOW   AL
+CT3   CT3    1.5300      931.6  ! ALLOW   AL
+CY    CA     1.3650     1465.4  ! ALLOW   AR
+!adm  jr.    1.3650       20.9  !adm jr., 5/08/91, indole CCDB structure searc
+CY    CPT    1.4400     1465.4  ! ALLOW   AR
+!adm  jr.    1.4400       50.2  !adm jr., 12/30/91, for jw
+CY    CT2    1.5100      963.0  ! ALLOW AR
+FE    CM     1.9000     1080.2  ! ALLOW HE
+FE    CPM    3.3814        0.0  ! ALLOW HE
+H     CD     1.1100     1381.7  ! ALLOW   PEP POL AR
+HA    C      1.1000     1381.7  ! ALLOW ARO HE
+HA    CA     1.0830     1423.6  ! ALLOW AR
+HA    CC     1.1000     1327.8  ! ALLOW PO
+HA    CP2    1.1110     1293.8  ! ALLOW PR
+HA    CP3    1.1110     1293.8  ! ALLOW PR
+HA    CPM    1.0900     1539.1  ! ALLOW HE
+HA    CS     1.1110     1256.1  ! ALLOW   SU
+!     meth   0.0000        0.0  ! methylthiolate 6-31+G* geom/freq, adm jr., 6/1/9
+HA    CT1    1.1110     1293.8  ! ALLOW   AL
+HA    CT2    1.1110     1293.8  ! ALLOW   AL
+HA    CT3    1.1110     1348.2  ! ALLOW   AL
+HA    CY     1.0800     1381.7  ! ALLOW   AR
+!     JWK    1.0800       20.9  ! JWK 05/14/91 new r0 from indol
+HA1   CE1    1.1000     1509.4  
+#
+HA2   CE2    1.1000     1528.3  
+#
+HB    CP1    1.0800     1381.7  ! ALLOW PR
+HB    CT1    1.0800     1381.7  ! ALLOW   PE
+HB    CT2    1.0800     1381.7  ! ALLOW   PE
+HB    CT3    1.0800     1381.7  ! ALLOW   PE
+HP    CA     1.0800     1423.6  ! ALLOW   AR
+HP    CY     1.0800     1465.4  ! ALLOW   AR
+!adm  jr.    1.0800       50.2  !adm jr., 12/30/91, for jw
+HR1   CPH1   1.0830     1570.1  ! ALLOW AR
+HR1   CPH2   1.0900     1423.6  ! ALLOW AR
+HR2   CPH2   1.0700     1394.3  ! ALLOW AR
+HR3   CPH1   1.0830     1528.3  ! ALLOW AR
+HT    HT     1.5139        0.0  ! ALLOW WA
+N     C      1.3000     1088.6  ! ALLOW PEP POL ARO PR
+N     CP1    1.4340     1339.8  ! ALLOW PR
+N     CP3    1.4550     1339.8  ! ALLOW PR
+NC2   C      1.3650     1938.6  ! ALLOW   PEP POL AR
+NC2   CT2    1.4900     1092.8  ! ALLOW   ALI PO
+NC2   CT3    1.4900     1092.8  ! ALLOW   ALI PO
+NC2   HC     1.0000     1905.1  ! ALLOW   PO
+NH1   C      1.3450     1549.2  ! ALLOW   PEP POL AR
+NH1   CT1    1.4300     1339.8  ! ALLOW   ALI PEP POL AR
+NH1   CT2    1.4300     1339.8  ! ALLOW   ALI PEP POL AR
+NH1   CT3    1.4300     1339.8  ! ALLOW   ALI PEP POL AR
+NH1   H      0.9970     1842.3  ! ALLOW   PEP POL AR
+NH1   HC     0.9800     1695.7  ! ALLOW   PEP POL AR
+NH2   CC     1.3600     1800.4  ! ALLOW   PEP POL AR
+NH2   CT2    1.4550     1004.9  
+NH2   CT3    1.4550     1004.9  ! ALLOW   PO
+NH2   H      1.0000     2009.8  ! ALLOW   PO
+NH2   HC     1.0000     1926.0  ! ALLOW   PO
+NH3   CT1    1.4800      837.4  ! ALLOW   ALI PO
+NH3   CT2    1.4800      837.4  ! ALLOW   ALI PO
+NH3   CT3    1.4800      837.4  ! ALLOW   ALI PO
+NH3   HC     1.0400     1687.4  ! ALLOW   PO
+NP    CP1    1.4850     1339.8  ! ALLOW PR
+NP    CP3    1.5020     1339.8  ! ALLOW PR
+NP    HC     1.0060     1926.0  ! ALLOW PR
+NPH   CPA    1.3757     1579.3  ! ALLOW HE
+NPH   FE     1.9580     1131.3  ! ALLOW HE
+NR1   CPH1   1.3800     1674.8  ! ALLOW AR
+NR1   CPH2   1.3600     1674.8  ! ALLOW AR
+NR1   H      1.0000     1951.1  ! ALLOW AR
+NR2   CPH1   1.3800     1674.8  ! ALLOW AR
+NR2   CPH2   1.3200     1674.8  ! ALLOW AR
+NR2   FE     2.2000      272.2  ! ALLOW HE
+NR3   CPH1   1.3700     1591.1  ! ALLOW AR
+NR3   CPH2   1.3200     1591.1  ! ALLOW AR
+NR3   H      1.0000     1896.7  ! ALLOW AR
+NY    CA     1.3700     1130.5  ! ALLOW   AR
+!adm  jr.    1.3700       50.2  !adm jr., 12/30/91, for jw
+NY    CPT    1.3750     1130.5  ! ALLOW   AR
+!adm  jr.    1.3750       50.2  !adm jr., 12/30/91, for jw
+NY    H      0.9760     1947.0  ! ALLOW   AR
+O     C      1.2300     2595.9  ! ALLOW   PEP POL AR
+O     CC     1.2300     2721.5  ! ALLOW   PEP POL AR
+OB    CC     1.2200     3140.2  ! ALLOW   PEP POL AR
+OB    CD     1.2200     3140.2  ! ALLOW   PEP POL AR
+OC    CA     1.2600     2198.2  ! ALLOW   PEP POL ARO IO
+OC    CC     1.2600     2198.2  ! ALLOW   PEP POL ARO IO
+OC    CT2    1.3300     1884.1  ! ALLOW   AL
+!     etho   0.0000        0.0  ! ethoxide 6-31+G* geom/freq, adm jr., 6/1/9
+OC    CT3    1.3300     1884.1  ! ALLOW   AL
+!     meth   0.0000        0.0  ! methoxide 6-31+G* geom/freq, adm jr., 6/1/9
+OH1   CA     1.4110     1399.7  ! ALLOW   ARO AL
+OH1   CD     1.4000      963.0  ! ALLOW   PEP POL ARO AL
+OH1   CT1    1.4200     1792.0  ! ALLOW   ALI ALC AR
+OH1   CT2    1.4200     1792.0  ! ALLOW   ALI ALC AR
+OH1   CT3    1.4200     1792.0  ! ALLOW   ALI ALC AR
+OH1   H      0.9600     2281.9  ! ALLOW   ALC AR
+!     EMB    0.9600       46.1  ! EMB 11/21/89 methanol vib fi
+OM    CM     1.1280     4668.5  ! ALLOW HE
+OM    FE     1.8000     1046.8  ! ALLOW HE
+OM    OM     1.2300     2512.2  ! ALLOW HE
+OS    CD     1.3340      628.0  ! ALLOW POL PE
+OS    CT3    1.4300     1423.6  ! ALLOW POL PE
+OT    HT     0.9572     1884.1  ! ALLOW   WA
+S     CT2    1.8180      829.0  ! ALLOW   ALI SUL IO
+S     CT3    1.8160     1004.9  ! ALLOW   ALI SUL IO
+S     HS     1.3250     1151.4  ! ALLOW   SUL IO
+SM    CT2    1.8160      896.0  ! ALLOW   SUL IO
+SM    CT3    1.8160      896.0  ! ALLOW   SUL IO
+SM    SM     2.0290      724.4  ! ALLOW   SUL IO
+SS    CS     1.8360      858.3  ! ALLOW   SU
+!     meth   0.0000        0.0  ! methylthiolate 6-31+G* geom/freq, adm jr., 6/1/9
+#
+ANGLES
+#
+#V(angle) = Ktheta(Theta - Theta0)**2
+#
+#V(Urey-Bradley) = Kub(S - S0)**2
+#
+#Ktheta: kcal/mole/rad**2
+#Theta0: degrees
+#Kub: kcal/mole/A**2 (Urey-Bradley)
+#S0: A
+#
+#atom types     Ktheta    Theta0   Kub     S0
+#
+CA    CA    CA     120.00    167.5   2.4162   146.54  ! ALLOW   AR
+!     JES   8      120.00    701.2   2.4162   613.58  ! JES 8/25/8
+CE1   CE1   CT3    123.50      201.0  
+#
+CE1   CT2   CT3    112.20      134.0  
+#
+CE2   CE1   CT2    126.00      201.0  
+#
+CE2   CE1   CT3    125.20      196.8  
+#
+CP1   N     C      117.00      251.2  ! ALLOW PR
+CP2   CP1   C      112.30      217.7  ! ALLOW PR
+CP2   CP1   CC     112.30      217.7  ! ALLOW PR
+CP2   CP1   CD     112.30      209.3  ! ALLOW PRO PE
+CP2   CP2   CP1    108.50      293.1  ! ALLOW PR
+CP3   CP2   CP2    108.50      293.1  ! ALLOW PR
+CP3   N     C      117.00      251.2  ! ALLOW PR
+CP3   N     CP1    114.20      418.7  ! ALLOW PR
+CP3   NP    CP1    111.00      418.7  ! ALLOW PR
+CPA   CPB   C      126.74      293.1  ! ALLOW HE
+CPA   CPM   CPA    125.12      394.4  ! ALLOW HE
+CPA   NPH   CPA    103.90      583.2  ! ALLOW HE
+CPB   C     C      121.50      293.1  ! ALLOW HE
+CPB   CPB   C      126.75      293.1  ! ALLOW HE
+CPB   CPB   CPA    106.51      129.0  ! ALLOW HE
+CPH2  NR1   CPH1   107.50      544.3  ! ALLOW AR
+CPH2  NR2   CPH1   104.00      544.3  ! ALLOW AR
+CPH2  NR3   CPH1   108.00      607.1  ! ALLOW AR
+CPM   CPA   CPB    124.07      257.9  ! ALLOW HE
+CPT   CA    CA     118.00      251.2  ! ALLOW   AR
+!adm  jr.   12     118.00   1051.9   2.4162  2569.08  !adm jr., 12/30/91, for jw
+CPT   CPT   CA     122.00      251.2  ! ALLOW   AR
+!adm  jr.   12     122.00   1051.9   2.4162 10756.72  !adm jr., 12/30/91, for jw
+CPT   CY    CA     107.40    502.4   2.2610   104.67  ! ALLOW   AR
+!adm  jr.   12     107.40   2103.7   2.2610   438.27  !adm jr., 12/30/91, for jw
+CPT   NY    CA     108.00      460.6  ! ALLOW   AR
+!adm  jr.   12     108.00   1928.4   2.2610  1835.05  !adm jr., 12/30/91, for jw
+CT1   CT1   C      108.00      217.7  ! ALLOW   ALI PEP POL AR
+CT1   CT1   CC     108.00      217.7  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    108.00     16.7   2.2610  7683.37  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+CT1   CT1   CT1    111.00    223.4   2.5610    33.50  ! ALLOW AL
+CT1   CT2   CA     107.50      216.9  ! ALLOW   ALI AR
+CT1   CT2   CC     108.00      217.7  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    108.00     16.7   2.5610   140.25  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+CT1   CT2   CD     108.00      217.7  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    108.00     20.9   2.5610   587.22  ! adm jr. 5/02/91, acetic acid pure solven
+CT1   CT2   CPH1   113.00      244.3  ! ALLOW AR
+CT1   CT2   CT1    113.50    244.3   2.5610    46.73  ! ALLOW   AL
+CT1   NH1   C      120.00      209.3  ! ALLOW   ALI PEP POL AR
+CT2   CA    CA     122.30      191.8  ! ALLOW   ALI AR
+CT2   CPB   CPA    126.74      272.2  ! ALLOW HE
+CT2   CPB   CPB    126.75      272.2  ! ALLOW HE
+CT2   CPH1  CPH1   130.00      191.8  ! ALLOW AR
+CT2   CT1   C      108.00      217.7  ! ALLOW   ALI PEP POL AR
+CT2   CT1   CC     108.00      217.7  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    108.00     16.7   2.5610   195.65  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+CT2   CT1   CD     108.00      217.7  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    108.00     20.9   2.5610   819.17  ! adm jr. 5/02/91, acetic acid pure solven
+CT2   CT1   CT1    111.00    223.4   2.5610    33.50  ! ALLOW   AL
+CT2   CT1   CT2    111.00    223.4   2.5610    33.50  ! ALLOW   AL
+CT2   CT2   C      108.00      217.7  ! ALLOW   ALI PEP POL AR
+CT2   CT2   CC     108.00      217.7  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    108.00     16.7   2.5610   140.25  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+CT2   CT2   CD     108.00      217.7  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    108.00     20.9   2.5610   587.22  ! adm jr. 5/02/91, acetic acid pure solven
+CT2   CT2   CPB    113.00      293.1  ! ALLOW HE
+CT2   CT2   CT1    113.50    244.3   2.5610    46.73  ! ALLOW   AL
+CT2   CT2   CT2    113.60    244.3   2.5610    46.73  ! ALLOW   AL
+CT2   CT3   CT1    113.50    244.3   2.5610    46.73  ! ALLOW   AL
+CT2   CY    CA     129.40      191.8  ! ALLOW AR
+!adm  jr.   5      129.40    802.9   2.5610   195.65  !adm jr., 5/08/91,  indole CCDB structure searc
+CT2   CY    CPT    124.00      191.8  ! ALLOW AR
+!adm  jr.   5      124.00    802.9   2.5610   819.17  !adm jr., 5/08/91,  indole CCDB structure searc
+CT2   NC2   C      120.00      260.9  ! ALLOW   ALI POL PEP AR
+CT2   NH1   C      120.00      209.3  ! ALLOW   ALI PEP POL AR
+CT2   OS    CD     109.60    167.5   2.2651   125.61  ! ALLOW  POL PE
+!     adm   jr.    109.60     20.9   2.2651   525.93  ! adm jr. 5/02/91, acetic acid pure solven
+CT3   CA    CA     122.30      191.8  ! ALLOW   ALI AR
+CT3   CPB   CPA    126.74      272.2  ! ALLOW HE
+CT3   CPB   CPB    126.75      272.2  ! ALLOW HE
+CT3   CPH1  CPH1   130.00      191.8  ! ALLOW AR
+CT3   CT1   C      108.00      217.7  ! ALLOW   ALI PEP POL AR
+CT3   CT1   CC     108.00      217.7  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    108.00     16.7   2.2651  2202.06  ! adm jr. 4/09/92, for ALA cte
+CT3   CT1   CT1    108.50    223.4   2.5610    33.50  ! ALLOW   AL
+CT3   CT1   CT2    114.00    223.4   2.5610    33.50  ! ALLOW   AL
+CT3   CT1   CT3    114.00    223.4   2.5610    33.50  ! ALLOW   AL
+CT3   CT2   CA     107.50      216.9  ! ALLOW   ALI AR
+CT3   CT2   CPH1   113.00      244.3  ! ALLOW AR
+CT3   CT2   CT1    113.50    244.3   2.5610    46.73  ! ALLOW   AL
+CT3   CT2   CT2    115.00    242.8   2.5610    33.50  ! ALLOW   AL
+CT3   CT2   CT3    114.00    223.4   2.5610    33.50  ! ALLOW   AL
+CT3   NC2   C      120.00      260.9  ! ALLOW   ALI POL PEP AR
+CT3   NH1   C      120.00      209.3  ! ALLOW   ALI PEP POL AR
+CT3   OS    CD     109.60    167.5   2.2651   125.61  ! ALLOW  POL PE
+!     adm   jr.    109.60     20.9   2.2651   525.93  ! adm jr. 5/02/91, acetic acid pure solven
+CT3   S     CT2     95.00      142.4  ! ALLOW   ALI SUL IO
+!     expt  MeEt    95.00     12.6   2.2651  2202.06  ! expt. MeEtS,    3/26/92 (FL
+CY    CPT   CA     130.60      669.9  ! ALLOW   AR
+!adm  jr.   12     130.60   2805.0   2.2651  9220.04  !adm jr., 12/30/91, for jw
+CY    CPT   CPT    107.40      460.6  ! ALLOW   AR
+!adm  jr.   12     107.40   1928.4   2.2651 38604.33  !adm jr., 12/30/91, for jw
+CY    CT2   CT1    114.00      244.3  ! ALLOW AR
+CY    CT2   CT3    114.00      244.3  ! ALLOW AR
+FE    NPH   CPA    128.05      402.6  ! ALLOW HE
+FE    NR2   CPH1   133.00      125.6  ! ALLOW HE
+FE    NR2   CPH2   123.00      125.6  ! ALLOW HE
+H     NH1   C      123.00      142.4  ! ALLOW   PEP POL AR
+H     NH1   CT1    117.00      146.5  ! ALLOW   PEP POL ARO AL
+H     NH1   CT2    117.00      146.5  ! ALLOW   PEP POL ARO AL
+H     NH1   CT3    117.00      146.5  ! ALLOW   PEP POL ARO AL
+H     NH2   CC     120.00      209.3  ! ALLOW   POL PEP AR
+H     NH2   H      120.00       96.3  ! ALLOW   PO
+!     adm   jr.    120.00     33.5   2.2651 ********  ! adm jr. 8/13/90 acetamide geometry and vibration
+H     NR1   CPH1   125.50    125.6   2.1500    83.74  ! ALLOW AR
+H     NR1   CPH2   127.00    125.6   2.1400    83.74  ! ALLOW AR
+H     NR3   CPH1   126.00    104.7   2.1300    62.80  ! ALLOW AR
+H     NR3   CPH2   126.00    104.7   2.0900    62.80  ! ALLOW AR
+H     NY    CA     126.00      117.2  ! ALLOW   AR
+!adm  jr.   12     126.00    490.9   2.0900   262.96  !adm jr., 12/30/91, for jw
+H     NY    CPT    126.00      117.2  ! ALLOW   AR
+!adm  jr.   12     126.00    490.9   2.0900  1101.03  !adm jr., 12/30/91, for jw
+H     OH1   CA     108.00      272.2  ! ALLOW   ALC AR
+!     JES   8      108.00   1139.5   2.0900  4610.02  ! JES 8/25/89 pheno
+H     OH1   CD     115.00      230.3  ! ALLOW   ALC ARO PEP PO
+!     adm   jr.    115.00     20.9   2.0900 19302.16  ! adm jr. 5/02/91, acetic acid pure solven
+H     OH1   CT1    106.00      240.8  ! ALLOW   ALC ARO AL
+!     meth  vib      0.00        0.0  ! methanol vib fit EMB 11/21/8
+H     OH1   CT2    106.00      240.8  ! ALLOW   ALC ARO AL
+!     meth  vib      0.00        0.0  ! methanol vib fit EMB 11/21/8
+H     OH1   CT3    106.00      240.8  ! ALLOW   ALC ARO AL
+!     meth  vib      0.00        0.0  ! methanol vib fit EMB 11/21/8
+HA    C     C      120.50      209.3  ! ALLOW   PEP POL AR
+HA    C     CPB    120.00      209.3  ! ALLOW HE
+HA    C     HA     118.00      209.3  ! ALLOW   PEP POL AR
+HA    CA    CA     120.00    121.4   2.1525   104.67  ! ALLOW AR
+HA    CA    CPT    122.00      171.7  ! ALLOW   AR
+!adm  jr.   5      122.00    718.8   2.1525   438.27  !adm jr., 5/08/91, indole CCDB structure searc
+HA    CA    CY     125.00    134.0   2.1730   104.67  ! ALLOW   AR
+!     JWK   05     125.00    561.0   2.1730   438.27  ! JWK 05/14/91 new theta0 and r0UB from indol
+HA    CP2   CP1    110.10    140.0   2.1790    94.33  ! ALLOW ALI PR
+HA    CP2   CP2    110.10    111.0   2.1790    94.33  ! ALLOW ALI PR
+HA    CP2   CP3    110.10    111.0   2.1790    94.33  ! ALLOW ALI PR
+HA    CP2   HA     109.00    148.6   1.8020    22.61  ! ALLOW ALI PR
+HA    CP3   CP2    110.10    111.0   2.1790    94.33  ! ALLOW ALI PR
+HA    CP3   HA     109.00    148.6   1.8020    22.61  ! ALLOW ALI PR
+HA    CPM   CPA    117.44       53.2  ! ALLOW HE
+HA    CPM   FE     180.00        0.0  ! ALLOW HE
+!     Heme  (6-l   180.00        0.0  ! Heme (6-liganded): for "ic para" only (KK 05/13/91
+HA    CS    CT3    110.10    144.9   2.1790    94.33  ! ALLOW SU
+HA    CS    HA     108.40    148.6   1.7750    58.62  ! ALLOW SU
+HA    CT1   C      109.50    138.2   2.1630   125.61  ! ALLOW   ALI PEP POL AR
+HA    CT1   CD     109.50    138.2   2.1630   125.61  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    109.50     20.9   2.1630   525.93  ! adm jr. 5/02/91, acetic acid pure solven
+HA    CT1   CT1    110.10    144.5   2.1790    94.33  ! ALLOW   AL
+HA    CT1   CT2    110.10    144.5   2.1790    94.33  ! ALLOW   AL
+HA    CT1   CT3    110.10    144.5   2.1790    94.33  ! ALLOW   AL
+HA    CT1   HA     109.00    148.6   1.8020    22.61  ! TEST for test cp
+HA    CT2   C      109.50    138.2   2.1630   125.61  ! ALLOW   ALI PEP POL AR
+HA    CT2   CA     107.50      206.4  ! ALLOW   ALI AR
+HA    CT2   CC     109.50    138.2   2.1630   125.61  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    109.50     16.7   2.1630   525.93  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+HA    CT2   CD     109.50    138.2   2.1630   125.61  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    109.50     20.9   2.1630   525.93  ! adm jr. 5/02/91, acetic acid pure solven
+HA    CT2   CE1    111.50      188.4  
+#
+HA    CT2   CPB    109.50      209.3  ! ALLOW HE
+HA    CT2   CPH1   109.50      140.0  ! ALLOW AR
+HA    CT2   CT1    110.10    140.0   2.1790    94.33  ! ALLOW   AL
+HA    CT2   CT2    110.10    111.0   2.1790    94.33  ! ALLOW   AL
+HA    CT2   CT3    110.10    144.9   2.1790    94.33  ! ALLOW   AL
+HA    CT2   CY     109.50      140.0  ! ALLOW AR
+!     ADM   JR.    109.50     41.9   2.1790   394.97  ! ADM JR., 10/02/89, from CT2CT2HA (U-B OMITTED), FOR JOANN
+HA    CT2   HA     109.00    148.6   1.8020    22.61  ! ALLOW   AL
+HA    CT3   C      109.50    138.2   2.1630   125.61  ! ALLOW   ALI PEP POL AR
+HA    CT3   CA     107.50      206.4  ! ALLOW   ALI AR
+HA    CT3   CC     109.50    138.2   2.1630   125.61  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    109.50     16.7   2.1630   525.93  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+HA    CT3   CD     109.50    138.2   2.1630   125.61  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    109.50     20.9   2.1630   525.93  ! adm jr. 5/02/91, acetic acid pure solven
+HA    CT3   CE1    111.50      175.9  
+#
+HA    CT3   CPB    109.50      209.3  ! ALLOW HE
+HA    CT3   CPH1   109.50      140.0  ! ALLOW AR
+HA    CT3   CS     110.10    144.9   2.1790    94.33  ! ALLOW SU
+HA    CT3   CT1    110.10    140.0   2.1790    94.33  ! ALLOW   AL
+HA    CT3   CT2    110.10    144.9   2.1790    94.33  ! ALLOW   AL
+HA    CT3   CT3    110.10    157.0   2.1790    94.33  ! ALLOW   AL
+HA    CT3   HA     108.40    148.6   1.8020    22.61  ! ALLOW   AL
+HA    CY    CA     126.40     83.7   2.1860   104.67  ! ALLOW   AR
+!     JWK   05     126.40    350.6   2.1860   438.27  ! JWK 05/14/91 new theta0 and r0UB from indol
+HA    CY    CPT    126.40    134.0   2.2550   104.67  ! ALLOW   AR
+!     JWK   05     126.40    561.0   2.2550   438.27  ! JWK 05/14/91 new theta0 and r0UB from indol
+HA1   CE1   CE1    119.50      217.7  
+#
+HA1   CE1   CE2    118.00      175.9  
+#
+HA1   CE1   CT2    116.00      167.5  
+#
+HA1   CE1   CT3    117.00       92.1  
+#
+HA2   CE2   CE1    120.50      188.4  
+#
+HA2   CE2   CE2    120.50      232.4  
+#
+HA2   CE2   HA2    119.00       79.6  
+#
+HB    CP1   C      112.00      209.3  ! ALLOW PEP PR
+HB    CP1   CC     112.00      209.3  ! ALLOW PEP PR
+HB    CP1   CD     112.00      209.3  ! ALLOW PEP POL PR
+HB    CP1   CP2    118.00      146.5  ! ALLOW PEP PR
+HB    CT1   C      109.50      209.3  ! ALLOW  PE
+HB    CT1   CC     109.50      209.3  ! ALLOW  PEP PO
+!     adm   jr.    109.50     16.7   2.2550  1835.05  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+HB    CT1   CD     109.50      209.3  ! ALLOW  PEP PO
+!     adm   jr.    109.50     20.9   2.2550  7683.37  ! adm jr. 5/02/91, acetic acid pure solven
+HB    CT1   CT1    111.00      146.5  ! ALLOW  PE
+HB    CT1   CT2    111.00      146.5  ! ALLOW  PE
+HB    CT1   CT3    111.00      146.5  ! ALLOW  PE
+HB    CT2   C      109.50      209.3  ! ALLOW  PE
+HB    CT2   CC     109.50      209.3  ! ALLOW  PEP PO
+!     adm   jr.    109.50     16.7   2.2550 32170.27  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+HB    CT2   CD     109.50      209.3  ! ALLOW  PEP PO
+!     adm   jr.    109.50     20.9   2.2550 ********  ! adm jr. 5/02/91, acetic acid pure solven
+HB    CT2   HB     115.00      150.7  ! ALLOW   PE
+HB    CT3   C      109.50      209.3  ! ALLOW  PE
+HC    NC2   C      120.00      205.2  ! ALLOW   POL PEP AR
+HC    NC2   CT2    120.00      169.2  ! ALLOW   POL AL
+HC    NC2   CT3    120.00      169.2  ! ALLOW   POL AL
+HC    NC2   HC     120.00      104.7  ! ALLOW   PO
+HC    NH2   CT2    111.00      209.3  ! ALLOW   PO
+HC    NH2   CT3    111.00      209.3  ! ALLOW   PO
+!     meth  geom   111.00    876.5   2.2550 ********  ! methylamine geom/freq, adm jr., 6/2/9
+HC    NH2   HC     106.50      163.3  ! ALLOW   PO
+HC    NH3   CT1    109.50    125.6   2.0740    83.74  ! ALLOW   POL AL
+HC    NH3   CT2    109.50    125.6   2.0740    83.74  ! ALLOW   POL AL
+HC    NH3   CT3    109.50    125.6   2.0740    83.74  ! ALLOW   POL AL
+HC    NH3   HC     109.50      184.2  ! ALLOW   PO
+HC    NP    CP1    109.50    138.2   2.0560    16.75  ! ALLOW POL ALI PR
+HC    NP    CP3    109.50    138.2   2.0560    16.75  ! ALLOW POL ALI PR
+HC    NP    HC     107.50      213.5  ! ALLOW PR
+HP    CA    CA     120.00    125.6   2.1525    92.11  ! ALLOW   AR
+!     JES   8      120.00    525.9   2.1525   385.68  ! JES 8/25/89 benzen
+HP    CA    CPT    122.00    125.6   2.1460    92.11  ! ALLOW   AR
+!adm  jr.   12     122.00    525.9   2.1460   385.68  !adm jr., 12/30/91, for jw
+HP    CA    CY     125.00    134.0   2.1730   104.67  ! ALLOW   AR
+!     JWK   05     125.00    561.0   2.1730   438.27  ! JWK 05/14/91 new theta0 and r0UB from indol
+HP    CY    CA     126.40    134.0   2.1860   104.67  ! ALLOW   AR
+!adm  jr.   12     126.40    561.0   2.1860   438.27  !adm jr., 12/30/91, for jw
+HP    CY    CPT    126.40    134.0   2.2550   104.67  ! ALLOW   AR
+!     JWK   05     126.40    561.0   2.2550   438.27  ! JWK 05/14/91 new theta0 and r0UB from indol
+HR1   CPH1  CPH1   130.00     92.1   2.2150    62.80  ! ALLOW AR
+!     adm   jr.    130.00     25.1   2.2150   262.96  ! adm jr., 6/27/90, hi
+HR3   CPH1  CPH1   130.00    104.7   2.2000    83.74  ! ALLOW AR
+!     adm   jr.    130.00     12.6   2.2000   350.62  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+HS    S     CT2     95.00      162.5  ! ALLOW   SUL ION AL
+HS    S     CT3     95.00      180.0  ! ALLOW   SUL ION AL
+HT    OT    HT     104.52      230.3  ! ALLOW WA
+N     C     CP1    112.50       83.7  ! ALLOW PR
+N     C     CT1    112.50       83.7  ! ALLOW ALI PEP POL ARO PR
+N     C     CT2    112.50       83.7  ! ALLOW ALI PEP POL ARO PR
+N     C     CT3    112.50       83.7  ! ALLOW ALI PEP POL ARO PR
+N     CP1   C      108.20      209.3  ! ALLOW PR
+N     CP1   CC     108.20      209.3  ! ALLOW PR
+N     CP1   CD     108.20      209.3  ! ALLOW PRO PE
+N     CP1   CP2    110.80      293.1  ! ALLOW PR
+N     CP1   HB     112.00      201.0  ! ALLOW PEP PR
+N     CP3   CP2    110.50      293.1  ! ALLOW PR
+N     CP3   HA     108.00      201.0  ! ALLOW PEP PR
+NC2   C     NC2    120.00    217.7   2.3642   376.83  ! ALLOW   POL PEP AR
+!     chan  from   120.00    251.2   2.3642  1577.79  ! changed from 60.0/120.3 for guanidinium (KK
+NC2   CT2   CT2    107.50      283.5  ! ALLOW   ALI PO
+NC2   CT2   HA     107.50      215.6  ! ALLOW   ALI PO
+NC2   CT3   HA     107.50      215.6  ! ALLOW   ALI PO
+NH1   C     CP1    116.50      335.0  ! ALLOW PEP PR
+NH1   C     CT1    116.50      335.0  ! ALLOW   ALI PEP POL AR
+NH1   C     CT2    116.50      335.0  ! ALLOW   ALI PEP POL AR
+NH1   C     CT3    116.50      335.0  ! ALLOW   ALI PEP POL AR
+NH1   CT1   C      107.00      209.3  ! ALLOW   PEP POL ARO AL
+NH1   CT1   CC     107.00      209.3  ! ALLOW   PEP POL ARO AL
+!     adm   jr.    107.00     16.7   2.3642  6606.19  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+NH1   CT1   CD     107.00      209.3  ! ALLOW   PEP POL ARO AL
+!     adm   jr.    107.00     20.9   2.3642 27660.13  ! adm jr. 5/02/91, acetic acid pure solven
+NH1   CT1   CT1    113.50      293.1  ! ALLOW   ALI PEP POL AR
+NH1   CT1   CT2    113.50      293.1  ! ALLOW   ALI PEP POL AR
+NH1   CT1   CT3    113.50      293.1  ! ALLOW   ALI PEP POL AR
+NH1   CT1   HB     108.00      201.0  ! ALLOW PE
+NH1   CT2   C      107.00      209.3  ! ALLOW   PEP POL ARO AL
+NH1   CT2   CC     107.00      209.3  ! ALLOW   PEP POL ARO AL
+!     adm   jr.    107.00     20.9   2.3642 ********  ! adm jr. 5/20/92, for asn,asp,gln,glu and cter
+NH1   CT2   CD     107.00      209.3  ! ALLOW   PEP POL ARO AL
+!     adm   jr.    107.00     20.9   2.3642 ********  ! adm jr. 5/02/91, acetic acid pure solven
+NH1   CT2   CT2    113.50      293.1  ! ALLOW   ALI PEP POL AR
+NH1   CT2   HA     109.50      215.6  ! ALLOW   ALI PEP POL AR
+NH1   CT2   HB     108.00      201.0  ! ALLOW PE
+NH1   CT3   HA     109.50      215.6  ! ALLOW   ALI PEP POL AR
+NH2   CC    CP1    112.50      335.0  ! ALLOW ALI PEP POL ARO PR
+NH2   CC    CT1    116.50    209.3   2.4500   209.35  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    116.50     33.5   2.4500   876.55  ! adm jr. 8/13/90 acetamide geometry and vibration
+NH2   CC    CT2    116.50    209.3   2.4500   209.35  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    116.50     33.5   2.4500   876.55  ! adm jr. 8/13/90 acetamide geometry and vibration
+NH2   CC    CT3    116.50    209.3   2.4500   209.35  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    116.50     33.5   2.4500   876.55  ! adm jr. 8/13/90 acetamide geometry and vibration
+NH2   CC    HA     111.00    184.2   1.9800   209.35  ! ALLOW PO
+!     adm   jr.    111.00     20.9   1.9800   876.55  ! adm jr., 5/13/91, formamide geometry and vibration
+NH2   CT2   HB     109.50    159.1   2.1400   209.35  
+NH2   CT2   CD     108.00      217.7  
+NH2   CT3   HA     109.50    159.1   2.1400   209.35  ! ALLOW PO
+!     meth  geom   109.50    666.2   2.1400   876.55  ! methylamine geom/freq, adm jr., 6/2/9
+NH3   CT1   C      110.00      183.0  ! ALLOW   PEP POL ARO AL
+NH3   CT1   CC     110.00      183.0  ! ALLOW   PEP POL ARO AL
+!     adm   jr.    110.00     16.7   2.1400  3670.11  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+NH3   CT1   CT1    110.00      283.5  ! ALLOW   ALI PO
+NH3   CT1   CT2    110.00      283.5  ! ALLOW   ALI PO
+NH3   CT1   CT3    110.00      283.5  ! ALLOW   ALI PO
+NH3   CT1   HB     107.50      215.6  ! ALLOW   ALI POL PE
+NH3   CT2   C      110.00      183.0  ! ALLOW   PEP POL ARO AL
+NH3   CT2   CC     110.00      183.0  ! ALLOW   PEP POL ARO AL
+!     adm   jr.    110.00     16.7   2.1400 15366.74  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+NH3   CT2   CD     110.00      183.0  ! ALLOW   PEP POL ARO AL
+!     adm   jr.    110.00     20.9   2.1400 64340.54  ! adm jr. 5/02/91, acetic acid pure solven
+NH3   CT2   CT2    110.00      283.5  ! ALLOW   ALI PO
+NH3   CT2   HA     107.50    188.4   2.1010   146.54  ! ALLOW   ALI PO
+NH3   CT2   HB     107.50      215.6  ! ALLOW   ALI POL PE
+NH3   CT3   HA     107.50    188.4   2.1010   146.54  ! ALLOW   ALI PO
+NP    CP1   C      106.00      209.3  ! ALLOW PR
+NP    CP1   CC     106.00      209.3  ! ALLOW PR
+NP    CP1   CD     106.00      209.3  ! ALLOW PRO PE
+NP    CP1   CP2    108.50      293.1  ! ALLOW PR
+NP    CP1   HB     107.50      215.6  ! ALLOW ALI POL PEP PR
+NP    CP3   CP2    108.50      293.1  ! ALLOW PR
+NP    CP3   HA     109.15      215.6  ! ALLOW PEP PR
+NPH   CPA   CPB    111.54      510.8  ! ALLOW HE
+NPH   CPA   CPM    124.39      368.5  ! ALLOW HE
+NPH   FE    CM      90.00      209.3  ! ALLOW HE
+NPH   FE    CPM     45.00        0.0  ! ALLOW HE
+!     Heme  (6-l    45.00        0.0  ! Heme (6-liganded): for "ic para" only  (KK 05/13/91
+NPH   FE    NPH     90.00       60.3  ! ALLOW HE
+NR1   CPH1  CPH1   106.00      544.3  ! ALLOW AR
+NR1   CPH1  CT2    124.00      191.8  ! ALLOW AR
+NR1   CPH1  CT3    124.00      191.8  ! ALLOW AR
+NR1   CPH1  HR3    124.00    104.7   2.1400    83.74  ! ALLOW AR
+!     adm   jr.    124.00     12.6   2.1400   350.62  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+NR1   CPH2  HR1    122.50    104.7   2.1400    83.74  ! ALLOW AR
+NR2   CPH1  CPH1   110.00      544.3  ! ALLOW AR
+NR2   CPH1  CT2    120.00      191.8  ! ALLOW AR
+NR2   CPH1  HR3    120.00    104.7   2.1400    83.74  ! ALLOW AR
+!     adm   jr.    120.00     12.6   2.1400   350.62  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+NR2   CPH2  HR1    125.00    104.7   2.1200    83.74  ! ALLOW AR
+NR2   CPH2  NR1    112.50      544.3  ! ALLOW AR
+NR2   FE    CM     180.00      209.3  ! ALLOW HE
+NR2   FE    NPH     90.00      209.3  ! ALLOW HE
+NR3   CPH1  CPH1   108.00      607.1  ! ALLOW AR
+NR3   CPH1  CT2    122.00      191.8  ! ALLOW AR
+NR3   CPH1  HR1    122.00     92.1   2.1800    62.80  ! ALLOW AR
+NR3   CPH2  HR2    126.00    134.0   2.1400   104.67  ! ALLOW AR
+NR3   CPH2  NR3    108.00      607.1  ! ALLOW AR
+NY    CA    CY     110.00    502.4   2.2400   104.67  ! ALLOW   AR
+!adm  jr.   12     110.00   2103.7   2.2400   438.27  !adm jr., 12/30/91, for jw
+NY    CA    HA     125.00    134.0   2.1770   104.67  ! ALLOW   AR
+!     JWK   05     125.00    561.0   2.1770   438.27  ! JWK 05/14/91 new theta0 and r0UB from indol
+NY    CA    HP     125.00    134.0   2.1770   104.67  ! ALLOW   AR
+!     JWK   05     125.00    561.0   2.1770   438.27  ! JWK 05/14/91 new theta0 and r0UB from indol
+NY    CPT   CA     130.60      669.9  ! ALLOW   AR
+!adm  jr.   12     130.60   2805.0   2.1770  1835.05  !adm jr., 12/30/91, for jw
+NY    CPT   CPT    107.40      460.6  ! ALLOW   AR
+!adm  jr.   12     107.40   1928.4   2.1770  7683.37  !adm jr., 12/30/91, for jw
+O     C     CP1    118.00      335.0  ! ALLOW PEP PR
+O     C     CT1    121.00      335.0  ! ALLOW   ALI PEP POL AR
+O     C     CT2    121.00      335.0  ! ALLOW   ALI PEP POL AR
+O     C     CT3    121.00      335.0  ! ALLOW   ALI PEP POL AR
+O     C     H      121.70      209.3  ! ALLOW   PEP POL AR
+O     C     N      122.50      335.0  ! ALLOW PRO PEP POL AR
+O     C     NH1    122.50      335.0  ! ALLOW   PEP POL AR
+O     CC    CP1    118.00      335.0  ! ALLOW ALI PEP POL ARO PR
+O     CC    CT1    121.00     62.8   2.4400   209.35  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    121.00     16.7   2.4400   876.55  ! adm jr. 4/10/91, acetamide updat
+O     CC    CT2    121.00     62.8   2.4400   209.35  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    121.00     16.7   2.4400   876.55  ! adm jr. 4/10/91, acetamide updat
+O     CC    CT3    121.00     62.8   2.4400   209.35  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    121.00     16.7   2.4400   876.55  ! adm jr. 4/10/91, acetamide updat
+O     CC    HA     122.00      184.2  ! ALLOW PO
+!     adm   jr.    122.00     20.9   2.4400  3670.11  ! adm jr., 5/13/91, formamide geometry and vibration
+O     CC    NH2    122.50    314.0   2.3700   209.35  ! ALLOW   POL PEP AR
+!     adm   jr.    122.50     16.7   2.3700   876.55  ! adm jr. 4/10/91, acetamide updat
+OB    CD    CP1    125.00    293.1   2.4420    83.74  ! ALLOW ALI PEP POL ARO PR
+OB    CD    CT1    125.00    293.1   2.4420    83.74  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    125.00     20.9   2.4420   350.62  ! adm jr. 5/02/91, acetic acid pure solven
+OB    CD    CT2    125.00    293.1   2.4420    83.74  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    125.00     20.9   2.4420   350.62  ! adm jr. 5/02/91, acetic acid pure solven
+OB    CD    CT3    125.00    293.1   2.4420    83.74  ! ALLOW   ALI PEP POL AR
+!     adm   jr.    125.00     20.9   2.4420   350.62  ! adm jr. 5/02/91, acetic acid pure solven
+OC    CA    CA     120.00      167.5  ! ALLOW  POL AR
+!     adm   jr.    120.00     33.5   2.4420  1468.04  ! adm jr. 8/27/91, phenoxid
+OC    CC    CP1    118.00    167.5   2.3880   209.35  ! ALLOW ALI PEP POL ARO ION
+OC    CC    CT1    118.00    167.5   2.3880   209.35  ! ALLOW   ALI PEP POL ARO IO
+!     adm   jr.    118.00     29.3   2.3880   876.55  ! adm jr. 7/23/91, correction, ACETATE (KK
+OC    CC    CT2    118.00    167.5   2.3880   209.35  ! ALLOW   ALI PEP POL ARO IO
+!     adm   jr.    118.00     29.3   2.3880   876.55  ! adm jr. 7/23/91, correction, ACETATE (KK
+OC    CC    CT3    118.00    167.5   2.3880   209.35  ! ALLOW   ALI PEP POL ARO IO
+!     adm   jr.    118.00     29.3   2.3880   876.55  ! adm jr. 7/23/91, correction, ACETATE (KK
+OC    CC    OC     124.00    418.7   2.2250   293.09  ! ALLOW   POL ION PEP AR
+!     adm   jr.    124.00     29.3   2.2250  1227.17  ! adm jr. 7/23/91, correction, ACETATE (KK
+OC    CT2   CT3    122.00      272.2  ! ALLOW  AL
+OC    CT2   HA     118.30      272.2  ! ALLOW  AL
+OC    CT3   HA     118.30      272.2  ! ALLOW  AL
+OH1   CA    CA     120.00      189.3  ! ALLOW   ARO AL
+OH1   CD    CT1    110.50      230.3  ! ALLOW   ALI PEP POL ARO AL
+OH1   CD    CT2    110.50      230.3  ! ALLOW   ALI PEP POL ARO AL
+!     adm   jr     110.50     41.9   2.2250  5138.15  ! adm jr, 10/17/90, acetic acid vibration
+OH1   CD    CT3    110.50      230.3  ! ALLOW   ALI PEP POL ARO AL
+!     adm   jr     110.50     41.9   2.2250 21513.44  ! adm jr, 10/17/90, acetic acid vibration
+OH1   CD    OB     123.00    209.3   2.2620   879.27  ! ALLOW   PEP POL ARO AL
+!     adm   jr     123.00     41.9   2.2620  3681.50  ! adm jr, 10/17/90, acetic acid vibration
+OH1   CT1   CT1    110.10      317.0  ! ALLOW   ALI ALC AR
+!     MeOH  EMB    110.10     41.9   2.2620 15414.45  ! MeOH, EMB, 10/10/8
+OH1   CT1   CT3    110.10      317.0  ! ALLOW   ALI ALC AR
+!     MeOH  EMB    110.10     41.9   2.2620 64540.31  ! MeOH, EMB, 10/10/8
+OH1   CT1   HA     108.89      192.2  ! ALLOW   ALI ALC AR
+!     MeOH  EMB    108.89     41.9   2.2620 ********  ! MeOH, EMB, 10/10/8
+OH1   CT2   CT1    110.10      317.0  ! ALLOW   ALI ALC AR
+!     MeOH  EMB    110.10     41.9   2.2620 ********  ! MeOH, EMB, 10/10/8
+OH1   CT2   CT2    110.10      317.0  ! ALLOW   ALI ALC AR
+!     MeOH  EMB    110.10     41.9   2.2620 ********  ! MeOH, EMB, 10/10/8
+OH1   CT2   CT3    110.10      317.0  ! ALLOW   ALI ALC AR
+!     MeOH  EMB    110.10     41.9   2.2620 ********  ! MeOH, EMB, 10/10/8
+OH1   CT2   HA     108.89      192.2  ! ALLOW   ALI ALC AR
+!     MeOH  EMB    108.89     41.9   2.2620 ********  ! MeOH, EMB, 10/10/8
+OH1   CT3   HA     108.89      192.2  ! ALLOW   ALI ALC AR
+!     MeOH  EMB    108.89     41.9   2.2620 ********  ! MeOH, EMB, 10/10/8
+OM    CM    FE     180.00      146.5  ! ALLOW HE
+OM    FE    NPH     90.00       20.9  ! ALLOW HE
+OM    OM    FE     180.00        0.0  ! ALLOW HE
+OS    CD    CP1    109.00    230.3   2.3260    83.74  ! ALLOW POL PEP PR
+OS    CD    CT1    109.00    230.3   2.3260    83.74  ! ALLOW POL PE
+!     adm   jr.    109.00     16.7   2.3260   350.62  ! adm jr., 4/05/91, for PRES CT1 from methylacetat
+OS    CD    CT2    109.00    230.3   2.3260    83.74  ! ALLOW POL PE
+!     adm   jr.    109.00     16.7   2.3260   350.62  ! adm jr., 4/05/91, for PRES CT1 from methylacetat
+OS    CD    CT3    109.00    230.3   2.3260    83.74  ! ALLOW POL PE
+!     adm   jr.    109.00     16.7   2.3260   350.62  ! adm jr., 4/05/91, for PRES CT1 from methylacetat
+OS    CD    OB     125.90    376.8   2.2576   669.92  ! ALLOW  PEP PO
+!     adm   jr.    125.90     12.6   2.2576  2804.95  ! adm jr. 3/19/92, from lipid methyl acetat
+OS    CT2   HA     109.50      251.2  ! ALLOW PEP PO
+!     adm   jr.    109.50     16.7   2.2576 11744.35  ! adm jr. 4/05/91, for PRES CT1 from methyl acetat
+OS    CT3   HA     109.50      251.2  ! ALLOW PEP PO
+!     adm   jr.    109.50     16.7   2.2576 49173.57  ! adm jr. 4/05/91, for PRES CT1 from methyl acetat
+S     CT2   CT1    112.50      242.8  ! ALLOW   ALI SUL IO
+S     CT2   CT2    114.50      242.8  ! ALLOW   ALI SUL IO
+!     expt  MeEt   114.50     12.6   2.2576 ********  ! expt. MeEtS,     3/26/92 (FL
+S     CT2   CT3    114.50      242.8  ! ALLOW   ALI SUL IO
+!     expt  MeEt   114.50     12.6   2.2576 ********  ! expt. MeEtS,     3/26/92 (FL
+S     CT2   HA     111.30      193.0  ! ALLOW   ALI SUL IO
+S     CT3   HA     111.30      193.0  ! ALLOW   ALI SUL IO
+SM    CT2   CT1    112.50      242.8  ! ALLOW   ALI SUL IO
+SM    CT2   HA     111.00      159.1  ! ALLOW   ALI SUL IO
+SM    CT3   HA     111.00      159.1  ! ALLOW   ALI SUL IO
+SM    SM    CT2    103.30      303.6  ! ALLOW   ALI SUL IO
+!     expt  dime   103.30     12.6   2.2576 ********  ! expt. dimethyldisulfide,    3/26/92 (FL
+SM    SM    CT3    103.30      303.6  ! ALLOW   ALI SUL IO
+!     expt  dime   103.30     12.6   2.2576 ********  ! expt. dimethyldisulfide,    3/26/92 (FL
+SS    CS    CT3    118.00      230.3  ! ALLOW SU
+SS    CS    HA     112.30      167.5  ! ALLOW SU
+#
+TORSIONS
+#
+#V(dihedral) = Kchi(1 + cos(n(chi) - delta))
+#
+#Kchi: kcal/mole
+#n: multiplicity
+#delta: degrees
+#
+#atom types             Kchi    n   delta
+#
+C     CT1   NH1   C         180.       0.8   1  ! ALLOW PE
+C     CT2   NH1   C         180.       0.8   1  ! ALLOW PE
+C     N     CP1   C           0.       3.3   3  ! ALLOW PRO PE
+CA    CA    CA    CA        180.      13.0   2  ! ALLOW   AR
+!     JES   8     CA        180.      54.3   2  ! JES 8/25/8
+CA    CPT   CPT   CA        180.      13.0   2  ! ALLOW   AR
+!     JWK   05    CA        180.      54.3   2  ! JWK 05/14/91 fit to indol
+CA    CT2   CT1   C           0.       0.2   3  ! ALLOW   AR
+!     2.7   kcal  C           0.       0.7   3  ! 2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/9
+CA    CY    CPT   CA        180.      12.6   2  ! ALLOW   AR
+!     JWK   09    CA        180.      52.6   2  ! JWK 09/05/8
+CA    NY    CPT   CA        180.      12.6   2  ! ALLOW   AR
+!     JWK   05    CA        180.      52.6   2  ! JWK 05/14/91 fit to indol
+CC    CP1   N     C           0.       3.3   3  ! ALLOW PRO PE
+CC    CT1   CT2   CA          0.       0.2   3  ! ALLOW   AR
+!     2.7   kcal  CA          0.       0.7   3  ! 2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/9
+CC    CT1   NH1   C         180.       0.8   1  ! ALLOW PEP PO
+CC    CT2   NH1   C         180.       0.8   1  ! ALLOW PEP PO
+CD    CP1   N     C         180.       0.0   1  ! ALLOW PRO PE
+CD    CT1   NH1   C         180.       0.8   1  ! ALLOW PEP PO
+CD    CT2   NH1   C         180.       0.8   1  ! ALLOW PEP PO
+CE1   CE1   CT3   HA          0.       0.1   3  
+#
+CE2   CE1   CT2   CT3         0.       2.1   3  
+#
+CE2   CE1   CT2   HA          0.       0.5   3  
+#
+CE2   CE1   CT3   HA        180.       0.2   3  
+#
+CP1   C     N     CP1       180.      11.5   2  ! ALLOW PR
+CP1   C     N     CP1         0.       1.3   4  ! ALLOW PR
+CP2   CP1   N     C           0.       3.3   3  ! ALLOW PRO PE
+CP2   CP3   N     C         180.       0.0   3  ! ALLOW PRO PE
+CP2   CP3   N     CP1         0.       0.4   3  ! ALLOW PR
+CP2   CP3   NP    CP1         0.       0.3   3  ! ALLOW PR
+CP3   N     C     CP1       180.      11.5   2  ! ALLOW PR
+CP3   N     C     CP1         0.       1.3   4  ! ALLOW PR
+CP3   N     CP1   C           0.       0.4   3  ! ALLOW PR
+CP3   N     CP1   CC          0.       0.4   3  ! ALLOW PR
+CP3   N     CP1   CP2         0.       0.4   3  ! ALLOW PR
+CP3   NP    CP1   C           0.       0.3   3  ! ALLOW PR
+CP3   NP    CP1   CC          0.       0.3   3  ! ALLOW PR
+CP3   NP    CP1   CD          0.       0.3   3  ! ALLOW PRO PE
+CP3   NP    CP1   CP2         0.       0.3   3  ! ALLOW PR
+CPH2  NR1   CPH1  CPH1      180.      58.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/20/8
+CPH2  NR2   CPH1  CPH1      180.      58.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/20/8
+CPH2  NR3   CPH1  CPH1      180.      50.2   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/20/8
+CPT   CA    CA    CA        180.      13.0   2  ! ALLOW   AR
+!     JWK   05    CA        180.      54.3   2  ! JWK 05/14/91 fit to indol
+CPT   CPT   CA    CA        180.      13.0   2  ! ALLOW   AR
+!     JWK   05    CA        180.      54.3   2  ! JWK 05/14/91 fit to indol
+CPT   CPT   CY    CA        180.      16.7   2  ! ALLOW   AR
+!     JWK   05    CA        180.      70.1   2  ! JWK 05/14/91 fit to indol
+CPT   CPT   NY    CA        180.      20.9   2  ! ALLOW   AR
+!     JWK   05    CA        180.      87.7   2  ! JWK 05/14/91 fit to indol
+CT1   C     N     CP1       180.      11.5   2  ! ALLOW PR
+CT1   C     N     CP1         0.       1.3   4  ! ALLOW PR
+CT1   C     N     CP3       180.      11.5   2  ! ALLOW PR
+CT1   C     N     CP3         0.       1.3   4  ! ALLOW PR
+CT1   C     NH1   CT1         0.       6.7   1  !  ALLOW PE
+CT1   C     NH1   CT1       180.      10.5   2  !  ALLOW PE
+CT1   CT1   NH1   C           0.       7.5   1  ! ALLOW PE
+CT1   CT2   CA    CA        180.       1.0   2  ! ALLOW   ARO AL
+CT1   CT2   CPH1  CPH1        0.       0.8   1  ! ALLOW AR
+CT1   CT2   CPH1  CPH1        0.       1.1   2  ! ALLOW AR
+CT1   CT2   CPH1  CPH1        0.       0.0   3  ! ALLOW AR
+CT1   CT2   CY    CA        180.       1.0   2  ! ALLOW AR
+CT1   CT2   CY    CPT       180.       1.0   2  ! ALLOW AR
+CT1   NH1   C     CP1         0.       6.7   1  ! ALLOW PEP PR
+CT1   NH1   C     CP1       180.      10.5   2  ! ALLOW PEP PR
+CT2   C     N     CP1       180.      11.5   2  ! ALLOW PR
+CT2   C     N     CP1         0.       1.3   4  ! ALLOW PR
+CT2   C     N     CP3       180.      11.5   2  ! ALLOW PR
+CT2   C     N     CP3         0.       1.3   4  ! ALLOW PR
+CT2   C     NH1   CT1         0.       6.7   1  !  ALLOW PE
+CT2   C     NH1   CT1       180.      10.5   2  !  ALLOW PE
+CT2   C     NH1   CT2         0.       6.7   1  !  ALLOW PE
+CT2   C     NH1   CT2       180.      10.5   2  !  ALLOW PE
+CT2   C     NH1   CT3         0.       6.7   1  !  ALLOW PE
+CT2   C     NH1   CT3       180.      10.5   2  !  ALLOW PE
+CT2   CA    CA    CA        180.      13.0   2  ! ALLOW   AR
+!     JES   8     CA        180.      54.3   2  ! JES 8/25/89 toluene and ethylbenzen
+CT2   CPH1  NR1   CPH2      180.      12.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/22/89, FROM HA CPH1 NR1 CPH
+CT2   CPH1  NR2   CPH2      180.      12.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/22/89, FROM HA CPH1 NR2 CPH
+CT2   CPH1  NR3   CPH2      180.      10.5   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+CT2   CT1   NH1   C           0.       7.5   1  ! ALLOW PE
+CT2   CT2   CPH1  CPH1        0.       1.7   1  ! ALLOW AR
+!     4-me  4-21  CPH1        0.       7.0   1  ! 4-methylimidazole 4-21G//6-31G* rot bar. ADM JR., 9/4/8
+CT2   CT2   CT2   CT2         0.       0.6   1  ! ALLOW AL
+CT2   CT2   NH1   C           0.       7.5   1  ! ALLOW PE
+CT2   CY    CPT   CA        180.      12.6   2  ! ALLOW AR
+CT2   CY    CPT   CPT       180.      12.6   2  ! ALLOW AR
+CT2   NH1   C     CP1         0.       6.7   1  ! ALLOW PEP PR
+CT2   NH1   C     CP1       180.      10.5   2  ! ALLOW PEP PR
+CT2   NH1   C     CT1         0.       6.7   1  !  ALLOW PE
+CT2   NH1   C     CT1       180.      10.5   2  !  ALLOW PE
+CT2   SM    SM    CT2         0.       4.2   1  ! ALLOW   ALI SUL IO
+CT2   SM    SM    CT2         0.      17.2   2  ! ALLOW   ALI SUL IO
+!     mp    6-31  dime        0.      12.6   2  ! mp 6-311G** dimethyldisulfide,  3/26/92 (FL
+CT2   SM    SM    CT2         0.       3.8   3  ! ALLOW   ALI SUL IO
+CT3   C     N     CP1       180.      11.5   2  ! ALLOW PR
+CT3   C     N     CP1         0.       1.3   4  ! ALLOW PR
+CT3   C     N     CP3       180.      11.5   2  ! ALLOW PR
+CT3   C     N     CP3         0.       1.3   4  ! ALLOW PR
+CT3   C     NH1   CT1         0.       6.7   1  !  ALLOW PE
+CT3   C     NH1   CT1       180.      10.5   2  !  ALLOW PE
+CT3   C     NH1   CT2         0.       6.7   1  !  ALLOW PE
+CT3   C     NH1   CT2       180.      10.5   2  !  ALLOW PE
+CT3   C     NH1   CT3         0.       6.7   1  !  ALLOW PE
+CT3   C     NH1   CT3       180.      10.5   2  !  ALLOW PE
+CT3   CA    CA    CA        180.      13.0   2  ! ALLOW   AR
+!     tolu  adm   jr.       180.      12.6   2  ! toluene, adm jr., 3/7/9
+CT3   CE1   CE2   HA2       180.      21.8   2  
+#
+CT3   CPH1  NR1   CPH2      180.      12.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/22/89, FROM HA CPH1 NR1 CPH
+CT3   CT1   NH1   C           0.       7.5   1  ! ALLOW PE
+CT3   CT2   CA    CA        180.       1.0   2  ! ALLOW   ARO AL
+CT3   CT2   CPH1  CPH1        0.       0.8   1  ! ALLOW AR
+CT3   CT2   CPH1  CPH1        0.       1.1   2  ! ALLOW AR
+CT3   CT2   CPH1  CPH1        0.       0.0   3  ! ALLOW AR
+CT3   CT2   CT2   CT2         0.       0.6   1  ! ALLOW AL
+CT3   CT2   CT2   CT3         0.       0.6   1  ! ALLOW AL
+CT3   CT2   CY    CA        180.       1.0   2  ! ALLOW AR
+CT3   CT2   CY    CPT       180.       1.0   2  ! ALLOW AR
+CT3   CT2   S     CT3       180.       1.0   1  ! ALOW    ALI SUL IO
+!     expt  MeEt  3         180.       4.2   1  ! expt. MeEtS,      3/26/92 (FL
+CT3   CT2   S     CT3         0.       1.5   3  ! ALOW    ALI SUL IO
+!     DTN   8     CT3         0.       6.5   3  ! DTN 8/24/9
+CT3   NH1   C     CP1         0.       6.7   1  ! ALLOW PEP PR
+CT3   NH1   C     CP1       180.      10.5   2  ! ALLOW PEP PR
+CT3   NH1   C     CT1         0.       6.7   1  !  ALLOW PE
+CT3   NH1   C     CT1       180.      10.5   2  !  ALLOW PE
+CT3   S     CT2   CT2       180.       1.0   1  ! ALOW    ALI SUL IO
+!     expt  MeEt  3         180.       4.2   1  ! expt. MeEtS,      3/26/92 (FL
+CT3   S     CT2   CT2         0.       1.5   3  ! ALOW    ALI SUL IO
+!     expt  MeEt  3           0.       6.5   3  ! expt. MeEtS,      3/26/92 (FL
+CT3   SM    SM    CT3         0.       4.2   1  ! ALLOW   ALI SUL IO
+CT3   SM    SM    CT3         0.      17.2   2  ! ALLOW   ALI SUL IO
+!     mp    6-31  dime        0.      12.6   2  ! mp 6-311G** dimethyldisulfide,   3/26/92 (FL
+CT3   SM    SM    CT3         0.       3.8   3  ! ALLOW   ALI SUL IO
+CY    CA    NY    CPT       180.      20.9   2  ! ALLOW   AR
+!     JWK   05    CPT       180.      87.7   2  ! JWK 05/14/91 fit to indol
+CY    CPT   CA    CA        180.      12.6   2  ! ALLOW   AR
+!     JWK   05    CA        180.      52.6   2  ! JWK 05/14/91 fit to indol
+CY    CPT   CPT   CA        180.      41.9   2  ! ALLOW   AR
+!     JWK   05    CA        180.     175.3   2  ! JWK 05/14/91 fit to indol
+H     NH1   C     CP1       180.      10.5   2  ! ALLOW PEP PR
+H     NH1   C     CT1       180.      10.5   2  !  ALLOW PE
+H     NH1   C     CT2       180.      10.5   2  !  ALLOW PE
+H     NH1   C     CT3       180.      10.5   2  !  ALLOW PE
+H     NH1   CT1   C           0.       0.0   1  ! ALLOW PE
+H     NH1   CT1   CC          0.       0.0   1  ! ALLOW PEP PO
+!     adm   jr.   4           0.       0.0   1  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+H     NH1   CT1   CD          0.       0.0   1  ! ALLOW PEP PO
+!     adm   jr.   5           0.       0.0   1  ! adm jr. 5/02/91, acetic acid pure solven
+H     NH1   CT1   CT1         0.       0.0   1  ! ALLOW PE
+H     NH1   CT1   CT2         0.       0.0   1  ! ALLOW PE
+H     NH1   CT1   CT3         0.       0.0   1  ! ALLOW PE
+H     NH1   CT2   C           0.       0.0   1  ! ALLOW PE
+H     NH1   CT2   CC          0.       0.0   1  ! ALLOW PEP PO
+H     NH1   CT2   CD          0.       0.0   1  ! ALLOW PEP PO
+!     adm   jr.   5           0.       0.0   1  ! adm jr. 5/02/91, acetic acid pure solven
+H     NH1   CT2   CT2         0.       0.0   1  ! ALLOW PE
+H     NH1   CT2   CT3         0.       0.0   1  ! ALLOW PE
+H     NH2   CC    CT1       180.       5.9   2  !  ALLOW   PEP POL ARO PR
+!     adm   jr.   4         180.      24.5   2  ! adm jr. 4/10/91, acetamide updat
+H     NH2   CC    CT2       180.       5.9   2  !  ALLOW   PEP POL ARO PR
+!     adm   jr.   4         180.      24.5   2  ! adm jr. 4/10/91, acetamide updat
+H     NH2   CC    CT3       180.       5.9   2  !  ALLOW   PEP POL ARO PR
+!     adm   jr.   4         180.      24.5   2  ! adm jr. 4/10/91, acetamide updat
+H     NH2   CC    CP1       180.      10.5   2  ! ALLOW PEP POL ARO PR
+H     NR1   CPH1  CPH1      180.       4.2   2  ! ALLOW AR
+!     his   adm   jr.       180.      29.3   2  ! his, adm jr., 7/20/8
+H     NR1   CPH1  CT2       180.       4.2   2  ! ALLOW AR
+!     his   adm   jr.       180.      29.3   2  ! his, adm jr., 7/22/89, FROM HA CPH1 NR1
+H     NR1   CPH1  CT3       180.       4.2   2  ! ALLOW AR
+!     his   adm   jr.       180.      29.3   2  ! his, adm jr., 7/22/89, FROM HA CPH1 NR1
+H     NR3   CPH1  CPH1      180.       5.9   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+H     NR3   CPH1  CT2       180.      12.6   2  ! ALLOW AR
+!     his   adm   jr.       180.      29.3   2  ! his, adm jr., 7/22/89, FROM HC NR3 CPH1 H
+H     NR3   CPH1  CT3       180.      12.6   2  ! ALLOW AR
+!     his   adm   jr.       180.      29.3   2  ! his, adm jr., 7/22/89, FROM HC NR3 CPH1 H
+H     NY    CA    CY        180.       3.3   2  ! ALLOW   AR
+!adm  jr.   12    CY        180.      14.0   2  !adm jr., 12/30/91, for jw
+H     NY    CPT   CA        180.       3.3   2  ! ALLOW   AR
+!adm  jr.   12    CA        180.      14.0   2  !adm jr., 12/30/91, for jw
+H     NY    CPT   CPT       180.       3.3   2  ! ALLOW   AR
+!     JWK   05    CPT       180.      14.0   2  ! JWK 05/14/91 fit to indol
+H     OH1   CA    CA        180.       4.1   2  ! ALLOW   ARO AL
+H     OH1   CT1   CT1         0.       5.6   1  ! ALLOW AL
+!     2-pr  OH    hf          0.      23.3   1  ! 2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT1   CT1         0.       0.8   2  ! ALLOW AL
+!     2-pr  OH    hf          0.       3.2   2  ! 2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT1   CT1         0.       1.3   3  ! ALLOW AL
+!     2-pr  OH    hf          0.       5.6   3  ! 2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT1   CT3         0.       5.6   1  ! ALLOW AL
+!     2-pr  OH    hf          0.      23.3   1  ! 2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT1   CT3         0.       0.8   2  ! ALLOW AL
+!     2-pr  OH    hf          0.       3.2   2  ! 2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT1   CT3         0.       1.3   3  ! ALLOW AL
+!     2-pr  OH    hf          0.       5.6   3  ! 2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT1         0.       5.4   1  ! ALLOW AL
+!     etha  OH    hf          0.      22.8   1  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT1         0.       1.3   2  ! ALLOW AL
+!     etha  OH    hf          0.       5.3   2  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT1         0.       1.8   3  ! ALLOW AL
+!     etha  OH    hf          0.       7.4   3  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT2         0.       5.4   1  ! ALLOW AL
+!     etha  OH    hf          0.      22.8   1  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT2         0.       1.3   2  ! ALLOW AL
+!     etha  OH    hf          0.       5.3   2  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT2         0.       1.8   3  ! ALLOW AL
+!     etha  OH    hf          0.       7.4   3  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT3         0.       5.4   1  ! ALLOW AL
+!     etha  OH    hf          0.      22.8   1  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT3         0.       1.3   2  ! ALLOW AL
+!     etha  OH    hf          0.       5.3   2  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+H     OH1   CT2   CT3         0.       1.8   3  ! ALLOW AL
+!     etha  OH    hf          0.       7.4   3  ! ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/9
+HA    CA    CA    CA        180.      14.7   2  ! ALLOW AR
+!     adm   jr.   10        180.      61.4   2  ! adm jr., 10/02/8
+HA    CA    CA    CPT       180.      14.7   2  ! ALLOW   AR
+!     JWK   09    CPT       180.      61.4   2  ! JWK 09/05/8
+HA    CA    CA    HA        180.      10.5   2  ! ALLOW AR
+!     ADM   JR.   10        180.      43.8   2  ! ADM JR., 10/02/8
+HA    CA    CPT   CPT       180.      12.6   2  ! ALLOW   AR
+HA    CA    CPT   CY        180.      16.7   2  ! ALLOW   AR
+!     JWK   09    CY        180.      70.1   2  ! JWK 09/05/8
+HA    CA    CY    CPT       180.       5.0   2  ! ALLOW AR
+HA    CA    CY    CT2       180.       5.0   2  ! ALLOW AR
+HA    CA    NY    CPT       180.      12.6   2  ! ALLOW   AR
+!     JWK   09    CPT       180.      52.6   2  ! JWK 09/05/8
+HA    CA    NY    H         180.       4.2   2  ! ALLOW   AR
+!     JWK   09    H         180.      17.5   2  ! JWK 09/05/8
+HA    CC    NH2   H         180.       5.9   2  !  ALLOW PEP PO
+!     adm   jr.   4         180.      24.5   2  ! adm jr. 4/10/91, acetamide updat
+HA    CP3   N     C         180.       0.0   3  ! ALLOW PRO PE
+HA    CP3   N     CP1         0.       0.4   3  ! ALLOW PR
+HA    CP3   NP    CP1         0.       0.3   3  ! ALLOW PR
+HA    CT1   CT2   CA          0.       0.2   3  ! ALLOW   AR
+!     2.7   kcal  CA          0.       0.7   3  ! 2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/9
+HA    CT2   CPH1  CPH1        0.       0.0   3  ! ALLOW AR
+!     4-me  4-21  CPH1        0.       0.0   3  ! 4-methylimidazole 4-21G//6-31G* rot bar. adm jr., 9/4/8
+HA    CT2   CY    CA        180.       1.0   2  ! ALLOW AR
+HA    CT2   CY    CPT       180.       1.0   2  ! ALLOW AR
+HA    CT2   NH1   C           0.       0.0   3  ! ALLOW PE
+HA    CT2   NH1   H           0.       0.0   3  ! ALLOW PE
+HA    CT2   S     CT3         0.       1.2   3  ! ALLOW   ALI SUL IO
+!     DTN   8     CT3         0.       4.9   3  ! DTN 8/24/9
+HA    CT3   CPH1  CPH1        0.       0.0   3  ! ALLOW AR
+!     4-me  4-21  CPH1        0.       0.0   3  ! 4-methylimidazole 4-21G//6-31G* rot bar. adm jr., 9/4/8
+HA    CT3   CS    HA          0.       0.7   3  ! ALLOW SU
+!     ethy  6-31  geom        0.       2.8   3  ! ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/9
+HA    CT3   CT2   CA          0.       0.2   3  ! ALLOW   AR
+!     2.7   kcal  CA          0.       0.7   3  ! 2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/9
+HA    CT3   NH1   C           0.       0.0   3  ! ALLOW PE
+HA    CT3   NH1   H           0.       0.0   3  ! ALLOW PE
+HA    CT3   S     CT2         0.       1.2   3  ! ALLOW   ALI SUL IO
+!     DTN   8     CT2         0.       4.9   3  ! DTN 8/24/9
+HA    CY    CA    CPT       180.       5.0   2  ! ALLOW   AR
+!     JWK   09    CPT       180.      21.0   2  ! JWK 09/05/8
+HA    CY    CA    HA        180.       5.0   2  ! ALLOW   AR
+!     JWK   09    HA        180.      21.0   2  ! JWK 09/05/8
+HA    CY    CPT   CA        180.      12.6   2  ! ALLOW   AR
+!     JWK   09    CA        180.      52.6   2  ! JWK 09/05/8
+HA    CY    CPT   CPT       180.      12.6   2  ! ALLOW   AR
+!     JWK   09    CPT       180.      52.6   2  ! JWK 09/05/8
+HA1   CE1   CE2   HA2       180.      21.8   2  
+#
+HA1   CE1   CT2   HA          0.       3.6   3  
+#
+HA1   CE1   CT2   CT3         0.       0.5   3  
+#
+HA1   CE1   CT3   HA          0.       1.4   3  
+#
+HA2   CE2   CE1   CT2       180.      21.8   2  
+#
+HB    CP1   N     C           0.       3.3   3  ! ALLOW PRO PE
+HB    CP1   N     CP3         0.       0.4   3  ! ALLOW PR
+HB    CP1   NP    CP3         0.       0.3   3  ! ALLOW PR
+HB    CT1   NH1   C           0.       0.0   1  ! ALLOW PE
+HB    CT1   NH1   H           0.       0.0   1  ! ALLOW PE
+HB    CT2   NH1   C           0.       0.0   1  ! ALLOW PE
+HB    CT2   NH1   H           0.       0.0   1  ! ALLOW PE
+HB    CT3   NH1   C           0.       0.0   1  ! ALLOW PE
+HB    CT3   NH1   H           0.       0.0   1  ! ALLOW PE
+HC    NH2   CT2   HB          0.       0.5   3  
+HC    NH2   CT2   CD          0.       0.5   3  
+HC    NP    CP1   C           0.       0.3   3  ! ALLOW PR
+HC    NP    CP1   CC          0.       0.3   3  ! ALLOW PR
+HC    NP    CP1   CD          0.       0.3   3  ! ALLOW PRO PE
+HC    NP    CP1   CP2         0.       0.3   3  ! ALLOW PR
+HC    NP    CP1   HB          0.       0.3   3  ! ALLOW PR
+HC    NP    CP3   CP2         0.       0.3   3  ! ALLOW PR
+HC    NP    CP3   HA          0.       0.3   3  ! ALLOW PR
+HP    CA    CA    CA        180.      17.6   2  ! ALLOW   AR
+!     JES   8     CA        180.      73.6   2  ! JES 8/25/89 benzen
+HP    CA    CA    CPT       180.      12.6   2  ! ALLOW   AR
+!     JWK   05    CPT       180.      52.6   2  ! JWK 05/14/91 fit to indol
+HP    CA    CA    CT2       180.      17.6   2  ! ALLOW   AR
+!     JES   8     CT2       180.      73.6   2  ! JES 8/25/89 toluene and ethylbenzen
+HP    CA    CA    CT3       180.      17.6   2  ! ALLOW   AR
+!     tolu  adm   jr.       180.      12.6   2  ! toluene, adm jr., 3/7/9
+HP    CA    CA    HP        180.      10.0   2  ! ALLOW   AR
+!     JES   8     HP        180.      42.1   2  ! JES 8/25/89 benzen
+HP    CA    CPT   CPT       180.      12.6   2  ! ALLOW   AR
+!     JWK   indo  05        180.      52.6   2  ! JWK indole 05/14/9
+HP    CA    CPT   CY        180.      12.6   2  ! ALLOW   AR
+!     JWK   05    CY        180.      52.6   2  ! JWK 05/14/91 fit to indol
+HP    CA    CY    CPT       180.       8.4   2  ! ALLOW AR
+!adm  jr.   12    CPT       180.      35.1   2  !adm jr., 12/30/91, for jw
+HP    CA    CY    CT2       180.       5.0   2  ! ALLOW AR
+!     JWK   indo  05        180.      21.0   2  ! JWK indole 05/14/9
+HP    CA    NY    CPT       180.       8.4   2  ! ALLOW   AR
+!adm  jr.   12    CPT       180.      35.1   2  !adm jr., 12/30/91, for jw
+HP    CA    NY    H         180.       1.7   2  ! ALLOW   AR
+!     JWK   05    H         180.       7.0   2  ! JWK 05/14/91 fit to indol
+HP    CY    CA    HP        180.       4.2   2  ! ALLOW   AR
+!     JWK   05    HP        180.      17.5   2  ! JWK 05/14/91 fit to indol
+HP    CY    CPT   CA        180.      11.7   2  ! ALLOW   AR
+!     JWK   05    CA        180.      49.1   2  ! JWK 05/14/91 fit to indol
+HP    CY    CPT   CPT       180.      11.7   2  ! ALLOW   AR
+!     JWK   05    CPT       180.      49.1   2  ! JWK 05/14/91 fit to indol
+HR1   CPH1  CPH1  CT2       180.       4.2   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+HR1   CPH1  CPH1  CT3       180.       4.2   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+HR1   CPH1  CPH1  HR1       180.       4.2   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/90, hi
+HR1   CPH1  NR3   CPH2      180.      10.5   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+HR1   CPH1  NR3   H         180.      12.6   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+HR1   CPH2  NR1   CPH1      180.      12.6   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+HR1   CPH2  NR1   H         180.       4.2   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+HR1   CPH2  NR2   CPH1      180.      12.6   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+HR2   CPH2  NR3   CPH1      180.      12.6   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+HR2   CPH2  NR3   H         180.       0.0   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/90, YES, 0.
+HR3   CPH1  CPH1  CT2       180.       8.4   2  ! ALLOW AR
+!     adm   jr.   3         180.      35.1   2  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+HR3   CPH1  CPH1  CT3       180.       8.4   2  ! ALLOW AR
+!     adm   jr.   3         180.      35.1   2  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+HR3   CPH1  CPH1  HR3       180.       8.4   2  ! ALLOW AR
+!     adm   jr.   3         180.      35.1   2  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+HR3   CPH1  NR1   CPH2      180.      12.6   2  ! ALLOW AR
+!     adm   jr.   3         180.      52.6   2  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+HR3   CPH1  NR1   H         180.       4.2   2  ! ALLOW AR
+!     adm   jr.   3         180.      17.5   2  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+HR3   CPH1  NR2   CPH2      180.      12.6   2  ! ALLOW AR
+!     adm   jr.   3         180.      52.6   2  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+HS    S     CT2   CT1         0.       1.0   1  ! ALLOW   ALI SUL IO
+HS    S     CT2   CT1         0.       0.6   2  ! ALLOW   ALI SUL IO
+HS    S     CT2   CT1         0.       1.1   3  ! ALLOW   ALI SUL IO
+HS    S     CT2   CT3         0.       1.0   1  ! ALLOW   ALI SUL IO
+HS    S     CT2   CT3         0.       0.6   2  ! ALLOW   ALI SUL IO
+HS    S     CT2   CT3         0.       1.1   3  ! ALLOW   ALI SUL IO
+HS    S     CT2   HA          0.       0.8   3  ! ALLOW   ALI SUL IO
+HS    S     CT3   HA          0.       0.8   3  ! ALLOW   ALI SUL IO
+N     C     CP1   CP2         0.       1.7   1  ! ALLOW PEP PR
+N     C     CP1   CP2         0.       2.5   2  ! ALLOW PEP PR
+N     C     CP1   HB        180.       1.7   1  ! ALLOW PEP PR
+N     C     CP1   HB          0.       2.5   2  ! ALLOW PEP PR
+N     C     CP1   N           0.       1.3   1  ! ALLOW PEP PR
+N     C     CP1   N           0.      -1.3   4  ! ALLOW PEP PR
+N     C     CT1   CT1         0.       0.0   1  ! ALLOW PEP PR
+N     C     CT1   CT2         0.       0.0   1  ! ALLOW PEP PR
+N     C     CT1   CT3         0.       0.0   1  ! ALLOW PEP PR
+N     C     CT1   HB          0.       0.0   1  ! ALLOW PEP PR
+N     C     CT2   HB          0.       0.0   1  ! ALLOW PEP PR
+N     C     CT3   HA          0.       0.0   1  ! ALLOW PEP PR
+N     CT1   CT2   CA          0.       0.2   3  ! ALLOW   AR
+!     2.7   kcal  CA          0.       0.7   3  ! 2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/9
+NH1   C     CP1   CP2         0.       1.7   1  ! ALLOW PEP PR
+NH1   C     CP1   CP2         0.       2.5   2  ! ALLOW PEP PR
+NH1   C     CP1   HB        180.       1.7   1  ! ALLOW PEP PR
+NH1   C     CP1   HB          0.       2.5   2  ! ALLOW PEP PR
+NH1   C     CP1   N           0.       1.3   1  ! ALLOW PEP PR
+NH1   C     CP1   N           0.      -1.3   4  ! ALLOW PEP PR
+NH1   C     CT1   CT1         0.       0.0   1  !   ALLOW PE
+NH1   C     CT1   CT2         0.       0.0   1  !   ALLOW PE
+NH1   C     CT1   CT3         0.       0.0   1  !   ALLOW PE
+NH1   C     CT1   HB          0.       0.0   1  !   ALLOW PE
+NH1   C     CT1   NH1         0.       2.5   1  !   ALLOW PE
+NH1   C     CT2   CT2         0.       0.0   1  !   ALLOW PE
+NH1   C     CT2   HA          0.       0.0   3  ! ALLOW PE
+NH1   C     CT2   HB          0.       0.0   1  !   ALLOW PE
+NH1   C     CT2   NH1         0.       2.5   1  !   ALLOW PE
+NH1   C     CT3   HA          0.       0.0   3  ! ALLOW PE
+NH1   CT1   C     N           0.       1.7   1  ! ALLOW PEP PR
+NH1   CT2   C     N           0.       1.7   1  ! ALLOW PEP PR
+NH2   CC    CP1   CP2         0.       1.7   1  ! ALLOW PEP PR
+NH2   CC    CP1   CP2         0.       2.5   2  ! ALLOW PEP PR
+NH2   CC    CP1   HB        180.       1.7   1  ! ALLOW PEP PR
+NH2   CC    CP1   HB          0.       2.5   2  ! ALLOW PEP PR
+NH2   CC    CP1   N           0.       1.3   1  ! ALLOW PEP PR
+NH2   CC    CP1   N           0.      -1.3   4  ! ALLOW PEP PR
+NH2   CC    CT2   HA        180.       0.0   3  ! ALLOW PO
+!     adm   jr.   8         180.       0.0   3  ! adm jr., 8/13/90 acetamide geometry and vibration
+NH3   CT1   C     N           0.       1.7   1  ! ALLOW PEP PR
+NH3   CT1   C     NH1         0.       2.5   1  ! ALLOW PEP PR
+NH3   CT1   CC    NH2         0.       1.7   1  ! ALLOW PEP PR
+NH3   CT2   C     N           0.       1.7   1  ! ALLOW PEP PR
+NH3   CT2   C     NH1         0.       1.7   1  ! ALLOW PEP PR
+!     adm   jr.   3           0.       7.0   1  ! adm jr. 3/24/92, for PRES GLY
+NH3   CT2   CC    NH2         0.       1.7   1  ! ALLOW PEP PR
+NP    CP1   C     N           0.       1.3   1  ! ALLOW PEP PR
+NP    CP1   C     NH1         0.       1.3   1  ! ALLOW PEP PR
+NP    CP1   CC    NH2         0.       1.3   1  ! ALLOW PEP PR
+NR1   CPH1  CPH1  CT2       180.      12.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/22/89, FROM NR1 CPH1 CPH1 H
+NR1   CPH1  CPH1  CT3       180.      12.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/22/89, FROM NR1 CPH1 CPH1 H
+NR1   CPH1  CPH1  HR3       180.      12.6   2  ! ALLOW AR
+!     adm   jr.   3         180.      52.6   2  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+NR1   CPH1  CT2   CT1         0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  CT1         0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR1   CPH1  CT2   CT2         0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  CT2         0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR1   CPH1  CT2   CT3         0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  CT3         0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR1   CPH1  CT2   HA          0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  HA          0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR1   CPH1  CT3   HA          0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  HA          0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR1   CPH2  NR2   CPH1      180.      58.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/20/8
+NR2   CPH1  CPH1  CT2       180.      12.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/22/89, FROM NR2 CPH1 CPH1 H
+NR2   CPH1  CPH1  CT3       180.      12.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/22/89, FROM NR2 CPH1 CPH1 H
+NR2   CPH1  CPH1  HR3       180.      12.6   2  ! ALLOW AR
+!     adm   jr.   3         180.      52.6   2  ! adm jr., 3/24/92, maintain old aliphatic H VDW param
+NR2   CPH1  CPH1  NR1       180.      58.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/20/8
+NR2   CPH1  CT2   CT1         0.       0.8   3  ! ALLOW AR
+NR2   CPH1  CT2   CT2         0.       0.8   3  ! ALLOW AR
+NR2   CPH1  CT2   CT3         0.       0.8   3  ! ALLOW AR
+NR2   CPH1  CT2   HA          0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  HA          0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR2   CPH1  CT3   HA          0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  HA          0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR2   CPH2  NR1   CPH1      180.      58.6   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/20/8
+NR2   CPH2  NR1   H         180.       4.2   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/20/8
+NR3   CPH1  CPH1  CT2       180.      10.5   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+NR3   CPH1  CPH1  CT3       180.      10.5   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+NR3   CPH1  CPH1  HR1       180.      10.5   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+NR3   CPH1  CPH1  NR3       180.      50.2   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+NR3   CPH1  CT2   CT1         0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  CT1         0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR3   CPH1  CT2   CT2         0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  CT2         0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR3   CPH1  CT2   CT3         0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  CT3         0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR3   CPH1  CT2   HA          0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  HA          0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR3   CPH1  CT3   HA          0.       0.8   3  ! ALLOW AR
+!     4-ME  4-21  HA          0.       3.3   3  ! 4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/8
+NR3   CPH2  NR3   CPH1      180.      50.2   2  ! ALLOW AR
+!     his   ADM   JR.       180.      29.3   2  ! his, ADM JR., 7/20/8
+NR3   CPH2  NR3   H         180.       5.9   2  ! ALLOW AR
+!     his   adm   jr.       180.      25.1   2  ! his, adm jr., 6/27/9
+NY    CA    CY    CPT       180.      16.7   2  ! ALLOW   AR
+!     JWK   05    CPT       180.      70.1   2  ! JWK 05/14/91 fit to indol
+NY    CA    CY    CT2       180.      14.7   2  ! ALLOW AR
+NY    CA    CY    HA        180.      14.7   2  ! ALLOW   AR
+!     JWK   09    HA        180.      61.4   2  ! JWK 09/05/8
+NY    CA    CY    HP        180.      14.7   2  ! ALLOW   AR
+!     JWK   indo  05        180.      61.4   2  ! JWK indole 05/14/9
+NY    CPT   CA    CA        180.      11.7   2  ! ALLOW   AR
+!     JWK   05    CA        180.      49.1   2  ! JWK 05/14/91 fit to indol
+NY    CPT   CA    HA        180.      16.7   2  ! ALLOW   AR
+!     JWK   09    HA        180.      70.1   2  ! JWK 09/05/8
+NY    CPT   CA    HP        180.      12.6   2  ! ALLOW   AR
+!     JWK   05    HP        180.      52.6   2  ! JWK 05/14/91 fit to indol
+NY    CPT   CPT   CA        180.      41.9   2  ! ALLOW   AR
+!     JWK   05    CA        180.     175.3   2  ! JWK 05/14/91 fit to indol
+NY    CPT   CPT   CY        180.      20.9   2  ! ALLOW   AR
+!     JWK   05    CY        180.      87.7   2  ! JWK 05/14/91 fit to indol
+O     C     CP1   CP2       180.       1.7   1  ! ALLOW PEP PR
+O     C     CP1   CP2         0.       2.5   2  ! ALLOW PEP PR
+O     C     CP1   HB          0.       1.7   1  ! ALLOW PEP PR
+O     C     CP1   HB          0.       2.5   2  ! ALLOW PEP PR
+O     C     CP1   N           0.      -1.3   4  ! ALLOW PEP PR
+O     C     CT1   CT1         0.       5.9   1  !   ALLOW PE
+O     C     CT1   CT2         0.       5.9   1  !   ALLOW PE
+O     C     CT1   CT3         0.       5.9   1  !   ALLOW PE
+O     C     CT1   HB          0.       0.0   1  !   ALLOW PE
+O     C     CT1   NH1         0.       0.0   1  !   ALLOW PE
+O     C     CT1   NH3         0.       0.0   1  ! ALLOW PEP PR
+O     C     CT2   CT2         0.       5.9   1  !   ALLOW PE
+O     C     CT2   HA        180.       0.0   3  ! ALLOW PO
+!     adm   jr.   8         180.       0.0   3  ! adm jr., 8/13/90 acetamide geometry and vibration
+O     C     CT2   HB          0.       0.0   1  !   ALLOW PE
+O     C     CT2   NH1         0.       0.0   1  !   ALLOW PE
+O     C     CT2   NH3         0.       0.0   1  ! ALLOW PEP PR
+O     C     CT3   HA        180.       0.0   3  ! ALLOW PO
+!     adm   jr.   8         180.       0.0   3  ! adm jr., 8/13/90 acetamide geometry and vibration
+O     C     N     CP1       180.      11.5   2  ! ALLOW PR
+O     C     N     CP1         0.       1.3   4  ! ALLOW PR
+O     C     N     CP3       180.      11.5   2  ! ALLOW PR
+O     C     N     CP3         0.       1.3   4  ! ALLOW PR
+O     C     NH1   CT1       180.      10.5   2  !  ALLOW PE
+O     C     NH1   CT2       180.      10.5   2  !  ALLOW PE
+O     C     NH1   CT3       180.      10.5   2  !  ALLOW PE
+O     C     NH1   H         180.      10.5   2  !  ALLOW PE
+O     CC    CP1   CP2       180.       1.7   1  ! ALLOW PEP PR
+O     CC    CP1   CP2         0.       2.5   2  ! ALLOW PEP PR
+O     CC    CP1   HB          0.       1.7   1  ! ALLOW PEP PR
+O     CC    CP1   HB          0.       2.5   2  ! ALLOW PEP PR
+O     CC    CP1   N           0.      -1.3   4  ! ALLOW PEP PR
+O     CC    CT2   HA        180.       0.0   3  ! ALLOW PO
+!     adm   jr.   4         180.       0.0   3  ! adm jr. 4/05/91, for asn,asp,gln,glu and cter
+O     CC    NH2   H         180.       5.9   2  !  ALLOW PEP POL ARO PR
+!     adm   jr.   4         180.      24.5   2  ! adm jr. 4/10/91, acetamide updat
+OB    CD    OS    CT2       180.       4.0   1  ! ALLOW   PEP PO
+!     adm   jr.   3         180.      16.9   1  ! adm jr. 3/19/92, from lipid methyl acetat
+OB    CD    OS    CT2       180.      16.1   2  ! ALLOW   PEP PO
+!     adm   jr.   3         180.      67.5   2  ! adm jr. 3/19/92, from lipid methyl acetat
+OB    CD    OS    CT3       180.       4.0   1  ! ALLOW   PEP PO
+!     adm   jr.   3         180.      16.9   1  ! adm jr. 3/19/92, from lipid methyl acetat
+OB    CD    OS    CT3       180.      16.1   2  ! ALLOW   PEP PO
+!     adm   jr.   3         180.      67.5   2  ! adm jr. 3/19/92, from lipid methyl acetat
+OC    CA    CA    CA        180.      13.0   2  ! ALLOW   AR
+!     adm   jr.   8         180.      54.3   2  ! adm jr. 8/27/91, phenoxid
+OC    CA    CA    HP        180.      17.6   2  ! ALLOW   AR
+!     adm   jr.   8         180.      73.6   2  ! adm jr. 8/27/91, phenoxid
+OC    CC    CP1   CP2         0.       0.7   3  ! ALLOW PEP PRO PO
+OC    CC    CP1   HB          0.       0.7   3  ! ALLOW PEP PRO PO
+OC    CC    CP1   N           0.       0.7   3  ! ALLOW PEP PRO PO
+OC    CC    CP1   NP          0.       0.7   3  ! ALLOW PEP PRO PO
+OC    CC    CT1   NH3       180.      13.4   2  ! ALLOW PEP PR
+!     adm   jr.   4         180.      56.1   2  ! adm jr. 4/17/94, zwitterionic glycin
+OC    CC    CT2   NH3       180.      13.4   2  ! ALLOW PEP PR
+!     adm   jr.   4         180.      56.1   2  ! adm jr. 4/17/94, zwitterionic glycin
+OH1   CA    CA    CA        180.      13.0   2  ! ALLOW   AR
+!     JES   8     CA        180.      54.3   2  ! JES 8/25/89 pheno
+OH1   CA    CA    HP        180.      17.6   2  ! ALLOW   AR
+!     JES   8     HP        180.      73.6   2  ! JES 8/25/89 pheno
+S     CT2   CT2   HA          0.       0.0   3  ! ALLOW   ALI SUL IO
+!     DTN   8     HA          0.       0.2   3  ! DTN 8/24/9
+SM    CT2   CT2   HA          0.       0.0   3  ! ALLOW   ALI SUL IO
+!     DTN   8     HA          0.       0.2   3  ! DTN 8/24/9
+SM    SM    CT2   CT1         0.       1.3   3  ! ALLOW  SUL AL
+SM    SM    CT2   CT2         0.       1.3   3  ! ALLOW  SUL AL
+SM    SM    CT2   HA          0.       0.7   3  ! ALLOW   ALI SUL IO
+!     expt  dime  3           0.       2.8   3  ! expt. dimethyldisulfide,    3/26/92 (FL
+SM    SM    CT3   HA          0.       0.7   3  ! ALLOW   ALI SUL IO
+!     expt  dime  3           0.       2.8   3  ! expt. dimethyldisulfide,    3/26/92 (FL
+SS    CS    CT3   HA          0.       0.6   3  ! ALLOW SU
+!     ethy  6-31  geom        0.       2.6   3  ! ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/9
+X     C     C     X         180.      16.7   2  ! ALLOW HE
+X     C     NC2   X         180.       9.4   2  ! ALLOW   PEP POL AR
+X     CD    OH1   X         180.       8.6   2  ! ALLOW   PEP POL ARO AL
+!     adm   jr    10        180.      35.9   2  ! adm jr, 10/17/90, acetic acid C-Oh rotation barrie
+X     CD    OS    X         180.       8.6   2  ! ALLOW   PEP PO
+!     adm   jr.   3         180.      35.9   2  ! adm jr. 3/19/92, from lipid methyl acetat
+X     CE1   CE1   X         180.      21.8   2  
+#
+X     CE2   CE2   X         180.      20.5   2  
+#
+X     CP1   C     X         180.       0.0   6  ! ALLOW   POL PEP PR
+X     CP1   CC    X         180.       0.0   6  ! ALLOW   POL PE
+X     CP1   CD    X         180.       0.0   6  ! ALLOW   POL PE
+X     CP1   CP2   X           0.       0.6   3  ! ALLOW PR
+X     CP2   CP2   X           0.       0.7   3  ! ALLOW PR
+X     CP3   CP2   X           0.       0.6   3  ! ALLOW PR
+X     CPA   CPB   X           0.       0.0   2  ! ALLOW HE
+X     CPA   CPM   X           0.       0.0   2  ! ALLOW HE
+X     CPB   C     X         180.      12.6   2  ! ALLOW HE
+X     CPB   CPB   X           0.       0.0   2  ! ALLOW HE
+X     CPB   CT2   X           0.       0.0   6  ! ALLOW HE
+X     CPB   CT3   X           0.       0.0   6  ! ALLOW HE
+X     CPT   CPT   X         180.       0.0   2  ! ALLOW   AR
+!     JWK   indo  05        180.       0.0   2  ! JWK indole 05/14/9
+X     CT1   CC    X         180.       0.2   6  ! ALLOW   POL PE
+X     CT1   CD    X         180.       0.0   6  ! ALLOW   POL PE
+!     adm   jr.   3         180.       0.0   6  ! adm jr. 3/19/92, from lipid methyl acetat
+X     CT1   CT1   X           0.       0.8   3  ! ALLOW   AL
+X     CT1   CT2   X           0.       0.8   3  ! ALLOW   AL
+X     CT1   CT3   X           0.       0.8   3  ! ALLOW   AL
+X     CT1   NH3   X           0.       0.4   3  ! ALLOW   ALI PO
+X     CT1   OH1   X           0.       0.6   3  ! ALLOW   ALI ALC AR
+!     EMB   11    X           0.       2.5   3  ! EMB  11/21/89 methanol vib fi
+X     CT1   OS    X           0.      -0.4   3  ! ALLOW   PEP PO
+!     adm   jr.   3           0.      -1.8   3  ! adm jr. 3/19/92, from lipid methyl acetat
+X     CT2   CA    X           0.       0.0   6  ! ALLOW   ALI AR
+!     tolu  adm   jr.         0.      12.6   6  ! toluene, adm jr., 3/7/9
+X     CT2   CC    X         180.       0.2   6  ! ALLOW   POL PE
+X     CT2   CD    X         180.       0.0   6  ! ALLOW   POL PE
+!     adm   jr.   3         180.       0.0   6  ! adm jr. 3/19/92, from lipid methyl acetat
+X     CT2   CT2   X           0.       0.8   3  ! ALLOW   AL
+X     CT2   CT3   X           0.       0.7   3  ! ALLOW   AL
+X     CT2   NC2   X         180.       0.0   6  ! ALLOW   ALI PO
+!     meth  adm   jr.       180.      12.6   6  ! methylguanidinium, adm jr., 3/26/9
+X     CT2   NH3   X           0.       0.4   3  ! ALLOW   ALI PO
+X     CT2   OH1   X           0.       0.6   3  ! ALLOW   ALI ALC AR
+!     EMB   11    X           0.       2.5   3  ! EMB  11/21/89 methanol vib fi
+X     CT2   OS    X           0.      -0.4   3  ! ALLOW   PEP PO
+!     adm   jr.   3           0.      -1.8   3  ! adm jr. 3/19/92, from lipid methyl acetat
+X     CT3   CA    X           0.       0.0   6  ! ALLOW   ALI AR
+!     tolu  adm   jr.         0.      12.6   6  ! toluene, adm jr., 3/7/9
+X     CT3   CC    X         180.       0.2   6  ! ALLOW   POL PE
+X     CT3   CD    X         180.       0.0   6  ! ALLOW   POL PE
+!     adm   jr.   3         180.       0.0   6  ! adm jr. 3/19/92, from lipid methyl acetat
+X     CT3   CT3   X           0.       0.6   3  ! ALLOW   AL
+X     CT3   NC2   X         180.       0.0   6  ! ALLOW   ALI PO
+!     meth  adm   jr.       180.      12.6   6  ! methylguanidinium, adm jr., 3/26/9
+X     CT3   NH2   X           0.       0.5   3  ! ALLOW   PO
+!     meth  geom  X           0.       1.9   3  ! methylamine geom/freq, adm jr., 6/2/9
+X     CT3   NH3   X           0.       0.4   3  ! ALLOW   ALI PO
+X     CT3   OH1   X           0.       0.6   3  ! ALLOW   ALI ALC AR
+!     EMB   11    X           0.       2.5   3  ! EMB  11/21/89 methanol vib fi
+X     CT3   OS    X           0.      -0.4   3  ! ALLOW   PEP PO
+!     adm   jr.   3           0.      -1.8   3  ! adm jr. 3/19/92, from lipid methyl acetat
+X     FE    CM    X           0.       0.2   4  ! ALLOW HE
+X     FE    NPH   X           0.       0.0   2  ! ALLOW HE
+X     FE    OM    X           0.       0.0   4  ! ALLOW HE
+X     NPH   CPA   X           0.       0.0   2  ! ALLOW HE
+#
+#   Improper angles not implemented in Makemol
+#
+#V(improper) = Kpsi(psi - psi0)**2
+#
+#Kpsi: kcal/mole/rad**2
+#psi0: degrees
+#note that the second column of numbers (0) is ignored
+#
+#atom types           Kpsi                   psi0
+#
+#
+#
+NONBONDED
+#
+#V(Lennard-Jones) = Eps,i,j[(Rmin,i,j/ri,j)**12 - 2(Rmin,i,j/ri,j)**6]
+#
+#epsilon: kcal/mole, Eps,i,j = sqrt(eps,i * eps,j)
+#Rmin/2: A, Rmin,i,j = Rmin/2,i + Rmin/2,j
+#
+#atom  ignored    epsilon      Rmin/2   ignored   eps,1-4       Rmin/2,1-4
+#
+C       3.5640    0.4606  ! ALLOW   PEP POL AR
+CA      3.5505    0.2931  ! ALLOW   AR
+CC      3.5640    0.2931  ! ALLOW   PEP POL AR
+CD      3.5640    0.2931  ! ALLOW  PO
+CE1     3.7244    0.2847  
+#
+CE2     3.7066    0.2680  
+#
+CM      3.7422    0.4606  ! ALLOW HE
+CP1     4.0540    0.0837    3.3858    0.0419  ! AL
+CP2     3.8758    0.2303    3.3858    0.0419  ! AL
+CP3     3.8758    0.2303    3.3858    0.0419  ! AL
+CPA     3.2076    0.3768  ! ALLOW HE
+CPB     3.2076    0.3768  ! ALLOW HE
+CPH1    3.2076    0.2093  ! ALLOW AR
+CPH2    3.2076    0.2093  ! ALLOW AR
+CPM     3.2076    0.3768  ! ALLOW HE
+CPT     3.2076    0.3768    3.3858    0.3768  ! AL
+CS      3.9204    0.4606  ! ALLOW SU
+CT1     4.0540    0.0837    3.3858    0.0419  ! AL
+CT2     3.8758    0.2303    3.3858    0.0419  ! AL
+CT3     3.6709    0.3350    3.3858    0.0419  ! AL
+CY      3.5505    0.2931  ! ALLOW   AR
+# carbon wildcards, following atom order is essential for accurate results
+#C*     0.000000  -0.070000     2.000000
+#CP%    0.000000  -0.090000     1.800000
+#C%1    0.000000  -0.020000     2.275000   0.000000  -0.010000     1.900000
+#C%2    0.000000  -0.055000     2.175000   0.000000  -0.010000     1.900000
+#C%3    0.000000  -0.080000     2.060000   0.000000  -0.010000     1.900000
+#CPH+   0.000000  -0.050000     1.800000
+#C      0.000000  -0.110000     2.000000
+#CA     0.000000  -0.070000     1.992400
+#CE1    0.000000  -0.068000     2.090000
+#CE2    0.000000  -0.064000     2.080000
+#CM     0.000000  -0.110000     2.100000
+#CP3    0.000000  -0.055000     2.175000   0.000000  -0.010000     1.900000 ! AL
+#CPT    0.000000  -0.090000     1.800000   0.000000  -0.090000     1.900000
+#CS     0.000000  -0.110000     2.200000
+#CY     0.000000  -0.070000     1.992400
+#
+H       0.4001    0.1926  ! ALLOW PEP POL SUL ARO AL
+HA      2.3522    0.0921  ! ALLOW PEP ALI POL SUL ARO PRO AL
+HA1     2.2275    0.1298  
+#
+HA2     2.2453    0.1089  
+#
+HB      2.3522    0.0921  ! ALLOW PEP ALI POL SUL ARO PRO AL
+HC      0.4001    0.1926  ! ALLOW PO
+HP      2.4203    0.1256    2.4203    0.1256  ! AL
+HR1     1.6038    0.1926  ! ALLOW AR
+HR2     1.2474    0.1926  ! ALLOW AR
+HR3     2.6160    0.0327  ! ALLOW AR
+HS      0.8019    0.4187  ! ALLOW SU
+HT      0.4001    0.1926  ! ALLOW WA
+# hydrogen wildcards
+#H*     0.000000  -0.046000     0.224500
+#HA     0.000000  -0.022000     1.320000
+#HA1    0.000000  -0.031000     1.250000
+#HA2    0.000000  -0.026000     1.260000
+#HB     0.000000  -0.022000     1.320000
+#HP     0.000000  -0.030000     1.358200   0.000000  -0.030000     1.358200
+#HR1    0.000000  -0.046000     0.900000
+#HR2    0.000000  -0.046000     0.700000
+#HR3    0.000000  -0.007800     1.468000
+#HS     0.000000  -0.100000     0.450000
+#
+N       3.2967    0.8374    3.2967    0.0004  ! AL
+NC2     3.2967    0.8374  ! ALLOW   PO
+NH1     3.2967    0.8374    2.7621    0.8374  ! AL
+!       7.1280   -4.1870  ! This 1,4 vdW allows the C5 dipeptide minimum to exist.(LK
+NH2     3.2967    0.8374  ! ALLOW   PO
+NH3     3.2967    0.8374  ! ALLOW   PO
+NP      3.2967    0.8374  ! ALLOW  PR
+NPH     3.2967    0.8374  ! ALLOW HE
+NR1     3.2967    0.8374  ! ALLOW AR
+NR2     3.2967    0.8374  ! ALLOW AR
+NR3     3.2967    0.8374  ! ALLOW AR
+NY      3.2967    0.8374  ! ALLOW   AR
+# nitrogen wildcards
+#N*     0.000000  -0.200000     1.850000
+#N      0.000000  -0.200000     1.850000   0.000000  -0.000100     1.850000
+#NH1    0.000000  -0.200000     1.850000   0.000000  -0.200000     1.550000
+#
+O       3.0294    0.5024    2.4948    0.5024  ! AL
+!       7.1280   -4.1870  ! This 1,4 vdW allows the C5 dipeptide minimum to exist.(LK
+OB      3.0294    0.5024    2.4948    0.5024  ! AL
+OC      3.0294    0.5024  ! ALLOW   POL IO
+OH1     3.1541    0.6368  ! ALLOW   ALC AR
+OM      3.0294    0.5024  ! ALLOW HE
+OS      3.1541    0.6368  ! ALLOW   ALC AR
+OT      3.1509    0.6368  ! ALLOW   WA
+# oxygen wildcards
+#O*     0.000000  -0.120000     1.700000   0.000000  -0.120000     1.400000
+#OC     0.000000  -0.120000     1.700000
+#OH1    0.000000  -0.152100     1.770000
+#OM     0.000000  -0.120000     1.700000
+#OS     0.000000  -0.152100     1.770000
+#OT     0.000000  -0.152100     1.768200
+#
+CAL     3.0472    0.5024  ! ALLOW IO
+FE      1.1583    0.0000  ! ALLOW HE
+S       3.5640    1.8841  ! ALLOW   SUL IO
+SM      3.5194    1.5911  ! ALLOW  SUL  IO
+SS      3.9204    1.9679  ! ALLOW  SU
+ZN      1.9424    1.0467  ! ALLOW  IO
+DUM     0.0000    0.0000  
+HE      2.6374    0.0891  
+NE      2.7265    0.3601  
+#
+#
+END

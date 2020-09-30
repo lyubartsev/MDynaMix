@@ -1,0 +1,30 @@
+#==================================================I
+#       Molecular Dynamics Data Base               I
+#       Configuration and interaction potential    I
+#==================================================I
+#           O=C=O molecule                         I
+#==================================================I 
+#       Number of sites
+ 3
+#       X        Y         Z         M          Q         sigma     epsilon
+#               (A)                                                  (kJ/M)
+C      0.        0.        0.      12.011      0.42      2.78       0.241
+O1     0.        0.       1.164    15.999     -0.21      3.01       0.691
+O2     0.        0.      -1.164    15.999     -0.21      3.01       0.691
+#    Num. of strings for the reference
+4
+       CO2
+       Parameters from:          
+       J.Samios, H.Stassen and T.Dorfmuller,
+       Chem.Phys., 160, 33 (1992)
+#   Num. of bonds
+ 2
+#ID(typ)    N1   N2         Reqv      Force        D        RHO (A**-1)    
+ 0           1    2        1.561       620. 
+ 0           1    3        1.561       620. 
+#   Num. of angles
+ 1
+ 2  1  3    180.     500.                                        
+#   Num of dihedrals
+ 0 
+

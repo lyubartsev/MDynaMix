@@ -1,0 +1,25 @@
+# Template input file for bileldens utility
+#
+ &TRAJ
+ NFORM='MDYN',
+ FNAME='/s4/Bilayer/180181/180181_pc_mem',
+ PATHDB='../makemol',
+ NTYPES=2,
+ NAMOL='180181_pc','H2O',
+ NFBEG=96,
+ NFEND=249,
+ ISTEP=50,
+ IPRINT=5
+ &END
+ &ELDEN
+ FDENS='dens_180181.dat',
+ IRT=1,
+ NA=320,
+ ZMAX=32.,
+ LSYM=.t.,
+ LCHG=.f.,
+ IATE = 143*1,
+ &END
+ 
+
+ 

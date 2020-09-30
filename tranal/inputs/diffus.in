@@ -1,0 +1,22 @@
+#  Template input file for computation of diffusion coefficients
+#
+&TRAJ
+ NFORM='MDYN',
+ FNAME='256_waters',
+ PATHDB='/s2/sasha/mdp/md527/moldb',
+ NTYPES=1,
+ NAMOL='H2O',
+ NSPEC=256,
+ NFBEG=3,
+ NFEND=10,
+ ISTEP=1
+ &END
+ &DIFF
+ IDF=1,
+ DTT=1.d-13,
+ NTT=500,
+ IAT=0,
+ LCOM=.true.,
+ FILDIF='watdif2.dat',
+ &END
+ 
