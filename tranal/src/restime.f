@@ -3,7 +3,11 @@
 *  From version 5.2
 *  Calculation of residence time
       include "tranal.h"
-      parameter (NRT1M=1024,NRT2M=2048,NDUPM=128,NITTM=1024)
+C     array boundaries for:
+C     NRT1M: number of sites "from"
+C     NRT2M: numberof sites "to"
+C     NITTM: number of time frames to follow residence time      
+      parameter (NRT1M=4096,NRT2M=8192,NITTM=2048)
       dimension TIIN(NRT1M,NRT2M),TIINI(NRT1M,NRT2M),TIINO(NRT1M,NRT2M)
       dimension DISTT(NITTM),DIST2(NITTM)
       integer IRS(NRT1M,NRT2M),IR1(NRT1M),IR2(NRT2M),IRS1(NRT1M),
@@ -19,7 +23,7 @@
       RRN = 0.
 *  Input of specific parameters
       read(*,RESTIM)
-      if(NITT.gt.NITTM) stop 'increase NITTM'
+      if(NITT.gt.NITTM) stop 'increase NITTM in restime.f'
       if(RRN.gt.RRX) stop 'RRN>RRX'
       RRNN=RRN-RRD
       RRNX=RRN+RRD
@@ -35,7 +39,7 @@
 	  NS1=NSPEC(ITYP1)
 	  do J=1,NS1
 	    NRT1=NRT1+1
-	    if(NRT1.gt.NRT1M)stop ' increase IRT1M'
+	    if(NRT1.gt.NRT1M)stop ' Increase NRT1M  in restime.f'
 	    ISP=ISADDR(ITYP1)+(J-1)*NSITS(ITYP1)+IS-ISADR(ITYP1)
 	    IRS1(NRT1)=ISP
 	  end do
@@ -46,7 +50,7 @@
 	NS2=NSPEC(ITYP2)
 	do J=1,NS2
           NRT2=NRT2+1
-	  if(NRT2.gt.NRT2M)stop ' increase IRT2M'
+	  if(NRT2.gt.NRT2M)stop ' increase NRT2M in restime.f'
 	  ISP=ISADDR(ITYP2)+(J-1)*NSITS(ITYP2)+IS-ISADR(ITYP2)
 	  IRS2(NRT2)=ISP
 	end do

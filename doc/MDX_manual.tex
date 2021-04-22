@@ -6,11 +6,14 @@
 version 5.3.0\\
 User manual}
 
-\author{Alexander Lyubartsev\\ \\
-Division of Physical Chemistry\\
+\author{Alexander Lyubartsev\\
+  Aatto Laaksonen \\
+  Alexei Nikitin \\
+  \\
+  Division of Physical Chemistry\\
+  Department of Materials and Environmental Chemistry \\
 Stockholm University
 }
-
 
 \date{12 September 2020}
 
@@ -34,10 +37,10 @@ Algorithms for NVE, NVT, NPT and anisotropic NPT ensembles are implemented.
 The long-range electrostatic interactions are treated by the Ewald 
 summation method, or alternatively by a reation field or simple cutoff. 
 The program can be run both in sequential and parallel execution, in
-the latter case the MPI parallel environment is required. From v.5.1
-possibility for taking into account quantum motion of nuclei using 
+the latter case the MPI parallel environment is required. 
+Possibility for taking into account quantum motion of nuclei using 
 Path Integral approach is implemented. Expanded ensemble mode
-of simulations for calculation of solvation free energies is added in v.5.2. 
+of simulations for calculation of solvation free energies is added from v.5.2. 
 
 The program is written in standard Fortran 77/90 and thus can be run on 
 any computer system having a Fortran compiler.
@@ -73,7 +76,10 @@ The changes made from 5.2.0 to 5.3.0
 
 \item
 v. 5.3.0
-A new version of the expended ensemble mode implementing L2MC algorothm 
+A new version of the expanded ensemble mode implementing L2MC algorithm:
+A.Nikitin, V.Milchevskaya, A.P.Lyubartsev "To the fast calculation of
+the solvation free energy. Combining expanded ensembles with L2MC",
+J. Comput. Chem., 42, 787 (2021)
 
 Additional combination rule for Lennard-Jones interations from paper: A. Nikitin, Y. Milchevskiy, A. P. Lyubartsev "AMBER-ii: New Combining Rules and Force Field for Perfluoroalkanes" J. Phys. Chem. B, 119, 14563-14573 (2015) DOI: 10.1021/acs.jpcb.5b07233
 
@@ -1134,14 +1140,23 @@ The expanded ensemble is specified by the following keywords:
 \verb|MDEE  <num_ensembles> <mode>|
 
 Run expanded ensemble simulations with \verb|<num_ensembles>| subensembles,
-Parameter \verb|<mode>| can be ``\verb|auto|'' ($\alpha$ poins are set
-with equal separation between them within the [0:1] interval, and
-balancing factors are tuned automatically by  
-``\verb|WL|'' ($\alpha$ points are specified by the user while balancing 
-factors are optimized by the Wang-Landau procedure,  ``\verb|manual|'' 
-(manual setup of EE parameters), or "\verb|L2MC|"
+Parameter \verb|<mode>| can be one of:
 
-In the case of \verb|manual| or \verb|WL| mode the \verb|MDEE|
+\verb|manual| : manual setup of EE  parameters, that is  $\alpha$-points
+and balancing factors which remain fixed during the simulation
+
+\verb|WL| : balancing factors are optimized during the simulation according to
+Wang-Landau algorithm (J.Comp.Chem., 34, 187 (2013))
+
+\verb|L2MC| : Implement L2MC algorithm for transitions between subensembles,
+in addtion to WL algorithm (J.Comp.Chem., 42, 787 (2021)
+
+\verb|auto|: $\alpha$ poins are set with equal separation between them
+within the [0:1] interval, balancing factors are tuned automatically by
+the Wang-Landau algorithm and L2MC algorothm for transitions between
+subensembles is used
+
+In the case parameter \verb|mode| is not set to \verb|auto|, the \verb|MDEE|
 command should be followed by exactly \verb|num_ensembles| lines,
 with two number on each: the value of coupling parameter $\alpha$ and
 balancing factor, corresponding to this subensemble. Values of balancing 
@@ -1152,13 +1167,7 @@ the set of coupling parameters $\alpha$ is choosen uniformly in the range [0:1]
 (that is, $\alpha_m = (M-m)/(M-1)$ where $M$ is the total number of
 subensembles \verb|<num_ensembles>|. 
 
-\verb|L2MC| mode: implements MC analogue of L2MC algorithm for transitions between
-subensembles. To be tested. 
-
 Default mode:  \verb|auto|
-
-In the case of automatic optimization of the balancing factors (mode 
-\verb|auto| or \verb|WL|), additional keywords can be used:
 
 \item
 \verb|EE_typ  <i_typ>|
@@ -1166,6 +1175,11 @@ In the case of automatic optimization of the balancing factors (mode
 Specifies that the molecules of type \verb|i_typ| are those which are
 inserted/deleted in the EE procedure.
 {\bf This keyword is required!}
+
+
+In the case of automatic optimization of the balancing factors (mode 
+\verb|auto|, \verb|WL|, \verb|L2MC|), additional keywords can be used:
+
 
 \item
 \verb|Num_pass  <value>|
@@ -1205,7 +1219,7 @@ a factor (default value 0.5, see keyword \verb|WL_parameters|).
 1. If WL procedure has not performed necessary number of iterations
 (keyword \verb|Num_WL|), the program gives warning in the output
 ``Expanded ensemble simulation not converged yet''. Then the computed 
-free energy values may not be accurate or not relevant et all.
+free energy values may not be accurate or not relevant at all.
 It is always recommended to continue simulation long enough after the
 balancing factors are optimized. 
 
@@ -1829,13 +1843,13 @@ substitute the corresponding force field parameters.
 
 TRANAL package consists of a number of utilities for analyzing of atom 
 trajectories generated by molecular dynamics programs. The package
-is constructed to work mainly with MDynaMix molecular dynamics program,
+is constructed to work primarily with MDynaMix molecular dynamics program,
 but is able to accept trajectories written in some other formats: 
-trajectories written in XMOL format, PDB trajectories from GROMACS and 
-NAMD binary trajectories.
+trajectories written in XMOL format, .trr, .xtc,  PDB trajectories from
+GROMACS and NAMD binary trajectories (.dcd).
 
 It is supposed that in all cases, the atoms and molecules are arranged
-in the following way: (the same as in MDynaMix program):
+in the following way (the same as in MDynaMix program):
 
 \verb|<molecules of type 1><molecules of type 2>...|
 
@@ -1968,6 +1982,10 @@ of GROMACS simulation package
 
 \item
 \verb|DCDT| - DCD trajectories generated by NAMD package
+
+\item|XTC| - .xtc trajectory from Gromacs 
+  
+\item|TRR| - .trr trajectory from Gromacs
 
 \end{itemize}
 

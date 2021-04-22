@@ -1,6 +1,7 @@
 Trajectory Analysis package from MDynaMix
 
 Version 5.3:  Support for Gromacs .trr and .xtc files included
+(contribution be Alexander Mirzoev)
 
 To compile everything:
 
@@ -33,6 +34,4 @@ FNAME =
 If NFBEG >= 0, it is supposed that trajectory files are numbered.
 The name given in parameter FNAME is complemented by a number changing from
 NFBEG to NFEND
-
-
 
