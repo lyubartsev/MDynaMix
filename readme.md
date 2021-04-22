@@ -1,10 +1,9 @@
-==================================================================
-*         MDynaMix: a molecular dynamics program                 *
-*               v.5.3.0     from 23 Sep. 2020                    * 
-==================================================================
+#       MDynaMix: a molecular dynamics program                 
+##               v.5.3.0     
 
+===================================================================
 
-Authors:
+## Authors:
 
 Alexander Lyubartsev     (alexander.lyubartsev@mmk.su.se)
 Aatto Laaksonen          (aatto@mmk.su.se)
@@ -16,10 +15,11 @@ Stockholm University
 S 106 91   Stockholm
 Sweden
 
-
 =====================================================================
 
-This program is a general purpose molecular dynamics code for simulations
+## Description:
+
+MDynaMix is a general purpose molecular dynamics code for simulations
 of mixtures  of either rigid or flexible molecules, interacting by
 AMBER-like force field in a periodic rectangular cell. In the case of 
 flexible molecules the double time step algorithm is used.
@@ -32,7 +32,7 @@ the latter case the MPI parallel environment is required.
 
 =======================================================================
 
-Quick compilation:
+## Quick compilation:
 
 $ make
 
@@ -41,6 +41,6 @@ or
 $ make mpi
 
 
-See futher details in "doc" directory
+See futher details in "doc" directory, or upload repository mdynamix-manual
 
 =======================================================================
