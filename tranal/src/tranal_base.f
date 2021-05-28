@@ -129,7 +129,6 @@
 	end if
 *  Check and reconstruct file list
  11	continue
-	write(*,*)FNAME(1:LF)
 	NF=NFEND-NFBEG+1
 	if(NFBEG < 0)then
 	   NF=1
@@ -188,10 +187,19 @@ CCC	    write(*,'(a)')STR(1:72)
 *  XMOL trajectory format
 	  else if(NFORM.eq.'XMOL')then
             open (unit=12,file=filnam(I),status='old',err=5)
-  	    if(IPRINT.ge.6)write(*,'(a6,a64,a8)')
-     +                 ' file ',filnam(I)(1:64),' is open'
+  	    if(IPRINT.ge.6)write(*,'(a5,a64,a8)')
+     +                 'file ',filnam(I)(1:64),' is open'
 	    read(12,*,err=10)NSTOT
-	    read(12,*,err=14)cdum,FULTIM
+C  MDynamix .xmol time	    
+	    read(12,'(a)')STR
+	    write(*,'(a)',err=14)STR(1:80)
+	    do L=1,80
+	 if(STR(L:L+5).eq.'time ='.or.STR(L:L+5).eq.'after ')then
+		  read(STR(L+6:L+20),*,err=14)FULTIM
+		  go to 15
+	       end if
+	    end do
+	    go to 14
 	    FULTIM=0.001*FULTIM            ! in ps
 	    if(IPRINT.ge.5)write(*,*)' FULTIM ',FULTIM,' ps'  
  	    go to 15
@@ -275,6 +283,7 @@ CCC	    write(*,'(a)')STR(1:72)
           write(*,*)' input of the file list is completed:',J,' files'	  
 	end if
  30	NF=J
+	write(*,*)NF,' trajectiory files will be analysed'
 	FULTIM0=TIMIN(1)
  	TTER=TTER*1.d-12    
 	if(NSTOT.gt.NTOT)then
@@ -431,7 +440,7 @@ CCC	    write(*,'(a)')STR(1:72)
 	   if(IIN.eq.0)then
             open (unit=12,file=filnam(IFL),status='old',
      +      form='formatted') 
-	    if(IPRINT.ge.7)write(*,*)' file ',IFL,' open'
+	    if(IPRINT.ge.7)write(*,*)' file ',filnam(IFL),' open'
 	 end if
 	 IOP=0
  31	  read(12,'(a)',end=45) STR
@@ -468,15 +477,20 @@ CCC	    write(*,'(a)')STR(1:72)
 	  if(IPRINT.ge.7)write(*,'(a,3f12.3)')' Box: ',BOXL,BOYL,BOZL
 	else if(NFORM.eq.'XMOL')then
 *  XMOL trajectory
-	  if(IIN.eq.0)then
+	   if(IIN.eq.0)then
             open (unit=12,file=filnam(IFL),status='old',
      +    form='formatted') 
-	    if(IPRINT.ge.7)write(*,*)' file ',IFL,' open'
+	    if(IPRINT.ge.7)write(*,*)' file ',filnam(IFL),' open'
 	  end if
  	  read(12,*,err=40,end=45) NUMTR
           read( 12,'(a)',err=40,end=40 )STR
-          read(STR,*,end=40,err=36)cdum,FULTIM
-	  do J=1,100
+	    do J=1,80
+	 if(STR(J:J+5).eq.'time ='.or.STR(J:J+5).eq.'after ')then
+		  read(STR(J+6:J+20),*,err=36)FULTIM
+		  go to 43
+	       end if
+	    end do
+ 43	  do J=1,100
             if(STR(J:J+2).eq.'BOX')then
               read(STR(J+4:128),*,end=40,err=40)BOXL,BOYL,BOZL
 	      if(IPRINT.ge.7)write(*,'(a,3f12.3)')
@@ -523,11 +537,6 @@ CCC	    write(*,'(a)')STR(1:72)
 	    end if
 	    read(12,err=40,end=45)BOXL,Y1,BOYL,Y2,Y3,BOZL
 	    if(IPRINT.ge.7)write(*,'(a,3f12.3)')' Box: ',BOXL,BOYL,BOZL
-	    if(LXMOL)then
-	      filxm(1:LLNX)=FXMOL(1:LLNX)
-	      filxm(LLNX+1:LLNX+4)=filnam(IFL)(LF+1:LF+4)
-	      open(unit=19,file=filxm,status='unknown')
-	    end if
 	  else
 *  Binary MDynamix trajectory
 	    if(IIN.eq.0)then
@@ -535,11 +544,6 @@ CCC	    write(*,'(a)')STR(1:72)
      +        form='unformatted',err=45) 
               read(12) IVEL, dt, boxl, boyl, bozl, unitl, ntypes,
      x                (nspec(i),nsits(i),logo,i=1,ntypes)
-	      if(LXMOL)then
-	        filxm(1:LLNX)=FXMOL(1:LLNX)
-	        filxm(LLNX+1:LLNX+4)=filnam(IFL)(LF+1:LF+4)
-	        open(unit=19,file=filxm,status='unknown')
-	      end if
 	      if(IPRINT.ge.7)write(*,*)
      &          'read first line.',NTYPES,' types'
               do ityp=1, ntypes
@@ -563,6 +567,12 @@ CCC	    write(*,'(a)')STR(1:72)
  	    write(*,'(2a/a,f14.3,a8,6I3)')
      +  ' begin analys of file  ',filnam(IFL), 
      +  ' init. T = ',fultim
+	    if(LXMOL)then
+	      filxm(1:LLNX)=FXMOL(1:LLNX)
+	      filxm(LLNX+1:LLNX+4)=filnam(IFL)(LF+1:LF+4)
+	      open(unit=19,file=filxm,status='unknown')
+	      write(*,*)'Writing XMOL trajecory into: ',filxm
+	    end if
 	    IIN=1
 	  end if  
 	  IBREAK=0
@@ -1132,13 +1142,13 @@ C  truncated octahedron abs(x)+abs(y)+abs(z) < 0.75*BOXL
       SUM2=4.00*Y(4)
       SUM2=AUX2-HT*(Y(3)+SUM2+Y(5))
       AUX=4.00*Y(2)
-      IF(NDIM-6)5,5,2
+      IF(NDIM-6.le.0)go to 5
     2 DO 4 I=6,NDIM,2
       SUM1=AUX1
       SUM2=AUX2
       AUX1=4.00*Y(I-1)
       AUX1=SUM1+HT*(Y(I-2)+AUX1+Y(I))
-      IF(I-NDIM)3,6,6
+      IF(I-NDIM.ge.0)go to 6
     3 AUX2=4.00*Y(I)
       AUX2=SUM2+HT*(Y(I-1)+AUX2+Y(I+1))
     4 CONTINUE

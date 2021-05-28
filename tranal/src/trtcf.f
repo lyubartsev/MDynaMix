@@ -1532,32 +1532,39 @@ C
       SCL=SCL+A(I,I)*A(I,I)
    10 CONTINUE
       SCL=DSQRT(DABS(SCL))/FLOAT(N)
-      DO 20 I=1,N
-      DO 20 J=1,N
-   20 A(I,J)=A(I,J)/SCL
-      DO 30 I=1,N
-      DO 30 J=1,N
+      DO I=1,N
+      DO J=1,N
+         A(I,J)=A(I,J)/SCL
+      end do
+      end do
+      DO I=1,N
+      DO J=1,N
       V(I,J)=0.D0
       IF(I.EQ.J)V(I,J)=1.D0
-   30 CONTINUE
-      DO 100 I=2,N
+      end do
+      end do
+      DO I=2,N
       IU1=I-1
-      DO 100 J=1,IU1
-  100 TES=TES+2.D0*A(I,J)*A(I,J)
+      DO J=1,IU1
+         TES=TES+2.D0*A(I,J)*A(I,J)
+      end do
+      end do
       TES=DSQRT(DABS(TES))
       M=0
   105 TES=TES/FLOAT(N)
       IF(TES.LT.RHO)TES=RHO
-  110 DO 165 I=2,N
+  110 DO I=2,N    ! 165
       IUU1=I-1
-      DO 165 J=1,IUU1
-      IF(DABS(A(I,J))-TES)165,115,115
+      DO J=1,IUU1   ! 165
+CC      IF(DABS(A(I,J))-TES)165,115,115
+      IF(DABS(A(I,J))-TES.lt.0.)go to 165
   115 M=1
       V1=A(J,J)
       V2=A(I,J)
       V3=A(I,I)
       U=0.5D0*(V1-V3)
-      IF(DABS(U)-RHO)120,125,125
+C      IF(DABS(U)-RHO)120,125,125
+      IF(DABS(U)-RHO.ge.0.)go to 125
   120 OMG=-1.D0
       GO TO 130
   125 SQVVUU=DSQRT(DABS(V2*V2+U*U))
@@ -1567,12 +1574,14 @@ C
       S=OMG/SQOOO
       C=DSQRT(DABS(1.00-S*S))
       DO 160 K=1,N
-      IF(K-I)140,135,135
+CC      IF(K-I)140,135,135
+      IF(K-I.le.0)go to 140
   135 TEM=A(K,J)*C-A(K,I)*S
       A(K,I)=A(K,J)*S+A(K,I)*C
       A(K,J)=TEM
       GO TO 155
-  140 IF(K-J)145,150,150
+CC  140 IF(K-J)145,150,150
+  140 IF(K-J.ge.0)go to 150
   145 TEM=A(J,K)*C-A(I,K)*S
       A(I,K)=A(J,K)*S+A(I,K)*C
       A(J,K)=TEM
@@ -1588,13 +1597,19 @@ C
       A(I,I)=V1*S*S+V3*C*C+2.D0*V2*S*C
       A(I,J)=(V1-V3)*S*C+V2*(C*C-S*S)
   165 CONTINUE
-      IF(M-1)175,170,170
+      end do
+      end do
+CC      IF(M-1)175,170,170
+      IF(M-1.le.0)go to 175
   170 M=0
       GO TO 110
-  175 IF(TES-RHO)180,180,105
-  180 DO 190 I=1,N
-      DO 190 J=1,N
-  190 A(I,J)=SCL*A(I,J)
+CC  175 IF(TES-RHO)180,180,105
+  175 IF(TES-RHO.ge.0.)go to 105
+  180 DO  I=1,N
+      DO  J=1,N
+        A(I,J)=SCL*A(I,J)
+      end do
+      end do
       RETURN
       END
 *
