@@ -10,7 +10,12 @@ make clean
 make 
 cp src/.libs/libxdrfile.a ..
 ### Compiling analysis routines
-cd ../../src 
+cd ../..
+if [ ! -d bin ]
+then
+    mkdir bin
+fi
+cd src
 make
 echo "Done"
 
