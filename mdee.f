@@ -920,18 +920,17 @@ Calculate total kinetic energy:
       time=timest+cputime(time0)
       write(*,*)' medium-range intermolecular forces:',timel      
       write(*,*)' short-range intermolecular forces: ',times
-	write(*,*)' change of subensemble:             ',time2
-	write(*,*)' choice of neuigbours:              ',timev   
+      write(*,*)' change of subensemble:             ',time2
+      write(*,*)' choice of neuigbours:              ',timev   
       write(*,*)' FURIR:                             ',timef      
       write(*,*)' ETERM:                             ',timee      
-      write(*,*)' atom-atom intramolecular forces:   ',timen      
       write(*,*)' covalent bonds:                    ',timeb      
       write(*,*)' covalent angles:                   ',timea      
       write(*,*)' torsions:                          ',timet      
-      write(*,*)' moving:                            ',timeg      
-      write(*,*)'-------------------------------------------------'
+      write(*,*)' moving:                            ',timeg
+      write(*,*)' data transfer                      ',timen
+	write(*,*)'-------------------------------------------------'
       write(*,*)' Total time:                        ',time
-	write(*,*)' node ',TASKID, NNN
 	end if 
 	write(*,*)
 	write(*,*)'Acceptance ratio ',float(ICHU)/(float(ICHE)+0.001) 

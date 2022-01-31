@@ -132,7 +132,7 @@
 	NF=NFEND-NFBEG+1
 	if(NFBEG < 0)then
 	   NF=1
-	   write(*,*)' NFBEG<= : a single trajectory file will be read'
+	   write(*,*)' NFBEG<=0 : a single trajectory file will be read'
 	end if   
 	J=0
  	do I=1,NF
@@ -365,9 +365,9 @@ C  MDynamix .xmol time
 	write(*,*)' --------------------------------'
 	write(*,*)'      Summary of the system:'
 	if(LMMOL)then
-	  write(*,*)' based on data from .mmol files'
+	  write(*,*)' based on data from .mmol/.itp files'
 	else
-	  write(*,*)' Not all .mmol files were found'
+	  write(*,*)' Not all .mmol/.itp files were found'
 	  write(*,*)' information is generated from the input file'
 *  giving numeric site names
 	  do IS=1,NSITES
@@ -771,7 +771,7 @@ c - for each type
 	include "tranal.h"
 *
         DIMENSION CM(3)
-	character PATHDB*128,namn*128,FIL*256,FMT*20
+	character PATHDB*128,namn*128,FIL*256,FMT*20,CH1*4,CH2*4,CH3*4
         FIL=' '
 	NX0=NX             
 	IER = 0
@@ -782,12 +782,12 @@ c - for each type
 	  ISTR=ichar(PATHDB(I:I))
 	  if(ISTR.le.15)then
 	    LD=I-1
-	    go to 11
+	    go to 5
 	  end if
         if(PATHDB(I:I).ne.' ')IL=I
 	end do 
 	LD=IL
- 11	continue
+ 5	continue
 	FIL(1:LD)=PATHDB(1:LD)
         FIL(LD+1:LD+1)='/'
 	IL=0 
@@ -795,24 +795,25 @@ c - for each type
 	  ISTR=ichar(NAMN(I:I))
 	  if(ISTR.le.15)then
 	    LN=I-1
-	    go to 11
+	    go to 5
 	  end if
         if(NAMN(I:I).ne.' ')IL=I
 	end do 
 	LN=IL
- 12	continue
+ 6	continue
 	FIL(LD+2:LD+LN+1)=NAMN(1:LN)
 	FIL(LD+LN+2:LD+LN+6)='.mmol'
-	open(unit=12,file=fil,status='old',err=999)
+	open(unit=12,file=fil,status='old',err=912)
+* If .mmol  file not found, go to 912 to check for .itp file
 	if(IPRINT.ge.5)then
 	PRINT "(80('-'))"
         write(*,*)
-        write(*,'(a,i4,a,a)')
-     +    '*** MOLECULE OF TYPE No.',NTYP,'  ',NAMN(1:LN)
+        write(*,'(a,i4,a2,a32,a8)')
+     +    '*** MOLECULE OF TYPE No.',NTYP,'  ',NAMN,' (.mmol)'
 	end if
 	STR=TAKESTR(12,IE)
 	read(STR,*)NSTS
-	if(IPRINT.ge.6)PRINT * ,'*** NR OF SITES:                ',NSTS
+	if(IPRINT.ge.6)write(*,*)'*** NR OF SITES:      ',NSTS
 	if(NX+NSTS.gt.NS)
      & stop '!!! Increase NS (number of sites) in tranal.h'
 	NSITS(NTYP)=NSTS
@@ -830,11 +831,6 @@ c - for each type
      +       a5,f8.4,a4,f9.4)')
      +      'atom ',NM(IX),'  R=',(R(IX,J),J=1,3),
      +      ' M=',MASS(IX),' Q=',CHARGE(IX)
-
-!     +      write(*,'(a5,a<len(NM(IX))>,a4,3f7.3,a3,f8.4,a3,f6.3,
-!     +      a5,f8.4,a4,f9.4)')
-!     +      'atom ',NM(IX),'  R=',(R(IX,J),J=1,3),
-!     +      ' M=',MASS(IX),' Q=',CHARGE(IX)
           endif
 	end do
 	NX=NX+NSTS
@@ -859,8 +855,72 @@ C  Number of bonds
 	  IADB(NTYP)=NRBB-NRB(NTYP)
         end if
 	close(12)
-* COM coordinates 
-      SUMM       = 0.D0
+	go to 20
+*    Reading Gromacs .itp file
+ 912	FIL(LD+2:LD+LN+1)=NAMN(1:LN)
+	FIL(LD+LN+2:LD+LN+5)='.itp'
+	open(unit=12,file=fil(1:LD+LN+5),status='old',err=999)
+	if(IPRINT.ge.5)then
+	PRINT "(80('-'))"
+        write(*,*)
+        write(*,'(a,i4,a,a32,a8)')
+     +    '*** MOLECULE OF TYPE No.',NTYP,'  ',NAMN,' (.itp)'
+	end if
+ 11     IE=-1
+	IX=0
+ 12	STR=TAKESTR(12,IE)
+	if(IE.eq.-1)then
+	   write(*,*)' Cannot parse file ',FIL(1:LD+LN+5)
+	   write(*,*)
+     +' Will try to retrieve necessary information from other data'
+	   LMMOL=.false.
+	   return
+	end if   
+	if(STR(1:1).eq.';')go to 12
+	if(STR(1:9).ne.'[ atoms ]')go to 11
+ 13	IE=0
+ 131	STR=TAKESTR(12,IE)
+	if(IE.ne.0)go to 14
+	if(STR(1:1).eq.';')go to 131
+	if(STR(1:1).eq.'[')go to 14
+	  read(STR,*,err=14,end=14)
+     + I1,CH1,I2,CH2,NM(IX+1),I3,CHARGE(IX+1),MASS(IX+1)
+          IX=IX+1
+	  if(I1.ne.IX)write(*,*)' Inconsistency in ',NAMN,
+     + '.itp file. Line ',IX,I1
+          if(IPRINT.ge.6) then
+            write(*,'(a5,a4,a3,f8.4,a3,f6.3)')
+     +      'atom ',NM(IX),' M=',MASS(IX),' Q=',CHARGE(IX)
+          end if
+	  go to 13
+ 14	  if(IPRINT.ge.5)write(*,*)' Number of sites: ',IX
+	  NSITS(NTYP)=IX
+	  if(NX+IX.gt.NS)
+     & stop '!!! Increase NS (number of sites) in tranal.h'
+	NX=NX+IX
+*       Bonds
+        if(LBOND)then
+ 16	IE=-1
+	NBD=0
+ 17	STR=TAKESTR(12,IE)
+	if(STR(1:1).eq.';')go to 17
+	if(IE.eq.-1)then
+	   write(*,*)'No bonds information in file ',FIL(1:LD+LN+5)
+	end if
+	go to 19
+	if(STR(1:9).ne.'[ bonds ]')go to 16
+ 18	STR=TAKESTR(12,IE)
+	if(IE.eq.-1)go to 19
+	if(STR(1:1).eq.';')go to 18
+	NBD=NBD+1
+	read(STR,*)IB(NBD),JB(NBD)
+	go to 18
+ 19	NRBB=NRBB+NBD
+	if(IPRINT.ge.6)write(*,*)NBD,'  bonds found' 
+	IADB(NTYP)=NRBB-NRB(NTYP)	
+      end if ! (LBOND 
+*       COM coordinates 	
+ 20   SUMM       = 0.D0
       DO IS      = NSBEG,NSEND
         SUMM       = SUMM+MASS(IS)
       END DO! OF IS
