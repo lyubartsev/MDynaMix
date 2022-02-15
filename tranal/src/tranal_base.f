@@ -1,7 +1,6 @@
 
 !DIR$ FIXED
-*  
-*   Part of MDynaMix package v.5.3 
+**   Part of MDynaMix package v.5.3 
 *
 *   Block TRANAL_BASE - set up and read MD trajectories
 *
@@ -286,12 +285,6 @@ C  MDynamix .xmol time
 	write(*,*)NF,' trajectiory files will be analysed'
 	FULTIM0=TIMIN(1)
  	TTER=TTER*1.d-12    
-	if(NSTOT.gt.NTOT)then
-	   write(*,*)'total number of atoms in the trajectory ',
-     + NSTOT,' exceds the limit'
-           write(*,*)
-     +  ' Increase parameter NTOT in tranal.h file and recompile'
-	end if
 	if(NTYPES.le.0)then
 	   write(*,*)'!!! Wrong number of molecule types : ',NTYPES
 	   stop
@@ -322,6 +315,13 @@ C  MDynamix .xmol time
 	    stop
 	  end if
           NOP     = NOP    + NSPEC(ITYP)
+	  if(NOP.gt.NPART)then
+	    write(*,*)'total number of molecules in the trajectory ',
+     + NOP,' exceds the limit'
+            write(*,*)
+     +	' Increase parameter NTOT in tranal.h file and recompile'
+	    stop
+	  end if
           TOTMAS       = TOTMAS+SUMM*NSPEC(ITYP)
           SUMMAS(ITYP) = SUMM 
 	  NAME(ITYP)=NAMOL(ITYP)(1:6)
@@ -339,10 +339,14 @@ C  MDynamix .xmol time
           if(NSITS(ITYP).eq.2)FNSTR=FNSTR+2.d0*NSPEC(ITYP)
           if(NSITS(ITYP).ge.3)FNSTR=FNSTR+3.d0*NSPEC(ITYP)
           NSTOT   = NSTOT  + NSPEC(ITYP)*NSITS(ITYP)
+	  if(NSTOT.gt.NTOT)then
+	    write(*,*)'total number of atoms in the trajectory ',
+     + NSTOT,' exceds the limit'
+            write(*,*)
+     +	' Increase parameter NTOT in tranal.h file and recompile'
+ 	    stop
+	  end if
           FNSS3   = 3.D0*DFLOAT(NSITES)
-          write(*,'(a6,i4,3x,a5,i5,4x,a6,i4)')
-     +' type ',ITYP,' Nmol',NSPEC(ITYP),
-     +'Nsites',NSITS(ITYP)
 	  do J=ISADR(ITYP)+1,ISADR(ITYP+1)
 	    MASSD(J)=MASS(J)/TOTMAS/FACTM
 	    ITS(J)=ITYP
@@ -379,10 +383,10 @@ C  MDynamix .xmol time
 	    SUMMAS(ITYP)=1.*NSITS(ITYP)
 	  end do
 	end if
-	write(*,*)' Type    Name    Atoms   Molecules'
+	write(*,*)' Type    Name    Atoms   Molecules   Mass'
 	do ITYP=1,NTYPES
-	   write(*,'(i3,3x,a6,2i7)')
-     +     ITYP,NAME(ITYP),NSITS(ITYP),NSPEC(ITYP)
+	   write(*,'(i4,5x,a6,2i8,f12.2)')
+     +     ITYP,NAME(ITYP),NSITS(ITYP),NSPEC(ITYP),SUMMAS(ITYP)
 	end do
 	write(*,*)' Total number of atoms: ',NSTOT
 	write(*,*)' --------------------------------'
@@ -867,7 +871,7 @@ C  Number of bonds
      +    '*** MOLECULE OF TYPE No.',NTYP,'  ',NAMN,' (.itp)'
 	end if
  11     IE=-1
-	IX=0
+	IX=NX
  12	STR=TAKESTR(12,IE)
 	if(IE.eq.-1)then
 	   write(*,*)' Cannot parse file ',FIL(1:LD+LN+5)
@@ -878,6 +882,7 @@ C  Number of bonds
 	end if   
 	if(STR(1:1).eq.';')go to 12
 	if(STR(1:9).ne.'[ atoms ]')go to 11
+	NSBEG=NX+1
  13	IE=0
  131	STR=TAKESTR(12,IE)
 	if(IE.ne.0)go to 14
@@ -886,18 +891,18 @@ C  Number of bonds
 	  read(STR,*,err=14,end=14)
      + I1,CH1,I2,CH2,NM(IX+1),I3,CHARGE(IX+1),MASS(IX+1)
           IX=IX+1
-	  if(I1.ne.IX)write(*,*)' Inconsistency in ',NAMN,
-     + '.itp file. Line ',IX,I1
+	  if(I1+NX.ne.IX)write(*,*)' Inconsistency in ',NAMN,
+     + '.itp file. Line ',IX,I1+NX
           if(IPRINT.ge.6) then
-            write(*,'(a5,a4,a3,f8.4,a3,f6.3)')
-     +      'atom ',NM(IX),' M=',MASS(IX),' Q=',CHARGE(IX)
+            write(*,'(a5,i5,2x,a4,a3,f8.4,a3,f6.3)')
+     +      'site ',IX,NM(IX),' M=',MASS(IX),' Q=',CHARGE(IX)
           end if
 	  go to 13
- 14	  if(IPRINT.ge.5)write(*,*)' Number of sites: ',IX
-	  NSITS(NTYP)=IX
-	  if(NX+IX.gt.NS)
-     & stop '!!! Increase NS (number of sites) in tranal.h'
-	NX=NX+IX
+ 14	  if(IPRINT.ge.5)write(*,*)' Number of sites: ',IX-NX
+	  NSITS(NTYP)=IX-NX
+	  if(IX.gt.NS)stop'!!! Increase NS (number of sites) in tranal.h'
+	NX=IX
+	NSEND=NX
 *       Bonds
         if(LBOND)then
  16	IE=-1
@@ -925,7 +930,7 @@ C  Number of bonds
         SUMM       = SUMM+MASS(IS)
       END DO! OF IS
       SUMMAS(NTYP)=SUMM
-*
+*       
       CM(1)      = 0.D0
       CM(2)      = 0.D0
       CM(3)      = 0.D0

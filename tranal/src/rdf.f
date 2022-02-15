@@ -96,8 +96,10 @@ C    Calculations of radial distribution functions
 *  Starting trajectory analysis
       IEND=0
       do while(IEND.eq.0)              ! over configurations
- 50     call READCONF(IEND)
-        if(LCOMRDF1.or.LCOMRDF2)call GETCOM
+ 50      call READCONF(IEND)
+        if(LCOMRDF1.or.LCOMRDF2)then
+           call GETCOM
+        end if
         if(IEND.ne.0)go to 200
         if(ME.le.0)then
           if(IPRINT.ge.6)write(*,'(a,f12.3,a,3f10.3)')
@@ -147,7 +149,8 @@ C    Calculations of radial distribution functions
                 end if
 	        call PBC(DX,DY,DZ)
 	        RR=sqrt(DX**2+DY**2+DZ**2)
-**		  write(*,*)I,K,IS,JS,IST,JST,IMOL,JMOL,RR
+**                write(*,*)I,K,IS,JS,IST,JST,IMOL,JMOL,RR
+**          write(*,*)X(IMOL),X(JMOL),Y(IMOL),Y(JMOL),Z(IMOL),Z(JMOL)
 *  This distinguishes sites on the same molecule
 	        if(IMOL.ne.JMOL)then
 		  NR=NA*RR/RDFCUT+1
@@ -214,8 +217,9 @@ C    Calculations of radial distribution functions
 	  write(16,'(5a,I12,a,I5)')' This pair: ',NM(IS),' - ',NM(JS),
      +  '   Npairs=',NPAIR,'  Nint=',NPRI
         end if
-        write(16,'(a)')
-     + '  R          RDF         RCN1        RCN2          KBI(nm^3)'
+        write(16,'(a,a)')
+     +  '  R          RDF         RCN1        RCN2    KBI(nm^3)  ',
+     +  ' sites     count' 
 	write(16,*)'-------------------------------------------------'
         CONU=0.
         RKBI=0.
@@ -231,19 +235,19 @@ C    Calculations of radial distribution functions
           RKBI=RKBI+(GofR-1.)*SH12*0.001
   	  if(CONU.gt.1.d-18)then
             if(LCOMRDF1.and.LCOMRDF2)then
-	      write(16,'(f8.3,3f12.5,2x,f12.5,3x,a4,2x,a4,a1,a4,I12)')
-     +RR,GofR,CONU1,CONU2,RKBI,'rdf:',NAME(ITS(IS)),'-',
+      write(16,'(f8.3,f12.5,2f11.4,2x,f11.4,3x,a4,a1,a4,I11)')
+     +RR,GofR,CONU1,CONU2,RKBI,NAME(ITS(IS)),'-',
      +NAME(ITS(JS)),IRDF(K,I)
             else if(LCOMRDF1.and..not.LCOMRDF2)then
-	      write(16,'(f8.3,3f12.5,2x,f12.5,3x,a4,2x,a4,a1,a4,I12)')
+      write(16,'(f8.3,f12.5,2f11.4,2x,f11.4,3x,a4,a1,a4,I11)')
      +RR,GofR,CONU1,CONU2,RKBI,'rdf:',NAME(ITS(IS)),'-',
      +NM(JS),IRDF(K,I)
             else if(.not.LCOMRDF1.and.LCOMRDF2)then
-	      write(16,'(f8.3,3f12.5,2x,f12.5,3x,a4,2x,a4,a1,a4,I12)')
+      write(16,'(f8.3,f12.5,2f11.4,2x,f11.4,3x,a4,a1,a4,I11)')
      +RR,GofR,CONU1,CONU2,RKBI,'rdf:',NM(IS),'-',
      +NAME(ITS(JS)),IRDF(K,I)
             else
-	      write(16,'(f8.3,3f12.5,2x,f12.5,3x,a4,2x,a4,a1,a4,I12)')
+      write(16,'(f8.3,f12.5,2f11.4,2x,f11.4,3x,a4,a1,a4,I11)')
      +RR,GofR,CONU1,CONU2,RKBI,'rdf:',NM(IS),'-',NM(JS),IRDF(K,I)
             end if
 	    if(I.lt.IFST)IFST=I
