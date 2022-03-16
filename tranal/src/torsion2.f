@@ -1,11 +1,10 @@
-C    Tranal - package for rajectory analysis, MDynaMix v.5.0
+C    Tranal - package for rajectory analysis, MDynaMix v.> 5.0
 C    Compute Ramachandra plot for 2 torsion angles
 C    
       program TORSION2
       include "tranal.h"
-      parameter (NTOR=100,NAAM=1000,NT=1000)
-      integer MANGL(NTOR),IADT(NTPS),IT(NT),JT(NT),KT(NT),LT(NT)
-      integer IGS(NTOR),ITRAN(NTOR),NPOP(NAAM,NAAM)
+      integer, allocatable :: IT(:),JT(:),KT(:),LT(:)
+      integer, allocatable :: NPOP(:,:)
       character FTOR*64,OTYP*16
       call SETTRAJ
 *  Input of data - after "TRAJ" section, 
@@ -27,11 +26,10 @@ C
 *  2) number of different pairs of torsions and number of bins in [-180:180]
       STR=TAKESTR(5,IE)
       read(STR,*)MANG,NAA
-      if(NAA.gt.NAAM)stop ' increase NAAM'
-*   3) how many torsions of each type
-      NADT=MANG*2                   ! total  
-      if(NADT.gt.NT)stop 'increase NT'
-*   4) List of torsions - 4 site numbers for each torsion
+      allocate(NPOP(NAA,NAA))
+      NADT=MANG*2               ! total
+      allocate(IT(NADT),JT(NADT),KT(NADT),LT(NADT))
+*   3) List of torsions - 4 site numbers for each torsion
 *      All "phi" torsions, then all "psi" torsions
       do I=1,NADT                   
 	STR=TAKESTR(5,IE)

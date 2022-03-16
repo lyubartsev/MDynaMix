@@ -4,8 +4,8 @@ C
       program TORSION
       include "tranal.h"
       parameter (NTOR=100,NAAM=1000,NT=1000)
-      integer MANGL(NTOR),IADT(NTPS),IT(NT),JT(NT),KT(NT),LT(NT)
-      integer IGS(NTOR),ITRAN(NTOR),NPOP(NTOR,NAAM)
+      integer, allocatable ::MANGL(:),IADT(:),IT(:),JT(:),KT(:),LT(:)
+      integer, allocatable ::IGS(:),ITRAN(:),ICIS(:),NPOP(:,:)
       character FTOR*64
       call SETTRAJ
 *  Input of data - after "TRAJ" section, 
@@ -18,8 +18,8 @@ C
 *  2) number of different torsion types and number of bins in [-180:180]
       STR=TAKESTR(5,IE)
       read(STR,*)NAG,NAA
-      if(NAG.gt.NTOR)stop ' increase NTT'
-      if(NAA.gt.NAAM)stop ' increase NAAM'
+      allocate(MANGL(NAG),IGS(NAG),ITRAN(NAG),ICIS(NAG),IADT(NAG+1))
+      allocate(NPOP(NAG,NAA))
 *   3) how many torsions of each type
       STR=TAKESTR(5,IE)
       read(STR,*)(MANGL(I),I=1,NAG)    ! torsions of each type
@@ -29,7 +29,7 @@ C
 	IADT(I+1)=IADT(I)+MANGL(I)
       end do
       NADT=IADT(NAG+1)                   ! total  
-      if(NADT.gt.NT)stop 'increase NT'
+      allocate(IT(NADT),JT(NADT),KT(NADT),LT(NADT))
 *   4) List of torsions - 4 site numbers for each torsion
 *      1st group, then 2-nd ..
       do I=1,NADT                   
@@ -51,6 +51,7 @@ C
       end if
       do I=1,NAG
 	IGS(I)=0
+        ICIS(i)=0
 	ITRAN(I)=0
 	do J=1,NAA
 	  NPOP(I,J)=0 
@@ -113,7 +114,10 @@ Cosine of angle:
 	    arg=0.d0
 	  end if    
 	  NARG=0.5*(arg+PI)*NAA/PI+1
-	  if(abs(arg*180/PI).le.120)then
+          ANGLE = abs(arg*180./PI)
+	  if(ANGLE.le.30.)then
+            ICIS(ITYP)=ICIS(ITYP)+1
+          else if(ANGLE.gt.30.and.ANGLE.le.120.)then   
 	    IGS(ITYP)=IGS(ITYP)+1
 	  else
 	    ITRAN(ITYP)=ITRAN(ITYP)+1
@@ -143,10 +147,12 @@ Cosine of angle:
 	write(17,'(f7.1,50f9.4)')ANG,
      + (NPOP(I,M)*FACT/MANGL(I),I=1,NAG)
 	  end do
+	  write(17,'(a,50f9.6)')'# CIS    ',
+     +(ICIS(I)*1./(ICIS(I)+IGS(I)+ITRAN(I)),I=1,NAG)
 	  write(17,'(a,50f9.6)')'# Gaushe ',
-     +(IGS(I)*1./(IGS(I)+ITRAN(I)),I=1,NAG)
+     +(IGS(I)*1./(ICIS(I)+IGS(I)+ITRAN(I)),I=1,NAG)
 	  write(17,'(a,50f9.6)')'# Trans  ',
-     +(ITRAN(I)*1./(IGS(I)+ITRAN(I)),I=1,NAG)
+     +(ITRAN(I)*1./(ICIS(I)+IGS(I)+ITRAN(I)),I=1,NAG)
 	  close(17)
       stop
       end

@@ -1,4 +1,4 @@
-C    TRANAL v 5.0
+C    TRANAL v 5.3
 C    Computation of average dielectric permittivity
 C    from the fluctuation of the total dipole moment
 C

@@ -7,13 +7,15 @@
  FNAME='../work/dmpc_NewMod',
  PATHDB='.',
  NTYPES=2,
- NAMOL='dmpc-2008','H2O',
+ NAMOL='dmpc','H2O',
+ NSPEC=98,2700,
+ NSITS=118,3,
  NFBEG=100,
  NFEND=500,
  IPRINT=5
  &END 
 #  output file
-dmpc_NM_ord.dat
+dmpc_order.dat
 # type of lipids
 1
 #  First line - number of atom pairs for order parameter calculations = 
@@ -21,7 +23,7 @@ dmpc_NM_ord.dat
 31
 #62   43   0
 #100
-#  for each line : 3 od 5 parameters 
+#  for each line : 3 or 5 parameters 
 #  1 and 2 define atom pair (site numbers)
 #  3 parameter 0 or 1
 #    if 0 - just compute order parameters for this pair

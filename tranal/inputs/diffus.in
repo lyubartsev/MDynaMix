@@ -2,21 +2,23 @@
 #
 &TRAJ
  NFORM='MDYN',
- FNAME='256_waters',
- PATHDB='/s2/sasha/mdp/md527/moldb',
+ FNAME='acetonitrile-298',
+ PATHDB='..',
  NTYPES=1,
- NAMOL='H2O',
- NSPEC=256,
- NFBEG=3,
- NFEND=10,
- ISTEP=1
+ NAMOL='CH3CN',
+ NSPEC=1024,
+ NSITS=6,
+ NFBEG=2,
+ NFEND=4,
+ ISTEP=1,
+ IPRINT=5
  &END
  &DIFF
  IDF=1,
- DTT=1.d-13,
+ DTT=1.d-12,
  NTT=500,
  IAT=0,
  LCOM=.true.,
- FILDIF='watdif2.dat',
+ FILDIF='aacet-diff.dat',
  &END
  

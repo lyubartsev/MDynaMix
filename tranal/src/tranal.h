@@ -1,9 +1,8 @@
-*  Main include file for tranal v.5.2 programs
+*  Main include file for tranal v.5.3 programs
+      use tranalmod
       implicit real*8 (A-H,O-Z)
-* max number of mol.types, sites, molecules  and atoms
-      PARAMETER (NTPS=10, NS=5000, NPART  = 20000, NTOT=100000)
-* max number of bonds
-      PARAMETER (NBM=100000)
+* max number of mol.types
+      PARAMETER (NTPS=1024, NPART  = 120000)
 * max number pof trajectory files
       PARAMETER (MAXFIL=10000)
 *
@@ -15,30 +14,16 @@
       PARAMETER (TODGR=180.D0/PI,BOXYC=0.57735026918962579568)
 *                                 
       real*4 DTN
-      real*8 MASS,MASSD,MASSDI
-      logical LXMOL,LVEL,LFILTR,LBOND,LOCT,LHEX,LMMOL
+      logical LXMOL,LVEL,LFILTR,LOCT,LHEX
       character*128  TAKESTR,STR,NAMOL,FILNAM,FILXM,FXMOL
-      character NAME*6,NFORM*4,NM*4
-      COMMON /COORD/ SX(NTOT),SY(NTOT),SZ(NTOT),
-     +               OX(NTOT),OY(NTOT),OZ(NTOT),
-     +               X(NPART),Y(NPART),Z(NPART),
-     +               WX(NTOT),WY(NTOT),WZ(NTOT),
-     +               PX(NTOT),PY(NTOT),PZ(NTOT),
-     +               QX(NTOT),QY(NTOT),QZ(NTOT),
-     +               VX(NTOT),VY(NTOT),VZ(NTOT)
-      COMMON /TPSTPS/ NSPEC(NTPS),NSITS(NTPS),ITS(NS),ITYPE(NTOT)
-     X               ,IADDR(NTPS+1),ISADR(NTPS+1),ISADDR(NTPS+1)
-     +               ,NNUM(NTOT),NSITE(NTOT),LIST(NTPS)
-     +               ,NUMR(NTOT),NUMO(NTOT),ITM(NPART)
-      COMMON/INTEG/ ISTEP,IBREAK,NF,MEE
-      COMMON /MOLPAR/ SIGMA(NS),EPSIL(NS),CHARGE(NS),R(NS,3)
-     X               ,MASS(NS),MASSD(NS),SUMMAS(NTPS)
-     +               ,MASSDI(NTOT),Q(NTOT),TIMIN(MAXFIL)
-      COMMON/MISC/BREAKM,FULTIM1,VFAC,TEMP,EP,PRES
-      COMMON /CONTRL/ NOP,NSITES,NTYPES,NSTOT,IAN,IPRINT,NUMTR,DTN
-      common /NAMES/ NAMOL(NTPS),NAME(NTPS),NM(NS),FILNAM(MAXFIL)
+      character*4  NFORM
+      COMMON /INTEG/ ISTEP,IBREAK,NF,MEE,LF,LLNX
+      COMMON /FIXED/ NSPEC(NTPS),NSITS(NTPS),NAMOL(NTPS)
+      COMMON/MISC/BREAKM,FULTIM1,VFAC,TEMP,EP,PRES,DTN
+      COMMON /CONTRL/ NOP,NSITES,NTYPES,NSTOT,IAN,IPRINT,NUMTR,NS
+      common /NAMES/ FILNAM(MAXFIL),TIMIN(MAXFIL)
      +  ,NFORM,FILXM,FXMOL
-      COMMON /SIM/ BOXL,BOYL,BOZL,HBOXL,HBOYL,HBOZL,TOTMAS,FULTIM,VOL
-      common /BONDS/ID(NBM),IB(NBM),JB(NBM),NRB(NTPS),IADB(NTPS),NRBB
-      common/LOGLOG/LXMOL,LF,LVEL,LFILTR,LBOND,LMMOL,LLNX,LHEX,LOCT
+      COMMON /SIM/ BOXL,BOYL,BOZL,HBOXL,HBOYL,HBOZL,TOTMAS,FULTIM,
+     + TSTART,TEND,VOL
+      common/LOGLOG/LXMOL,LVEL,LFILTR,LHEX,LOCT
 

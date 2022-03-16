@@ -7,9 +7,9 @@ C     array boundaries for:
 C     NRT1M: number of sites "from"
 C     NRT2M: numberof sites "to"
 C     NITTM: number of time frames to follow residence time      
-      parameter (NRT1M=4096,NRT2M=8192,NITTM=2048)
-      dimension TIIN(NRT1M,NRT2M),TIINI(NRT1M,NRT2M),TIINO(NRT1M,NRT2M)
-      dimension DISTT(NITTM),DIST2(NITTM)
+      parameter (NRT1M=4096,NRT2M=8192)
+      real*8 TIIN(NRT1M,NRT2M),TIINI(NRT1M,NRT2M),TIINO(NRT1M,NRT2M)
+      real*8, allocatable :: DISTT(:),DIST2(:)
       integer IRS(NRT1M,NRT2M),IR1(NRT1M),IR2(NRT2M),IRS1(NRT1M),
      & IRS2(NRT2M)
       character*64 FILOUT
@@ -23,7 +23,7 @@ C     NITTM: number of time frames to follow residence time
       RRN = 0.
 *  Input of specific parameters
       read(*,RESTIM)
-      if(NITT.gt.NITTM) stop 'increase NITTM in restime.f'
+      allocate(DISTT(NITT),DIST2(NITT))
       if(RRN.gt.RRX) stop 'RRN>RRX'
       RRNN=RRN-RRD
       RRNX=RRN+RRD

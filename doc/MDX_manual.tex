@@ -1894,6 +1894,9 @@ self-diffusion coefficients
 them to XMOL format
 
 \item
+{\bf h-bonds} - identification of hydrogen bonds and their statistics
+
+\item
 {\bf latdiff} - computation of 2D mean square displacement and lateral
 diffusion for membranes or bilayers
 
@@ -2340,6 +2343,59 @@ In all cases, diffusion is given in $10^{-5}cm^2/s$.
 This utility just reads the trajectories and type the coordinates of the first 
 atom in the output. It can be used as a template to write new analyzing 
 utilities
+
+\subsection{Hydrogen bonds: h-bonds.f}
+
+This utility identifies hydrogen bonds according to the geometrical criteria and
+report their statistics. 
+
+Input parameters for this utility follow after the trajectory parameters
+organised in \verb|HBOND| namelist:
+
+\begin{verbatim}
+ $HBOND
+ parameter=value(s),
+ ...
+ $END
+\end{verbatim}
+
+Parameters:
+
+\begin{itemize}
+
+\item
+  \verb|NHB = <int.value>|
+  Number of different types of hydrogen bonds. Each type of hydrogen bonds is determined
+  by a donor atom (D), acceptor atom (A),  and hydrogen atom (H).
+
+\item   
+  \verb|ACC = <int.value 1>,...,<int.value NHB>|
+  A list of \verb|NHB| iteger numbers representing global site numbers for acceptors
+  for each type of hydrogen bond
+
+\item   
+  \verb|DON = <int.value 1>,...,<int.value NHB>|
+  A list of \verb|NHB| iteger numbers representing global site numbers for donors
+  for each type of hydrogen bond
+
+\item   
+  \verb|HYD = <int.value 1>,...,<int.value NHB>|
+  A list of \verb|NHB| iteger numbers representing global site numbers for hydrogen atoms
+  for each type of hydrogen bond
+  
+\item
+  \verb|RMAX  = <value>|
+  Maximum distance between donor and acceptor (in $\AA$). Default 3.4 $\AA$.
+
+\item
+  \verb|ANGLE  = <value>|
+  Maximum angle (in degrees) between D-H and D-A vectors. Default 30 degrees.
+
+\item
+  \verb=|FOUT = '<filename>'|
+  Name of the output file
+
+\end{itemize}  
 
 \subsection{Lateral diffusion: latdiff.f}
 

@@ -1,6 +1,7 @@
+!  RDFs from pure water simulation
  &TRAJ
  NFORM='TRR',
- FNAME='/s1/sasha/Soft/gromacs/work/traj.trr',
+ FNAME='traj.trr',
  PATHDB='.'
  NTYPES=1
  NAMOL='SOL',

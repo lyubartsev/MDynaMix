@@ -263,6 +263,7 @@ contains
           select type (trj)
           type is (xtcfile)
             deallocate(trj % pos)
+        trj % stat = xdrfile_close(trj % xd)
 
           type is (trrfile)
             deallocate(trj % pos)
@@ -271,7 +272,7 @@ contains
           end select
         end if 
 
-        trj % stat = xdrfile_close(trj % xd)
+!!        trj % stat = xdrfile_close(trj % xd)
     end subroutine close_xdr
 #endif
 end module xdr

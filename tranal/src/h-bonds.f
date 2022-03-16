@@ -10,8 +10,8 @@ C     ACC - list of acceptors (as site nummer, integer array of length NHB)
 C     DON - list of donors (as site nummer, integer array of length NHB)
 C     HYD - list of hydrogens (as site nummer, integer array of length NHB)
       program HBONDS
-      parameter(NHBMAX=1000)
       include "tranal.h"
+      parameter(NHBMAX=1000)
       integer*8 ACC(NHBMAX),DON(NHBMAX),HYD(NHBMAX),ICNT(NHBMAX)
       character*64 FOUT
       namelist /HBOND/FOUT,RMAX,HANG,NHB,ACC,DON,HYD

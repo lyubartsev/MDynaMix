@@ -5,19 +5,20 @@ C
  	program SDF
 	include "tranal.h"
 C  max size of SDF grid
-	parameter (NOMXM=200,NOMYM=200,NOMZM=200)
-	parameter (NOIM=100,MSOR=100)
+	parameter (NOIM=256,MSOR=256)
 	dimension E0(3),D1(3),D2(3),EX(3),EY(3),EZ(3),RV(3)
-	dimension XAV(NS),YAV(NS),ZAV(NS),XAV2(NS),YAV2(NS),ZAV2(NS)
-	dimension IAA(NS),ISM(NS,NOIM),ISREP(NS)
+	real*8, allocatable :: XAV(:),YAV(:),ZAV(:),
+     +   XAV2(:),YAV2(:),ZAV2(:)	
+        integer, allocatable :: IAA(:),ISREP(:),ISM(:,:)
 	dimension ISOR(MSOR),IO1(NOIM),IO2(NOIM),IO3(NOIM)
-	dimension ID3(0:NOMXM,0:NOMYM,0:NOMZM)
-	dimension TMP(0:NOMXM)
+	integer, allocatable :: ID3(:,:,:)
+	real*8, allocatable :: TMP(:)
 	integer*8 NCOR
-	character*2 NMM(NS)
-	character*64 FILORI,FILCRD,AUX
+	character*2, allocatable :: NMM(:)
+	character*4 OUTF
+	character*64 FILORI,FILCRD,AUX,FILCUBE
 	namelist /SDFIN/ NSOR,ISOR,NOI,IO1,IO2,IO3,FILORI,FILCRD,
-     + NOMX,NOMY,NOMZ,RXMAX,RYMAX,RZMAX 
+     + FILCUBE,NOMX,NOMY,NOMZ,RXMAX,RYMAX,RZMAX,OUTF 
 *    Recuired parameters:
 *    NOI - number of equivalent local coord. systems 
 *    IO1, IO2, IO3 (NOI) - define local coordinate system
@@ -30,13 +31,21 @@ C  max size of SDF grid
 	RZMAX=5.
 	NOI=1
 	NSOR=1
+	OUTF='CUBE'
         call SETTRAJ
+	allocate(XAV(NSITES),YAV(NSITES),ZAV(NSITES))
+	allocate(XAV2(NSITES),YAV2(NSITES),ZAV2(NSITES))
+        allocate(IAA(NSITES),ISREP(NSITES),ISM(NSITES,NOIM))
+	allocate(NMM(NSITES))
 	read(*,SDFIN)
+	if(OUTF.ne.'CUBE'.and.OUTF.ne.'GOPM')then
+	   write(*,*)'Warning: unknown output formet ',OUTF
+	   write(*,*)'Assume CUBE format'
+	   OUTF='CUBE'
+	end if
 	if(NOI.gt.NOIM)stop 'increase NOIM !!!'
 	if(NSOR.gt.MSOR)stop 'increase MSOR !!!'
-	if(NOMX.gt.NOMXM)stop 'increase NOMXM !!!'
-	if(NOMY.gt.NOMYM)stop 'increase NOMYM !!!'
-	if(NOMZ.gt.NOMZM)stop 'increase NOMZM !!!'
+	allocate(ID3(0:NOMX,0:NOMY,0:NOMZ),TMP(0:NOMZ))
 	do IGR=1,NSOR   ! equivalent atoms "to"
 	  if(ISOR(IGR).le.0.or.ISOR(IGR).gt.NSITES)then
 	     write(*,*)' Wrong value ',IGR,' of array ISOR ',ISOR(IGR)
@@ -90,7 +99,7 @@ C  max size of SDF grid
 	      end do
 	   end do
 	end do
-	do I=1,NS
+	do I=1,NSITES
 	   XAV(I)=0.
 	   YAV(I)=0.
 	   ZAV(I)=0.
@@ -377,13 +386,69 @@ C  SDF output
       Y1= RYMAX
       Z0=-RZMAX+DDZ
       Z1= RZMAX
-C  This is "formatted" gOpenMol PLT-file 
+      FACORI=VOL/(DDX*DDY*DDZ*NCOR)
+C    Output to CUBE Gaussian format	
+      if(OUTF.eq.'CUBE')then
+        write(*,*)' writing 3D distribution ...'
+        write(*,'(i14,3f8.2,3f8.4,e13.5)')
+     +NCOR,RXMAX,RYMAX,RZMAX,DDX,DDY,DDZ,FACORI
+        IML=ITS(IO1(1))
+	 write(31,*)'SDF cube file. Molecule ',NAME(IML)
+	 write(31,*)'OUTER LOOP: X, MIDDLE LOOP: Y, INNER LOOP: Z'
+	 write(31,'(I5,3f8.2)')NMSTR,-RXMAX,-RYMAX,-RZMAX
+	 write(31,'(I5,3f10.6)')NOMX,DDX,0.,0.
+	 write(31,'(I5,3f10.6)')NOMY,0.,DDY,0.
+	 write(31,'(I5,3f10.6)')NOMZ,0.,0.,DDZ
+	 do I=1,NMSTR
+	   XX=XAV(I)/IAA(I)
+	   YY=YAV(I)/IAA(I)
+	   ZZ=ZAV(I)/IAA(I)
+           if(NMM(I)(1:1).EQ.'H')then
+	      IAT=1
+	   else if(NMM(I)(1:1).eq.'B')then
+	      IAT=5
+	   else if(NMM(I)(1:1).eq.'C')then
+	      IAT=6
+	   else if(NMM(I)(1:1).eq.'N')then
+	      IAT=7
+	   else if(NMM(I)(1:1).eq.'O')then
+	      IAT=8
+	   else if(NMM(I)(1:1).eq.'F')then
+	      IAT=9
+	   else if(NMM(I)(1:1).eq.'P')then
+	      IAT=15
+	   else if(NMM(I)(1:1).eq.'S')then
+	      IAT=16
+	   else if(NMM(I)(1:2).eq.'Na')then
+	      IAT=11
+	   else if(NMM(I)(1:2).eq.'Mg')then
+	      IAT=12
+	   else if(NMM(I)(1:2).eq.'Al')then
+	      IAT=13
+	   else if(NMM(I)(1:2).eq.'Si')then
+	      IAT=14
+	   else if(NMM(I)(1:2).eq.'Cl')then
+	      IAT=17
+	   else 
+	      IAT=10
+	   end if
+	   write(31,'(i5,4f10.6)')IAT,0.,XX,YY,ZZ
+	 end do   
+         do IX=1,NOMX
+	   do IY=1,NOMY
+             do IZ=1,NOMZ
+               TMP(IZ)=ID3(IX,IY,IZ)*FACORI
+	     end do
+	     write(31,'(6e13.5)')(TMP(IZ),IZ=1,NOMX)
+	   end do
+         end do
+C       This is "formatted" gOpenMol PLT-file
+      else if (OUTF.eq.'GOPM')then	 
       N3=3
       N200=200
       write(31,*)N3,N200
       write(31,*)NOMZ,NOMY,NOMX
       write(31,'(6e13.5)')Z0,Z1,Y0,Y1,X0,X1
-      FACORI=VOL/(DDX*DDY*DDZ*NCOR)
       write(*,*)' writing 3D distribution ...'
       write(*,'(i14,3f8.2,3f8.4,e13.5)')
      +NCOR,RXMAX,RYMAX,RZMAX,DDX,DDY,DDZ,FACORI
@@ -396,6 +461,7 @@ C  This is "formatted" gOpenMol PLT-file
 	end do
       end do
       close(31)
+      end if
 C  Mean structure output (XMOL format)
       open(unit=32,file=filcrd,status='unknown')
       write(32,'(i5,a)')NMSTR,
@@ -414,7 +480,8 @@ C  Mean structure output (XMOL format)
       end do
       close(32)
       write(*,*)' Done!   '
-      write(*,*)' Use pltfile utility to convert file ',FILORI,
+	if(OUTF.eq.'GOPM')write(*,*)
+     +' Use pltfile utility to convert file ',FILORI,
      +' to binary .plt format'
       stop
       end

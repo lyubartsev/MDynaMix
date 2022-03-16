@@ -1,4 +1,3 @@
-
 !DIR$ FIXED
 **   Part of MDynaMix package v.5.3 
 *
@@ -23,11 +22,11 @@
 #endif        
 	include "tranal.h"
 	character*128 FFILTR,PATHDB,FNAME,cdum*8,chr4*4, FMT*20
-	real*4 TX(NTOT),TY(NTOT),TZ(NTOT)
         integer(4) ierr
+	integer, allocatable :: NUMO(:)
 	save
 	namelist /TRAJ/NFORM,FNAME,PATHDB,NTYPES,NAMOL,NFBEG,NFEND,
-     + ISTEP,BREAKM,LVEL,LFILTR,FFILTR,LXMOL,FXMOL,IPRINT,LBOND,NSPEC,
+     + ISTEP,BREAKM,LVEL,LFILTR,FFILTR,LXMOL,FXMOL,IPRINT,NSPEC,
      + NSITS,BOXL,BOYL,BOZL,VFAC,LHEX,LOCT,TSTART,TEND
 *  requested parameters:
 *
@@ -71,8 +70,6 @@
 *   LFILTR - analysis for particular atoms
 *   FFILTR - file name specifying which atoms take for the analysis
 *
-*   LBOND - information about bonds is read from .mmol file
-*
 *   VFAC - factor to multiply velocities to bring them to A/fs
 *
 *  This is default trajectory format
@@ -80,16 +77,15 @@
 	LVEL=.false.
 	LFILTR=.false.
 	LXMOL=.false.
-	LBOND=.false.
 	ISTEP=1
 	IPRINT=5
 	BREAKM=11.
 	VFAC=1.
-	LMMOL=.true.
 	NFBEG=-1
 	NFEND=1
 	TSTART=0.
 	TEND=-1.
+	PATHDB='.'
 *       Read input data
 	read(*,TRAJ)
 	if(NFORM.eq.'PDBT'.or.NFORM.eq.'DCDT'.or.NFORM.eq.'XTC')then
@@ -103,7 +99,25 @@
           BOYL=BOXL
           BOZL=BOXL
         end if
-*  defining the length of the file name
+*  Allocation of basic arrays
+	if(NTYPES.le.0)then
+	   write(*,*)
+     +'!!! Wrong or undetermined number of molecular types (NTYPES):',
+     +	  NTYPES
+	  stop   
+	end if   
+	NTYPES1=NTYPES+1
+        allocate(SUMMAS(NTYPES),LIST(NTYPES),NAME(NTYPES))
+	allocate(LMMOL(NTYPES))
+	allocate(IADDR(NTYPES1),ISADR(NTYPES1),ISADDR(NTYPES1))
+	NS=0.
+	do ITYP=1,NTYPES
+	   LMMOL(ITYP)=.true.
+	   NS=NS+NSPEC(ITYP)
+	end do
+	if(NS.le.0)NS=1
+	allocate(CHARGE(NS),MASS(NS),NM(NS))
+*    defining the length of the file name
 	IL=0 
 	do I=1,120
 	  ISTR=ichar(FNAME(I:I))
@@ -128,6 +142,7 @@
 	end if
 *  Check and reconstruct file list
  11	continue
+	if(NFEND.ge.10000)stop 'NFENG should be less than 10000'
 	NF=NFEND-NFBEG+1
 	if(NFBEG < 0)then
 	   NF=1
@@ -315,40 +330,37 @@ C  MDynamix .xmol time
 	    stop
 	  end if
           NOP     = NOP    + NSPEC(ITYP)
-	  if(NOP.gt.NPART)then
-	    write(*,*)'total number of molecules in the trajectory ',
-     + NOP,' exceds the limit'
-            write(*,*)
-     +	' Increase parameter NTOT in tranal.h file and recompile'
-	    stop
-	  end if
           TOTMAS       = TOTMAS+SUMM*NSPEC(ITYP)
           SUMMAS(ITYP) = SUMM 
 	  NAME(ITYP)=NAMOL(ITYP)(1:6)
+          NSTOT   = NSTOT  + NSPEC(ITYP)*NSITS(ITYP)
+          NSITES  = NSITES + NSITS(ITYP)
         end do           
 	if(NOP.le.0)then
 	   write(*,*)'!!! Wrong number of molecules :      ',NOP
 	   stop
 	end if
-        FACTM=AVSNO*1.d3
+*    Allocation
+        allocate(SX(NSTOT),SY(NSTOT),SZ(NSTOT))
+        allocate(OX(NSTOT),OY(NSTOT),OZ(NSTOT))
+        allocate(WX(NSTOT),WY(NSTOT),WZ(NSTOT))
+	allocate(Q(NSTOT))
+	allocate(X(NOP),Y(NOP),Z(NOP))
+	allocate(VX(NSTOT),VY(NSTOT),VZ(NSTOT))
+	allocate(PX(NOP),PY(NOP),PZ(NOP))
+	allocate(QX(NOP),QY(NOP),QZ(NOP))
+	allocate(ITYPE(NSTOT),NNUM(NSTOT),NSITE(NSTOT))
+	allocate(NUMR(NSTOT),NUMO(NSTOT),ITM(NOP))
+	allocate(ITS(NSITES))
+*  Initialization of reference arrays
         do ityp=1, ntypes
  	  ISADR(ITYP+1)  = ISADR(ITYP)+ NSITS(ITYP)          ! site addr
 	  ISADDR(ITYP+1) = ISADDR(ITYP)+NSPEC(ITYP)*NSITS(ITYP)  ! atom adr
           IADDR (ITYP+1) = IADDR (ITYP)+NSPEC(ITYP)         ! mol. addr
-          NSITES  = NSITES + NSITS(ITYP)
           if(NSITS(ITYP).eq.2)FNSTR=FNSTR+2.d0*NSPEC(ITYP)
           if(NSITS(ITYP).ge.3)FNSTR=FNSTR+3.d0*NSPEC(ITYP)
-          NSTOT   = NSTOT  + NSPEC(ITYP)*NSITS(ITYP)
-	  if(NSTOT.gt.NTOT)then
-	    write(*,*)'total number of atoms in the trajectory ',
-     + NSTOT,' exceds the limit'
-            write(*,*)
-     +	' Increase parameter NTOT in tranal.h file and recompile'
- 	    stop
-	  end if
           FNSS3   = 3.D0*DFLOAT(NSITES)
 	  do J=ISADR(ITYP)+1,ISADR(ITYP+1)
-	    MASSD(J)=MASS(J)/TOTMAS/FACTM
 	    ITS(J)=ITYP
 	  end do                     !    Nsite -> type
 	  do IS=1,NSPEC(ITYP)
@@ -368,21 +380,6 @@ C  MDynamix .xmol time
 * Summary of the system
 	write(*,*)' --------------------------------'
 	write(*,*)'      Summary of the system:'
-	if(LMMOL)then
-	  write(*,*)' based on data from .mmol/.itp files'
-	else
-	  write(*,*)' Not all .mmol/.itp files were found'
-	  write(*,*)' information is generated from the input file'
-*  giving numeric site names
-	  do IS=1,NSITES
-	    MASS(IS)=1.
-	    NM(IS)='Art'
-	    write(NM(IS),'(i4)')IS
-	  end do
-	  do ITYP=1,NTYPES
-	    SUMMAS(ITYP)=1.*NSITS(ITYP)
-	  end do
-	end if
 	write(*,*)' Type    Name    Atoms   Molecules   Mass'
 	do ITYP=1,NTYPES
 	   write(*,'(i4,5x,a6,2i8,f12.2)')
@@ -390,7 +387,7 @@ C  MDynamix .xmol time
 	end do
 	write(*,*)' Total number of atoms: ',NSTOT
 	write(*,*)' --------------------------------'
-* Renumeration array
+*  Renumeration array
 	if(LFILTR)then
 	   do I=1,NUMTR
 	     NUMR(I)=0
@@ -426,10 +423,13 @@ C  MDynamix .xmol time
         use xdrwrap
 #endif        
 	include "tranal.h"
-	real*4 TX(NTOT),TY(NTOT),TZ(NTOT)
+	real*4, allocatable :: TX(:),TY(:),TZ(:)
 	character cdum*32,chr4*4
 	data IINIT/0/ 
 	save
+        if(.not.allocated(TX))allocate(TX(NSTOT))
+        if(.not.allocated(TY))allocate(TY(NSTOT))
+        if(.not.allocated(TZ))allocate(TZ(NSTOT))
 	if(IINIT.eq.0)then
 	  IINIT=1
 	  IFL=1    ! number of the first file to read
@@ -519,11 +519,11 @@ C  MDynamix .xmol time
 *  GROMACS XTC trajectory
 	else if(NFORM.eq.'XTC') then
 !	    write(*,*) 'Reading XTC file'
-	    call xtc_read_tranal(BOXL,BOYL,BOZL,SX,SY,SZ,FULTIM,ierr)
+       call xtc_read_tranal(BOXL,BOYL,BOZL,NSTOT,SX,SY,SZ,FULTIM,ierr)
             if (ierr.ne.0) goto 45
 	else if (NFORM.eq.'TRR') then
 !	    write(*,*) 'Reading TRR file'
-	    call trr_read(BOXL,BOYL,BOZL,SX,SY,SZ,VX,VY,VZ,FULTIM,ierr)
+       call trr_read(BOXL,BOYL,BOZL,NSTOT,SX,SY,SZ,VX,VY,VZ,FULTIM,ierr)
             if (ierr.ne.0) goto 45
 #endif            
 	else if(NFORM.eq.'DCDT')then
@@ -650,9 +650,10 @@ c - for each type
 	      OY(I)=SY(I)
 	      OZ(I)=SZ(I)
 	      IN=NUMR(I)
+	      ITYP=ITYPE(I)
 	      if(LVEL.and.NFORM.eq.'XMOL')then
 	        read(12,*,err=40,end=40)CHR4,XX,YY,ZZ,VVX,VVY,VVZ		
-		if(.not.LMMOL)NM(NSITE(IN))=CHR4
+		if(.not.LMMOL(ITYP))NM(NSITE(IN))=CHR4
 		if(IN.ne.0)then
 		   SX(IN)=XX
 		   SY(IN)=YY
@@ -673,10 +674,10 @@ c - for each type
 		  end if
 		  if(STR(1:4).ne.'ATOM')go to 53
 		  read(str(31:128),*)XX,YY,ZZ
-		  if(.not.LMMOL)NM(NSITE(IN))(1:3)=STR(14:16)
+	if(.not.LMMOL(ITYPE(IN)))NM(NSITE(IN))(1:3)=STR(14:16)
 		else        ! XMOL case
 	          read(12,*,err=40,end=40)CHR4,XX,YY,ZZ
-		  if(.not.LMMOL)NM(NSITE(IN))=CHR4
+		  if(.not.LMMOL(ITYPE(IN)))NM(NSITE(IN))=CHR4
 		end if		
 		if(IN.ne.0)then
 		   SX(IN)=XX
@@ -700,18 +701,7 @@ c - for each type
 	EKIN=0.
 	if(LOCT) VOL=0.5*VOL
 	do I=1,NSTOT
-          if(.not.LMMOL.and.IAN.le.1)then
-	    ITYP=ITYPE(I)
-	    if(I.eq.ISADDR(ITYP)+1)then
-	      do J=1,NSITS(ITYP)
-		JS=ISADR(ITYP)+J
-                R(JS,1)=SX(I+J-1)-SX(I)
-                R(JS,2)=SY(I+J-1)-SY(I)
-                R(JS,3)=SZ(I+J-1)-SZ(I)
-	      end do
-	    end if
-	  end if
-	  DX=SX(I)-OX(I)
+ 	  DX=SX(I)-OX(I)
 	  DY=SY(I)-OY(I)
 	  DZ=SZ(I)-OZ(I)
  	  if(DX.gt.HBOXL)DX=DX-BOXL
@@ -772,14 +762,13 @@ c - for each type
 *    Define molecule from DATABASE
 *
 	subroutine READMOL(SUMM,NX,NTYP,PATHDB,NAMN,IER)
+        use dynarray
 	include "tranal.h"
-*
-        DIMENSION CM(3)
+*       
 	character PATHDB*128,namn*128,FIL*256,FMT*20,CH1*4,CH2*4,CH3*4
         FIL=' '
 	NX0=NX             
 	IER = 0
-	NRBB = 0
 	IE=0
 	IL=0 
 	do I=1,128
@@ -818,46 +807,29 @@ c - for each type
 	STR=TAKESTR(12,IE)
 	read(STR,*)NSTS
 	if(IPRINT.ge.6)write(*,*)'*** NR OF SITES:      ',NSTS
-	if(NX+NSTS.gt.NS)
-     & stop '!!! Increase NS (number of sites) in tranal.h'
+	if(NX+NSTS.gt.NS)then
+	   NS=NX+NSTS+1
+	   call reshapereal(CHARGE,NS)
+	   call reshapereal(MASS,NS)
+	   call reshapechar4(NM,NS)
+	end if   
 	NSITS(NTYP)=NSTS
 	NSBEG=NX+1
 	do I=1,NSTS
 	  STR=TAKESTR(12,IE)
 	  IX=NX+I
-!   	  NM(IX)=STR(1:len(NM(IX)))
-!	  read(STR((len(NM(IX))+1):128),*,err=903)(R(IX,J),J=1,3),
-	read(STR(1:128),*,err=903)NM(IX),(R(IX,J),J=1,3),
+	   read(STR(1:128),*,err=903)NM(IX),R1,R2,R3,
      +  MASS(IX),CHARGE(IX)
           if(IPRINT.ge.6) then
             write(FMT,*) len(NM(IX))
             write(*,'(a5,a'//ADJUSTL(FMT)//',a4,3f7.3,a3,f8.4,a3,f6.3,
      +       a5,f8.4,a4,f9.4)')
-     +      'atom ',NM(IX),'  R=',(R(IX,J),J=1,3),
+     +      'atom ',NM(IX),'  R=',R1,R2,R3,
      +      ' M=',MASS(IX),' Q=',CHARGE(IX)
           endif
 	end do
 	NX=NX+NSTS
 	NSEND=NX
-*   Reading eventual bond list
-        if(LBOND)then
-          STR=TAKESTR(12,IE)
-          read(STR,*,err=904,end=904)NSR
-          do I=1,NSR
-	    STR=TAKESTR(12,IE)
-	    if(IPRINT.ge.6)write(*,'(a128)')STR
-          end do
-          STR=TAKESTR(12,IE)
-C  Number of bonds
-          read(STR,*,err=902,end=902)NBD
-          NRB(NTYP)=NBD
-          do K=NRBB+1,NRBB+NBD
-	    STR=TAKESTR(12,IE)
-	    read(STR,*,err=902,end=902)IDUM,IB(K),JB(K)
-          end do
-	  NRBB = NRBB+NBD
-	  IADB(NTYP)=NRBB-NRB(NTYP)
-        end if
 	close(12)
 	go to 20
 *    Reading Gromacs .itp file
@@ -877,8 +849,7 @@ C  Number of bonds
 	   write(*,*)' Cannot parse file ',FIL(1:LD+LN+5)
 	   write(*,*)
      +' Will try to retrieve necessary information from other data'
-	   LMMOL=.false.
-	   return
+	   go to 904
 	end if   
 	if(STR(1:1).eq.';')go to 12
 	if(STR(1:9).ne.'[ atoms ]')go to 11
@@ -886,9 +857,15 @@ C  Number of bonds
  13	IE=0
  131	STR=TAKESTR(12,IE)
 	if(IE.ne.0)go to 14
-	if(STR(1:1).eq.';')go to 131
+	if(STR(1:1).eq.';'.or.STR(1:12).eq.'            ')go to 131
 	if(STR(1:1).eq.'[')go to 14
-	  read(STR,*,err=14,end=14)
+	  if(IX+1.gt.NS)then
+	    NS=IX+11
+	    call reshapereal(CHARGE,NS)
+	    call reshapereal(MASS,NS)
+	    call reshapechar4(NM,NS)
+	  end if   
+	  read(STR,*,err=904,end=14)
      + I1,CH1,I2,CH2,NM(IX+1),I3,CHARGE(IX+1),MASS(IX+1)
           IX=IX+1
 	  if(I1+NX.ne.IX)write(*,*)' Inconsistency in ',NAMN,
@@ -899,72 +876,41 @@ C  Number of bonds
           end if
 	  go to 13
  14	  if(IPRINT.ge.5)write(*,*)' Number of sites: ',IX-NX
+          iF(IX.le.NX)go to 904 
 	  NSITS(NTYP)=IX-NX
 	  if(IX.gt.NS)stop'!!! Increase NS (number of sites) in tranal.h'
 	NX=IX
 	NSEND=NX
-*       Bonds
-        if(LBOND)then
- 16	IE=-1
-	NBD=0
- 17	STR=TAKESTR(12,IE)
-	if(STR(1:1).eq.';')go to 17
-	if(IE.eq.-1)then
-	   write(*,*)'No bonds information in file ',FIL(1:LD+LN+5)
-	end if
-	go to 19
-	if(STR(1:9).ne.'[ bonds ]')go to 16
- 18	STR=TAKESTR(12,IE)
-	if(IE.eq.-1)go to 19
-	if(STR(1:1).eq.';')go to 18
-	NBD=NBD+1
-	read(STR,*)IB(NBD),JB(NBD)
-	go to 18
- 19	NRBB=NRBB+NBD
-	if(IPRINT.ge.6)write(*,*)NBD,'  bonds found' 
-	IADB(NTYP)=NRBB-NRB(NTYP)	
-      end if ! (LBOND 
-*       COM coordinates 	
  20   SUMM       = 0.D0
       DO IS      = NSBEG,NSEND
         SUMM       = SUMM+MASS(IS)
       END DO! OF IS
-      SUMMAS(NTYP)=SUMM
-*       
-      CM(1)      = 0.D0
-      CM(2)      = 0.D0
-      CM(3)      = 0.D0
-      DO IS      = NSBEG,NSEND
-        CM(1)      = CM(1)+R(IS,1)*MASS(IS)
-        CM(2)      = CM(2)+R(IS,2)*MASS(IS)
-        CM(3)      = CM(3)+R(IS,3)*MASS(IS)
-      END DO! OF IS
+      SUMMAS(NTYP)=SUMM       
+	return
 *
-      CM(1)      = CM(1)/SUMM
-      CM(2)      = CM(2)/SUMM
-      CM(3)      = CM(3)/SUMM
-	if(IPRINT.ge.10)then
-        PRINT *,'*** Molecular GEOMETRY (C.O.M. IN ORIGIN): '
-        DO IS      = NSBEG,NSEND
-          PRINT "('*** ',I4,3x,A4,3X,3(1X,F7.3))",
-     +    IS,NM(IS),R(IS,1),R(IS,2),R(IS,3)
-        END DO! OF IS
-      end if
-      return
- 903	write(*,*)' Cannot read .mmol file for molecule ',NAMN 
+ 903	write(*,*)' Cannot read .mmol/.itp file for molecule ',NAMN 
 	write(*,*)' Error in the list of atoms, atom ',I
-	stop
- 902    write(*,*)' Cannot read .mmol file for molecule ',NAMN 
-	write(*,*)' Error in the list of bonds, line ',K
-	stop
- 904	write(*,*)' Cannot read .mmol file for molecule ',NAMN 
-	write(*,*)' Error in the reference of .mol file, line '
-	stop
- 999  write(*,*)'!!! Molecule ',NAMN,' not found in the data base'
-      write(*,*)'    File not found: ',FIL
-	write(*,*)
+	go to 990
+ 904	write(*,*)' Cannot read .mmol/.itp file for molecule ',NAMN 
+	go to 990
+ 999	write(*,*)' .mmol / .itp file not found for molecule ',NAMN
+ 990	write(*,*)
      +' Will try to retrieve necessary information from other data'
-	LMMOL=.false.
+	LMMOL(NTYP)=.false.
+	if(NX+NSITS(NTYP).gt.NS)then
+	   NS=NX+NSTS+1
+	   call reshapereal(CHARGE,NS)
+	   call reshapereal(MASS,NS)
+	   call reshapechar4(NM,NS)
+	end if   
+*  giving numeric site names
+	do IS=NX+1,NX+NSITS(NTYP)
+	    MASS(IS)=1.
+	    NM(IS)='    '
+	    write(NM(IS),'(i4)')IS
+	    MASS(IS)=1.
+	    CHARGE(IS)=0.
+	  end do
 	return
 	end 
 *

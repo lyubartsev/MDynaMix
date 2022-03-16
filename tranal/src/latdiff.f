@@ -4,11 +4,10 @@ C
       program LATDIFF
       include "tranal.h"
 *  NTCD - num of time stamps to compute MSD
-      parameter (NTCD=2002)
-      real*8 RCUM(NTCD),RCUMX(NTCD),RCUMY(NTCD),RCUMZ(NTCD),TTIM(NTCD),
-     +TRCX(NTCD,NPART),TRCY(NTCD,NPART),DRZ(NPART)
-      real*8 XT(NPART),YT(NPART),ZT(NPART)
-      integer NCUM(NTCD),ISHX(NPART),ISHY(NPART)
+      real*8, allocatable ::
+     + RCUM(:),RCUMX(:),RCUMY(:),RCUMZ(:),TTIM(:),DRZ(:),
+     +TRCX(:,:),TRCY(:,:),TRCZ(:,:),XT(:),YT(:),ZT(:)
+      integer, allocatable :: NCUM(:),ISHX(:),ISHY(:)
       character*64 FILDIF
       logical LCOM
       data IREC/1/,IINIT/0/,JINIT/0/
@@ -27,12 +26,18 @@ C
 *    FILDIF - name of file for output
 *    FBEG - start of linear fitting of MSD, as a fraction of the whole
 *           interval  DTT*NTT
-      MTR=NTCD-2
       LCOM=.true.
       FBEG=0.2
       call SETTRAJ
       read(*,DIFF)
-      if(NTT+2.gt.NTCD)stop ' increase NTCD'
+      NTT2=NTT+2
+      NOP2=NOP+2
+      MTR=NTT+1
+      allocate(RCUM(NTT2),RCUMX(NTT2),RCUMY(NTT2),RCUMZ(NTT2),
+     + TTIM(NTT2))
+      allocate(TRCX(NTT2,NOP2),TRCY(NTT2,NOP2),TRCZ(NTT2,NOP2))
+      allocate(NCUM(NTT2),ISHX(NOP2),ISHY(NOP2))
+      allocate(XT(NOP2),YT(NOP2),ZT(NOP2),DRZ(NOP2))
       if(IRT.le.0.or.IRT.gt.NTYPES)then
         write(*,*)' wrong lipid type number (IRT):',IRT
         stop
@@ -45,7 +50,7 @@ C
 	RCUM(IT)=0.d0
 	NCUM(IT)=0
       end do   
-      do I=1,NPART
+      do I=1,NOP
 	ISHX(I)=0
 	ISHY(I)=0
       end do
@@ -277,7 +282,8 @@ C
 	if(LCOM)write(9,'(a)')
      +'#  correction for COM motion of each layear is made'
 	write(9,'(a)')
-     +'#  t(ps)  Dav    Ddif    sqrt(MSD)(A)     Dx     Dy      Nav'
+     +  '#   t(ps)      Dav      Ddif     sqrt(MSD)(A)   ',
+     +  '    Dx     Dy      Nav'
 	TSHO=0.
         XYS=0.
         YS=0.

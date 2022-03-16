@@ -1,13 +1,13 @@
-C    Tranal v.5.0
+C    Tranal v.5.3
 C    Computation of MSD and diffusion
 C    
       program DIFFUS
       include "tranal.h"
-*  NTCD - num of time stamps to compute MSD
-      parameter (NTCD=1002)
-      real*8 RCUM(NTCD),RCUMX(NTCD),RCUMY(NTCD),RCUMZ(NTCD),TTIM(NTCD),
-     +TRCX(NTCD,NPART),TRCY(NTCD,NPART),TRCZ(NTCD,NPART)
-      integer NCUM(NTCD),ISHX(NPART),ISHY(NPART),ISHZ(NPART)
+      real*8, allocatable ::
+     + RCUM(:),RCUMX(:),RCUMY(:),RCUMZ(:),TTIM(:),
+     +TRCX(:,:),TRCY(:,:),TRCZ(:,:)
+      integer, allocatable ::
+     +NCUM(:),ISHX(:),ISHY(:),ISHZ(:)
       character*64 FILDIF
       logical LCOM
       data IREC/1/,IINIT/0/,JINIT/0/
@@ -24,18 +24,23 @@ C
 *    FILDIF - name of file for output
 *    FBEG - start of linear fitting of MSD, as a fraction of the whole
 *           interval  DTT*NTT
-      MTR=NTCD-1
       ISTEP=1
       LCOM=.false.
       FBEG=0.2
       call SETTRAJ
       read(*,DIFF)
-      if(NTT+1.gt.NTCD)stop ' increase NTCD'
+      NTT2=NTT+2
+      NOP2=NOP+2
+      MTR=NTT+1
+      allocate(RCUM(NTT2),RCUMX(NTT2),RCUMY(NTT2),RCUMZ(NTT2),
+     + TTIM(NTT2))
+      allocate(TRCX(NTT2,NOP2),TRCY(NTT2,NOP2),TRCZ(NTT2,NOP2))
+      allocate(NCUM(NTT2),ISHX(NOP2),ISHY(NOP2),ISHZ(NOP2))
       do IT=1,NTT
 	RCUM(IT)=0.d0
 	NCUM(IT)=0
       end do   
-      do I=1,NPART
+      do I=1,NOP
 	ISHX(I)=0
 	ISHY(I)=0
 	ISHZ(I)=0
@@ -135,11 +140,11 @@ C
 	IRB=IREC  
 	IRB1=IRB+1
 	if(IRB1.gt.MTR)IRB1=1
-	IROUND=0
+	IROUND=0 
 	do ITIM=1,NTT
 	  TBACK=FULTIM*1.d-12-ITIM*DTT
 *	  write(*,*)ITIM,FULTIM,TBACK*1.d12,IRB,TTIM(IRB)*1.d12,IRB1,
-*     + TTIM(IRB1)*1.d12
+*     +         TTIM(IRB1)*1.d12
  10	  if(TTIM(IRB).le.TBACK)then
 	    if(TTIM(IRB1)-TTIM(IRB).lt.5.*DTT)then
 	    AL=(TBACK-TTIM(IRB))/(TTIM(IRB1)-TTIM(IRB))      
@@ -184,7 +189,7 @@ C
 	end if
       end do
  34   write(*,*)IAN,' configurations analysed'
-	open(unit=9,file=fildif,status='unknown')
+      open(unit=9,file=fildif,status='unknown')
 	write(*,'(a,i5)')
      +'# translational time -correlation function of type',IDF
 	write(9,'(a)')'#  D units is 10**-9 m**2/s '

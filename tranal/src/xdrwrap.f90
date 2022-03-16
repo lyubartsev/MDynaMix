@@ -40,12 +40,18 @@ module xdrwrap
         ierr = trr % stat                
     end subroutine
     
-    subroutine xtc_read_tranal(BOXL,BOYL,BOZL,SX,SY,SZ,FULLTIME,ierr)
+    subroutine xtc_read_tranal(BOXL,BOYL,BOZL,NOP,SX,SY,SZ,FULLTIME,ierr)
         integer(4),intent(out):: ierr
         real(8), intent(out):: BOXL,BOYL,BOZL, SX(:), SY(:), SZ(:), FULLTIME
-        integer(4) N
+        integer(4) N,NOP
         
         N=xtc%NAtoms
+        if(N.ne.NOP)then
+           write(*,*)'!!! Wrong number of atoms:'
+           write(*,*)'    In trajectory:              ',N
+           write(*,*)'    According to the input file:',NOP
+           stop
+        end if
         call xtc % read
         ierr = xtc % stat
         if (ierr.eq.0) then
@@ -65,7 +71,6 @@ module xdrwrap
         real(4), intent(out):: BOX(3),  FULLTIME
         real(8), intent(out) :: Ri(:,:)
         integer(4) N
-        
         N=xtc%NAtoms
         call xtc % read
         ierr = xtc % stat
@@ -78,12 +83,19 @@ module xdrwrap
     end subroutine
 
     
-    subroutine trr_read(BOXL,BOYL,BOZL,SX,SY,SZ,VX,VY,VZ,FULLTIME,ierr)
+    subroutine trr_read(BOXL,BOYL,BOZL,NOP,SX,SY,SZ,VX,VY,VZ,FULLTIME,ierr)
         integer(4),intent(out):: ierr
         real(8), intent(out):: BOXL,BOYL,BOZL, SX(:), SY(:), SZ(:),VX(:), VY(:), VZ(:), FULLTIME
-        integer(4) N
+        integer(4) N,NOP
         
         N=trr%NAtoms
+        if(N.ne.NOP)then
+           write(*,*)'!!! Wrong number of atoms:'
+           write(*,*)'    In trajectory:              ',N
+           write(*,*)'    According to the input file:',NOP
+           stop
+        end if
+        
         call trr % read
         ierr = trr % stat
         if (ierr.eq.0) then

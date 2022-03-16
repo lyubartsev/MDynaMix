@@ -1,18 +1,19 @@
 C    Package tranal v.5.0
 C    Calculations of radial distribution functions
       program RDF
+      use dynarray
       include "tranal.h"
       character*64 FOUTRDF
-      parameter (MAXRDF=64,MAXGR=1024,NAAM=1024)
-      integer*8 IREP(MAXRDF),IRD(MAXRDF,MAXGR),JRD(MAXRDF,MAXGR),
-     +IRDF(MAXRDF,NAAM),IRDFI(MAXRDF,NAAM)
+      integer*8, allocatable ::  IREP(:),IRD(:,:),JRD(:,:),
+     +   IRDF(:,:),IRDFI(:,:)
       logical LCOMRDF1,LCOMRDF2
-      dimension TMP(MAXRDF)
+      real*8, allocatable :: TMP(:)
       namelist /RDFIN/ FOUTRDF,RDFCUT,NA,NAI,RMI,RMAX,NRDF,ME,
      +  LCOMRDF1,LCOMRDF2
 *  defaults
       LCOMRDF1=.false.
       LCOMRDF2=.false.
+      MAXGR=128
       RDFCUT=10.
       NA=200
       NAI=100
@@ -23,8 +24,8 @@ C    Calculations of radial distribution functions
       call SETTRAJ
 *  read RDF computation parameters
       read(*,RDFIN)
-      if(NRDF.gt.MAXRDF)stop 'Increase MAXRDF!!!'
-      if(NA.gt.NAAM.or.NAI.gt.NAAM)stop 'Increase NAAM!'
+      allocate (IREP(NRDF),IRD(NRDF,MAXGR),JRD(NRDF,MAXGR))
+      allocate (IRDF(NRDF,NA),IRDFI(NRDF,NAI),TMP(NRDF))
       DRI=RMAX-RMI
 *  initialization
       BOXS=0.           ! to accumulate average box sizes
@@ -42,7 +43,11 @@ C    Calculations of radial distribution functions
 	STR=TAKESTR(5,IE)
 	if(str(1:1).eq.'&')then
           READ(str(2:24),*)IRP
-	  if(IRP.gt.MAXGR) stop 'Increase MAXGR!!!'
+	  if(IRP.gt.MAXGR) then
+             MAXGR=IRP+1
+             call reshapeint8_2(IRD,NRDF,MAXGR)
+             call reshapeint8_2(JRD,NRDF,MAXGR)
+          end if
 	  IREP(K)=IRP
 	  do IR=1,IRP
 	    STR=TAKESTR(5,IE)
@@ -240,15 +245,15 @@ C    Calculations of radial distribution functions
      +NAME(ITS(JS)),IRDF(K,I)
             else if(LCOMRDF1.and..not.LCOMRDF2)then
       write(16,'(f8.3,f12.5,2f11.4,2x,f11.4,3x,a4,a1,a4,I11)')
-     +RR,GofR,CONU1,CONU2,RKBI,'rdf:',NAME(ITS(IS)),'-',
+     +RR,GofR,CONU1,CONU2,RKBI,NAME(ITS(IS)),'-',
      +NM(JS),IRDF(K,I)
             else if(.not.LCOMRDF1.and.LCOMRDF2)then
       write(16,'(f8.3,f12.5,2f11.4,2x,f11.4,3x,a4,a1,a4,I11)')
-     +RR,GofR,CONU1,CONU2,RKBI,'rdf:',NM(IS),'-',
+     +RR,GofR,CONU1,CONU2,RKBI,NM(IS),'-',
      +NAME(ITS(JS)),IRDF(K,I)
             else
       write(16,'(f8.3,f12.5,2f11.4,2x,f11.4,3x,a4,a1,a4,I11)')
-     +RR,GofR,CONU1,CONU2,RKBI,'rdf:',NM(IS),'-',NM(JS),IRDF(K,I)
+     +RR,GofR,CONU1,CONU2,RKBI,NM(IS),'-',NM(JS),IRDF(K,I)
             end if
 	    if(I.lt.IFST)IFST=I
 	   end if

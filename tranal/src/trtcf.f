@@ -9,10 +9,10 @@ C
 *============ TRTCF ===================================================
 *
       program TRTCF
+      use tcfmod
       include "tranal.h"
-      include "trtcf.h"
 *
-      DIMENSION M1(NTPS),M2(NTPS),JTCF(NTCF)
+      integer, allocatable :: M1(:),M2(:),JTCF(:)
       character*32 FILTCF
       namelist /TCF/ NSTEG,DTCF,ITCF,N1,N2,FILTCF
 *
@@ -30,16 +30,31 @@ C
       NAMECF(10) = 'WACF-X'
       NAMECF(11) = 'WACF-Y'
       NAMECF(12) = 'WACF-Z'
+      NTCF=12
       NSTCF=0
       ICTCF=0
 *  1.2 Setup trajectory
       call SETTRAJ
+      allocate(M1(NTYPES),M2(NTYPES),N1(NTYPES),N2(NTYPES),JTCF(NTYPES))
+      allocate(RMX(NOP,3,3))
+      allocate(DPX(NOP),DPY(NOP),DPZ(NOP))
+      allocate(UPX(NOP),UPY(NOP),UPZ(NOP))
       IEND=0
 * read input
       read(*,TCF)
+      MAXTCF=(NSTEG+2)*3*NOP
+      MCF=NSTEG*NTYPES
+      DTCF=0.001*DTCF    !  to fs
+      allocate(CC1(MAXTCF),CC2(MAXTCF),CC3(MAXTCF))
+      allocate(CC4(MAXTCF),CC5(MAXTCF),CC6(MAXTCF))
+      allocate(CFA(MCF),CFV(MCF),CP1(MCF),CP2(MCF),CU1(MCF),CU2(MCF))
+      allocate(CVX(MCF),CVY(MCF),CVZ(MCF),CAX(MCF),CAY(MCF),CAZ(MCF),
+     + CCF(MCF))
+      allocate(INX(NSTEG+18))
       DTCF=DTCF*0.001    !   in ps
       do I=1,NTCF
-	if(ITCF(I).ne.0)NSTCF=NSTCF+1
+         if(ITCF(I).ne.0)NSTCF=NSTCF+1
+         
       end do
       if(ITCF(1).ne.0.or.ITCF(7).ne.0.or.ITCF(8).ne.0.or.ITCF(9).ne.0)
      +ITCF(NTCF+1)=1                                           ! velocity
@@ -74,18 +89,18 @@ C
       end if
 *
       NOM        = NOP*3
-      NNTCF	= (MAXCF+2)*NOM
+      NNTCF	= (NSTEG+2)*NOM
       NCALLS     = 0           
       MEM=NSTCF*MCF*8 
       do I=NTCF+1,NTCF+6
 	if(ITCF(I).ne.0)MEM=MEM+4*NNTCF
       end do
-      DMEM=0.001*MEM
+      DMEM=1.d-6*MEM
 *     
         PRINT "(/'*** TCF CALCULATION WILL BE PERFORMED ***')"
         PRINT "('   .... FOR ',I3,' TYPES')",NSTCF
         PRINT "(/'*** CC ARRAYS WILL TAKE ',f9.3
-     X       ,'  KB')",DMEM 
+     X       ,'  MB')",DMEM 
 *
         write(*,*)
         write(*,*)
@@ -97,16 +112,13 @@ C
         END DO! OF I
         PRINT *
 *
-      IF(NSTEG.GT.MAXCF)            STOP '!!! NSTEG.GT.MAXCF'
-      IF((NOM*(NSTEG+2)).GT.MAXTCF) STOP '!!! INCREASE MAXTCF !'
-*
 *  1.3 Zero arrays
 *
       DO I       = 1,NSTEG
         INX(I)     = 0
       END DO! OF I
 *
-      DO  I      = 1,MAXCF*NTPS
+      DO  I      = 1,NSTEG*NTYPES
       CFV(I)     = 0.D0
       CFA(I)     = 0.D0
       CP1(I)     = 0.D0
@@ -187,7 +199,7 @@ C
       write(25,*)'     TIME       TCF          UNNORM.'
 *
       DO I     = 1,NSTEG
-      CCF(I)   = 0.D0
+        CCF(I)   = 0.D0
       END DO! OF I
       NSP      = NSPEC(ITYP)
       FNSPI3   = 1.D0/DFLOAT(NSP)/3.D0
@@ -297,7 +309,7 @@ C
       CNRM     = CP1(JCF+1)*FNF
       IF(CNRM.NE.0.D0) CNRM=1.D0/CNRM
       IF(CNRM.EQ.0.D0) then
-	  PRINT "(/1X,'!!! EMPTY TCF ARRAY !!!')"
+	  write(25,*)'!!! EMPTY TCF ARRAY !!!'
 	  go to 203
 	end if
       DO J     = 1,NSTEG
@@ -770,8 +782,8 @@ C
 *   3.  Put data in arrays for tcf calculations
 *   -------------------------------------------
       SUBROUTINE GETTCF
+      use tcfmod
       include "tranal.h"
-      include "trtcf.h"
       character*16 filtcf
 *
       if(NSTCF.le.0)return
@@ -890,8 +902,8 @@ C
 *============ ADDTCF ====================================================
 *
       SUBROUTINE ADDTCF
+      use tcfmod
       include "tranal.h"
-      include "trtcf.h"
 *
       NCALLS     = NCALLS+1
       LIS        = MOD(NCALLS-1,NSTEG)+1
@@ -1124,8 +1136,8 @@ C
 *============ GETVEC =============================================
 *
       SUBROUTINE GETVEC
+      use tcfmod
       include "tranal.h"
-      include "trtcf.h"
 *
       DO ITYP = 1,NTYPES
       I1      = N1(ITYP)
@@ -1182,8 +1194,8 @@ C
 *   ------------------------------------------------------
       SUBROUTINE ROTMAT(XX,YY,ZZ,IBG,N,NBTOP)
 *
+      use tcfmod
       include "tranal.h"
-      include "trtcf.h"
 *
       DIMENSION XX(*),YY(*),ZZ(*)
       LOGICAL NBTOP
@@ -1220,8 +1232,8 @@ C
 *  --------------------------------------------------------
       SUBROUTINE GETROT
 *
+      use tcfmod
       include "tranal.h"
-      include "trtcf.h"
       DIMENSION RX(NS),RY(NS),RZ(NS),FMASS(NS)
       DIMENSION FMOI(3,3)      
       DIMENSION G(3),H(3)
@@ -1618,8 +1630,8 @@ CC  175 IF(TES-RHO)180,180,105
 *   9. Calculate dipole moment
 *   --------------------------
       SUBROUTINE DIPOLE
+      use tcfmod
       include "tranal.h"
-      include "trtcf.h"
 *
       FAK	  = 1.0/0.52917
       FAC         = 2.5418
@@ -1644,7 +1656,7 @@ Calculate permanent dipole moment (magnitude)
       DMX         = DMX+CHARGE(IS)*WX(N)
       DMY         = DMY+CHARGE(IS)*WY(N)
       DMZ         = DMZ+CHARGE(IS)*WZ(N)
-      END DO! OF IS
+      END DO                    ! OF IS
       DNORM       = DSQRT(DMX**2+DMY**2+DMZ**2)
       DIPMOM      = DIPMOM+DNORM*FAC*FAK
       IF(DNORM.GT.1.d-10) then

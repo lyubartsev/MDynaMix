@@ -1,12 +1,12 @@
 # Template input file for bileldens utility
 #
  &TRAJ
- NFORM='MDYN',
- FNAME='/s4/Bilayer/180181/180181_pc_mem',
- PATHDB='../makemol',
- NTYPES=2,
- NAMOL='180181_pc','H2O',
- NFBEG=96,
+ NFORM='XTC',
+ FNAME='traj_comp.xtc',
+ PATHDB='.',
+ NTYPES=3,
+ NAMOL='180181_pc','TIP3P',
+ NFBEG=,
  NFEND=249,
  ISTEP=50,
  IPRINT=5

@@ -1,7 +1,6 @@
  &TRAJ
  NFORM='MDYN',
- FNAME='/s2/sasha/mdh2o/512H2O_vel',
- PATHDB='/s2/sasha/mdp/md50/moldb'
+ FNAME='512H2O_vel',
  NTYPES=1
  NAMOL='H2O',
  NSPEC=512,
@@ -14,8 +13,8 @@
  &TCF
  FILTCF='h2o.tcf',
  NSTEG=500,
- DTCF=10.,
- ITCF=1,1,1,0,1,0,2,2,2,2,2,2,
+ DTCF=0.01,
+ ITCF=1,1,1,1,1,1,2,2,2,1,1,1,
  N1=1,
  N2=2,
  &END

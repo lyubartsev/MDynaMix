@@ -4,10 +4,10 @@ C    Computation of Bilayer electron density
 *
       program BILELDENS
       include "tranal.h"
-      parameter (MAXDIV=1000)
-      dimension DENE(MAXDIV),DENM(MAXDIV),DECH(MAXDIV),EPOT(MAXDIV)
-      dimension EPOT2(MAXDIV),UACH(NS)
-      integer IATE(NS)
+      real*8, allocatable :: DENE(:),DENM(:),DECH(:),EPOT(:),
+     + EPOT2(:)
+      integer,allocatable :: IATE(:)
+      real*8, allocatable :: UACH(:)
       character elm,fdens*64,fchg*64
       logical LCOM,LSYM,LCHG
       namelist /ELDEN/ FDENS,IRT,NA,ZMAX,IATE,LSYM,LCHG,FCHG
@@ -21,12 +21,15 @@ C    Computation of Bilayer electron density
 *          according to the first letter of the atom name)
 *  FCHG - file with masses of each site
       LSYM=.false.
+      LCHG=.false.
       call SETTRAJ
+      allocate(IATE(NSITES),UACH(NSITES)) 
       do I=1,NSITES
         IATE(I)=1
       end do
 *  Enter analysis parameters
       read(*,ELDEN)
+      allocate(DENE(NA),DENM(NA),DECH(NA),EPOT(NA),EPOT2(NA))
 *  Prepare
       if(LCHG)then
         open(unit=3,file=FCHG,status='old')
@@ -161,7 +164,7 @@ C    Computation of Bilayer electron density
         if(I.le.NA/2)then
           EU=EU+DECH(I)
         else
-          ED=ED+DECH(NI)
+          ED=ED+DECH(I)
         end if
         EPOT(I)=EFACT*POT*ZMAX/NA
       end do
@@ -201,7 +204,7 @@ C    Computation of Bilayer electron density
         write(8,'(f12.3,6f12.6)')
      +  RR,DENE(I)*FAC,DENM(I)*FAC*FACM,DECH(I)*FAC,EPOT(I),EPOT2(I)
       end do
-      if(LSYM)write(8,'(a)')'  Densities are symmetrized'
+      if(LSYM)write(8,'(a)')'#  Densities are symmetrized'
       write(*,*)' Q_up = ',EU,'  Q_down=',ED,' Q total ',EU+ED
       write(8,'(3(a,f12.7))')'# Q_up = ',EU,'  Q_down=',ED,
      & ' Q total ',EU+ED
