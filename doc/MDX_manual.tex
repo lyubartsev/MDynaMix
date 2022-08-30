@@ -3,7 +3,7 @@
 \begin{document}
 
 \title{MDynaMix Package\\
-version 5.3.0\\
+version 5.3.1\\
 User manual}
 
 \author{Alexander Lyubartsev\\
@@ -15,7 +15,7 @@ User manual}
 Stockholm University
 }
 
-\date{18 December 2021}
+\date{18 February 2022}
 
 \maketitle
 
@@ -26,8 +26,7 @@ Stockholm University
 \newpage
 \section{Introduction}
 
-MDynaMix is a general purpose molecular dynamics code for simulations
-of mixtures  of rigid or flexible molecules, interacting by standard 
+MDynaMix is a general purpose molecular dynamics code for simulation of mixtures  of rigid or flexible molecules, interacting by standard 
 molecular-mechanics force field including electrostatic and Lennard-Jones
 potentials for electrostatic interactions as well as terms describing 
 covalent bonds, angles and dihedral angles. The program is well suited for
@@ -59,13 +58,12 @@ components:
 
 \begin{itemize}
 \item
+{\bf tranal} utilities suite to analyze molecular dynamics trajectories
+\item
 {\bf makemol} utility to create molecular description files (.mmol)
 \item
 {\bf charm2mdx} convert Charmm parameter file into MDynaMix force field
 parameter file
-{\bf cifo} utility to convert .cif (crystollagraphic informational files)
-to MDynaMix molecular description files
-{\bf tranal} - a suite of utilities for analyzing trajectories
 \end{itemize}
 
 \subsection{Changes from previous versions}
@@ -76,7 +74,7 @@ The changes made from 5.2.0 to 5.3.0
 
 \item
 v 5.3.1  
-Rg utility in the tranal suite to compute gyrationradius and end-to-end distance
+\verb|rgyr| utility in the tranal suite to compute gyration radius and end-to-end distance
 
 Tranal utility accept .itp files in Gromacs format describing individual
 molecules 
@@ -1097,7 +1095,9 @@ energies by gradual removal or insertion of molecules in the system.
 The theory and computational details behind the expanded ensemble method 
 are described in papers (J.Chem.Phys.96, 1776 (1992); Molec.Simulations , 
 18, 43 (1996)). Details of the current implementation
-are described in J{\"a}mbeck et all, J.Comput.Chem.,34,187 (2013). 
+are described in J{\"a}mbeck et all, J.Comput.Chem.,34,187 (2013). Update 5.3.1
+implements L2MC algorithm for Monte Carlo transitions between subensembles
+(Nikitin et al., J.Comp.Chem., 42, 787 (2021))
 
 The expanded ensemble methodology implemented in MDynaMix from v.5.2.3,
 includes the Wang-Landau algorithm,
@@ -1155,15 +1155,14 @@ and balancing factors which remain fixed during the simulation
 \verb|WL| : balancing factors are optimized during the simulation according to
 Wang-Landau algorithm (J.Comp.Chem., 34, 187 (2013))
 
-\verb|L2MC| : Implement L2MC algorithm for transitions between subensembles,
-in addtion to WL algorithm (J.Comp.Chem., 42, 787 (2021)
-
 \verb|auto|: $\alpha$ poins are set with equal separation between them
 within the [0:1] interval, balancing factors are tuned automatically by
-the Wang-Landau algorithm and L2MC algorothm for transitions between
-subensembles is used
+the Wang-Landau algorithm.
 
-In the case parameter \verb|mode| is not set to \verb|auto|, the \verb|MDEE|
+\verb|L2MC| : In addition to ``auto'' option, L2MC algorithm for transitions between
+subensembles is used (Nikitin et al, J.Comp.Chem., 42, 787 (2021))
+
+In the case parameter \verb|mode| is not set to \verb|auto| or \verb|L2MC|, the \verb|MDEE|
 command should be followed by exactly \verb|num_ensembles| lines,
 with two number on each: the value of coupling parameter $\alpha$ and
 balancing factor, corresponding to this subensemble. Values of balancing 
@@ -1874,6 +1873,14 @@ analysis. Correspondingly, the input file for each utility consists of
 two parts: the first one which determines how to read trajectories, and
 the second part containing parameters for the required analysis.
 
+Many utilities of tranal need certain information on molecules for
+which simulations are done. Particularly, number of atoms in the molecule,
+atom names, charges and masses. Tranal  takes this information either
+from MDynaMix .mmol file format, or from .itp file of Gromacs file format.
+Support for .itp files is limited, that is an .itp file should describe just
+one molecule (as e.g. prepared by ``acpype'' utility), without ``include''
+statements.
+
 Currently, the following analyzing utilities are included:
 
 \begin{itemize}
@@ -1908,8 +1915,8 @@ of specific molecular vectors
 {\bf rdf} - computation of radial distribution functions
 
 \item
-{\bf rg} - computation of gyration radius and distance between two given atoms in a  molecule,
-           as well as their distributions
+  {\bf rgyr} - computation of gyration radius and distance between two
+  given atoms in a  molecule, as well as their distributions
 
 \item
 {\bf sdf} - computation of spatial distribution functions
@@ -1932,10 +1939,7 @@ All tranal utilities can be compiled by setup.sh script in the tranal directory.
 The compiled utilities can be found in tranal/bin folder.
 
 To read .xtc and .trr trajectories in Gromacs format, tranal uses \verb|xdrfile|
-library 
-
-Eventually, sizes of arrays may be needed to adjust, by editing {\bf tranal.h}
-file, as well as sizes of arrays in each specific procedure.
+library. 
 
 Contributions for analysis of other properties are welcomed.
 
@@ -2010,7 +2014,7 @@ set the full file name (with extension)
 \item
 \verb|PATHDB = <value>|
 
-Directory with molecular description files (.mmol). Default is the 
+Directory with molecular description files (.mmol or .itp). Default is the 
 current directory (.) .
 
 \item
@@ -2611,13 +2615,13 @@ as 2 and 3):
 3  3
 \end{verbatim}
 
-\subsection{Gyration radius and end-to-end distance: Rg.f}
+\subsection{Gyration radius and end-to-end distance: rgyr.f}
 
 This utility compute distribution of the gyration radius (Rg), and of the distance
 between two specified atoms in molecule (Ree) of the specified type. Also computed are
 average values of the gyration radius, root mean square of the distance, and their variances. 
 
-The input into \verb|Rg| utility consists of a NAMELIST section
+The input into \verb|rgyr| utility consists of a NAMELIST section
 \verb|RGLIST|:
 
 \begin{verbatim}
@@ -2660,8 +2664,10 @@ Name of the output file with computed data
 
 \subsection{Spatial distribution functions: sdf.f}
 
-This utility computes spatial distribution functions and creates a file
-which can be visualized using gOpenMol package (http://.www.csc.fi/gopenmol/).
+This utility computes spatial distribution functions and creates
+output file in Gaussian ``cube'' format which can be visualized using
+VMD package  \\
+(https://www.ks.uiuc.edu/Research/vmd/)
 
 The input into \verb|sdf| utility consists of a NAMELIST section
 \verb|SDFIN| and subsequent lines defining sites which will be displayed
@@ -2744,6 +2750,11 @@ NOMY = <value>
 NOMZ = <value> 
 \end{verbatim}
 resolution (number of bins) in each direction
+
+\item
+  \verb|OUTF = <char> |  : format of the SDF  file. Default \verb|'CUBE'|
+  (Gaussian cube file). \verb|GOPM| givess output in format of
+  GOpenMol program (obsolete).
 
 \end{itemize}
 
@@ -3037,7 +3048,7 @@ Number of time steps in the time correlation functions
 \item
 \verb|DTCF = <value>|
 
-TCF time step in fs
+TCF time step in ps
 
 It is recommended that TCF time step be equal to the trajectory time
 step multiplied by parameter \verb|ISTEP| defined in the trajectory part 
@@ -3097,7 +3108,5 @@ molecular vector whose TCF is calculated. For each molecular type \verb|m|,
 sites  \verb|<n1-m>| and \verb|<n2-m>| should belong to it.
 
 \end{itemize}
-
-
 
 \end{document}

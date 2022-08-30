@@ -44,25 +44,21 @@ C
       read(*,TCF)
       MAXTCF=(NSTEG+2)*3*NOP
       MCF=NSTEG*NTYPES
-      DTCF=0.001*DTCF    !  to fs
       allocate(CC1(MAXTCF),CC2(MAXTCF),CC3(MAXTCF))
       allocate(CC4(MAXTCF),CC5(MAXTCF),CC6(MAXTCF))
       allocate(CFA(MCF),CFV(MCF),CP1(MCF),CP2(MCF),CU1(MCF),CU2(MCF))
       allocate(CVX(MCF),CVY(MCF),CVZ(MCF),CAX(MCF),CAY(MCF),CAZ(MCF),
      + CCF(MCF))
       allocate(INX(NSTEG+18))
-      DTCF=DTCF*0.001    !   in ps
       do I=1,NTCF
          if(ITCF(I).ne.0)NSTCF=NSTCF+1
-         
       end do
       if(ITCF(1).ne.0.or.ITCF(7).ne.0.or.ITCF(8).ne.0.or.ITCF(9).ne.0)
      +ITCF(NTCF+1)=1                                           ! velocity
       if(ITCF(2).ne.0.or.ITCF(10).ne.0.or.ITCF(11).ne.0.or.
      +ITCF(12).ne.0)ITCF(NTCF+2)=1                             ! ang. vel.
       if(ITCF(3).ne.0.or.ITCF(4).ne.0)ITCF(NTCF+3)=1           ! dip.moment
-      if(ITCF(5).ne.0.or.ITCF(6).ne.0)then
-        ITCF(NTCF+4)=1           ! unit vec.
+      if(ITCF(5).ne.0.or.ITCF(6).ne.0)ITCF(NTCF+4)=1           ! unit vec.
 *                                                        
         do ITYP=1,NTYPES
 	  NSS = NSITS(ITYP)
@@ -73,7 +69,6 @@ C
 	    stop      
 	  end if
 	end do
-      end if
 *  Case of TCF in local coord.system
       if(ITCF(7).eq.2.or.ITCF(8).eq.2.or.ITCF(9).eq.2)then
         ITCF(NTCF+5)=1
@@ -147,7 +142,7 @@ C
 *  1.4 Start trajectory analysis
 *
       do while(IEND.eq.0)
-        call READCONF(IEND)
+         call READCONF(IEND)
         if(IEND.eq.0)then
 	  if((FULTIM-FULTIM0)+1.d-6.ge.DTCF*ICTCF)then
  237	    ICTCF=ICTCF+1
@@ -877,7 +872,7 @@ C
 *	3.4 Reorientational motion - spec. unit vector
 *       ----------------------------------------------
 	if(ITCF(NTCF+4).ne.0)then
-      CALL GETVEC
+           CALL GETVEC
 *
       IXCF=1
       DO ITYP = 1,NTYPES
@@ -908,7 +903,7 @@ C
       NCALLS     = NCALLS+1
       LIS        = MOD(NCALLS-1,NSTEG)+1
       LST        = NOM+(NSTEG-LIS)*NOM
-*
+*     
       if(ITCF(NTCF+1).ne.0)CALL COPY1(CC1(LST+1),CC1(1),NOM)
       if(ITCF(NTCF+2).ne.0)CALL COPY1(CC2(LST+1),CC2(1),NOM)
       if(ITCF(NTCF+3).ne.0)CALL COPY1(CC3(LST+1),CC3(1),NOM)
@@ -955,9 +950,10 @@ C
       if(ITCF(NTCF+3).ne.0)
      +CALL SUMPL(LIS,CC3(I),CC3(J),CC3(K),CC3(L),CC3(M),CC3(N),NOM
      X          ,CP1(JCF),CP2(JCF),NSTEG)
-      if(ITCF(NTCF+4).ne.0)
-     +CALL SUMPL(LIS,CC4(I),CC4(J),CC4(K),CC4(L),CC4(M),CC4(N),NOM
-     X          ,CU1(JCF),CU2(JCF),NSTEG)
+      if(ITCF(NTCF+4).ne.0)then
+      CALL SUMPL(LIS,CC4(I),CC4(J),CC4(K),CC4(L),CC4(M),CC4(N),NOM
+     X        ,CU1(JCF),CU2(JCF),NSTEG)
+      end if
       END DO! I
       IXCF       = IXCF+NSP*3
       END DO! OF ITYP

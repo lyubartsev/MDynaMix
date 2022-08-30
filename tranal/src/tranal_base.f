@@ -771,6 +771,7 @@ c - for each type
 	IER = 0
 	IE=0
 	IL=0 
+	SUMM=0.
 	do I=1,128
 	  ISTR=ichar(PATHDB(I:I))
 	  if(ISTR.le.15)then
@@ -881,8 +882,7 @@ c - for each type
 	  if(IX.gt.NS)stop'!!! Increase NS (number of sites) in tranal.h'
 	NX=IX
 	NSEND=NX
- 20   SUMM       = 0.D0
-      DO IS      = NSBEG,NSEND
+ 20   DO IS      = NSBEG,NSEND
         SUMM       = SUMM+MASS(IS)
       END DO! OF IS
       SUMMAS(NTYP)=SUMM       
@@ -910,7 +910,9 @@ c - for each type
 	    write(NM(IS),'(i4)')IS
 	    MASS(IS)=1.
 	    CHARGE(IS)=0.
+            SUMM    = SUMM+MASS(IS)
 	  end do
+        SUMMAS(NTYP)=SUMM       
 	return
 	end 
 *
