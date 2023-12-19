@@ -4,19 +4,19 @@
 C     Computation of gyration radius (Rg) and end-to-end distance (Ree) of a molecule
 C
 C     Input parameters:
-C     RMAX : Maximum distance to compute distribution of Rg and Ree
+C     RMAX : Maximum distant to compute distribution of Rg and Ree
 C     NA   : Number of bins for histograms of Rg and Ree
 C     ITYP : Type of the molecules to compute Rg and Ree
 C     IS1, IS2 : sites determining two ends of the molecule      
 C     FILOUT: output file      
-      program RGR2
+      program RGYR
       include "tranal.h"
-      parameter(NGMAX=10000)
-      integer*8 IR2(NGMAX),IRG(NGMAX)
+      integer*8, allocatable :: IR2(:),IRG(:)
       character*32 FILOUT
       namelist /RGLIST/ NA,RMAX,ITYP,IS1,IS2,FILOUT
       call SETTRAJ
       read(*,RGLIST)
+      allocate(IR2(NA),IRG(NA))
       IEND=0
       do I=1,NA
          IR2(I)=0

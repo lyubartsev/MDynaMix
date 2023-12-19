@@ -1,0 +1,24 @@
+! Computation of Gyration radius
+ &TRAJ
+ NFORM='XTC',
+ FNAME='traj_whole-p0.xtc',
+ PATHDB='.',
+ NTYPES=1,
+ NAMOL='7mer-4O5-GCHOH',
+ NSPEC=100,
+ NSITS=175,
+ IPRINT=5
+ TSTART=200000
+ &END
+# torsion distributions
+#  file name
+ &RGLIST
+ FILOUT='7mer-4O5-GCHOH-Rg-test.dat',
+ ITYP=1,
+ IS1=13,
+ IS2=164,
+ NA=500,
+ RMAX=50.
+ &END
+ 
+ 

@@ -1,0 +1,27 @@
+# trajectory analysis
+# System:   128 DDPC lipids, 128 CHOL, 6400 water 
+ &TRAJ
+ NFORM='XTC',
+ FNAME='traj_comp.xtc',
+ PATHDB='.',
+ NTYPES=3,
+ NAMOL='DDPC','chlesterol','TIP3p',
+ NSPEC=128,128,6400
+ NSITS=142,74,3,
+ NFBEG=-1,
+ NFEND=1,
+ ISTEP=1,
+ TSTART=5000.
+ IPRINT=5
+ &END
+ &DIFF
+ IDF=1,
+ DTT=1.d-11,
+ NTT=1000,
+ IRT=1,
+ IAT=0,
+ LCOM=.true.,
+ BREAKM=20000.,
+ FILDIF='latdif_ddpc.dif',
+ &END
+ 

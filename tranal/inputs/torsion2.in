@@ -1,0 +1,31 @@
+ &TRAJ
+ NFORM='XTC',
+ FNAME='traj_comp-0.xtc',
+ PATHDB='.',
+ NTYPES=1,
+ NAMOL='7mer-4O5-GCHOH-p0',
+ NSPEC=100,
+ NSITS=175,
+ IPRINT=5
+ TSTART=200000
+ &END
+# 2D torsion distributions
+#  file name
+7mer-4O5-GCHOH_rama.dat
+#
+# number of types & resolution
+6   180
+#  phi
+26  11  10  6
+51  36  35  31
+76  68  67  56 
+101 93  92  82
+126 118 117 106
+151 138 137 133
+#  psi
+28  26  11  10  
+53  51  36  35
+78  76  68  67   
+103 101 93 92
+128 126 118 117
+153 151 138 137
