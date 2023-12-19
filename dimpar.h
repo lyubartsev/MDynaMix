@@ -18,12 +18,12 @@ C
 C
 C  These parameters set maximum number of:              
 C       NPART -  molecules
-      PARAMETER (NPART  = 100000  )
+      PARAMETER (NPART  = 50000  )
 C       NTPS - different types of molecules
       PARAMETER (NTPS   =   10  )
 C       NS - sites (i.e., sum of atoms if one take one molecule of each type)
 C       NTOT - total atoms
-      PARAMETER (NS     = 10000  , NTOT   = 200000             ) 
+      PARAMETER (NS     = 5000  , NTOT   = 150000             ) 
 C       NNBTM - maximum number of different non-bonded types
       PARAMETER(NNBTM=2000)
 C       NBSMX - max neighbours per atom inside cutoff of fast forces (SHORT)

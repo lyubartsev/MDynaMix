@@ -149,87 +149,6 @@ C
       RETURN
       END
 *
-*================== JACOBI =============================================
-*
-*   rotation matrix
-*
-      SUBROUTINE JACOBI(A,V)
-      IMPLICIT real*8 (A-H,O-Z)
-      DIMENSION A(3,3),V(3,3)
-      N=3
-      RHO=1.0D-8
-      TES=0.D0
-      SCL=0.D0
-      DO 10 I=1,N
-      SCL=SCL+A(I,I)*A(I,I)
-   10 CONTINUE
-      SCL=DSQRT(DABS(SCL))/FLOAT(N)
-      DO 20 I=1,N
-      DO 20 J=1,N
-   20 A(I,J)=A(I,J)/SCL
-      DO 30 I=1,N
-      DO 30 J=1,N
-      V(I,J)=0.D0
-      IF(I.EQ.J)V(I,J)=1.D0
-   30 CONTINUE
-      DO 100 I=2,N
-      IU1=I-1
-      DO 100 J=1,IU1
-  100 TES=TES+2.D0*A(I,J)*A(I,J)
-      TES=DSQRT(DABS(TES))
-      M=0
-  105 TES=TES/FLOAT(N)
-      IF(TES.LT.RHO)TES=RHO
-  110 DO 165 I=2,N
-      IUU1=I-1
-      DO 165 J=1,IUU1
-      IF(DABS(A(I,J))-TES.lt.0.d0)go to 165
-      M=1
-      V1=A(J,J)
-      V2=A(I,J)
-      V3=A(I,I)
-      U=0.5D0*(V1-V3)
-      IF(DABS(U)-RHO.ge.0.d0)go to 125
-      OMG=-1.D0
-      GO TO 130
-  125 SQVVUU=DSQRT(DABS(V2*V2+U*U))
-      OMG=-V2/SQVVUU
-      IF(U.LT.0.D0)OMG=-OMG
-  130 SQOOO=DSQRT(DABS(2.0*(1.00+DSQRT(DABS(1.00-OMG*OMG)))))
-      S=OMG/SQOOO
-      C=DSQRT(DABS(1.00-S*S))
-      DO 160 K=1,N
-      IF(K-I)140,135,135
-  135 TEM=A(K,J)*C-A(K,I)*S
-      A(K,I)=A(K,J)*S+A(K,I)*C
-      A(K,J)=TEM
-      GO TO 155
-  140 IF(K-J)145,150,150
-  145 TEM=A(J,K)*C-A(I,K)*S
-      A(I,K)=A(J,K)*S+A(I,K)*C
-      A(J,K)=TEM
-      GO TO 155
-  150 TEM=A(K,J)*C-A(I,K)*S
-      A(I,K)=A(K,J)*S+A(I,K)*C
-      A(K,J)=TEM
-  155 TEM=V(K,J)*C-V(K,I)*S
-      V(K,I)=V(K,J)*S+V(K,I)*C
-      V(K,J)=TEM
-  160 CONTINUE
-      A(J,J)=V1*C*C+V3*S*S-2.D0*V2*S*C
-      A(I,I)=V1*S*S+V3*C*C+2.D0*V2*S*C
-      A(I,J)=(V1-V3)*S*C+V2*(C*C-S*S)
-  165 CONTINUE
-      IF(M-1)175,170,170
-  170 M=0
-      GO TO 110
-  175 IF(TES-RHO)180,180,105
-  180 DO 190 I=1,N
-      DO 190 J=1,N
-  190 A(I,J)=SCL*A(I,J)
-      RETURN
-      END
-*
 *=============== GETMOI ========================================
 *
       SUBROUTINE GETMOI(X,Y,Z,M,MOMENT,NSS)
@@ -459,40 +378,6 @@ C
        return
        end
 *....
-*======== XINTGR =======================================================
-*....
-      FUNCTION XINTGR(H,Y,NDIM)
-      IMPLICIT REAL*8 (A-H,O-Z)
-      DIMENSION Y(*)
-      HT=H/3.0 
-	XINTGR=0.d0
-      IF(NDIM.LT.6)RETURN
-      SUM1=4.00*Y(2)
-      SUM1=HT*(Y(1)+SUM1+Y(3))
-      AUX1=4.00*Y(4)
-      AUX1=SUM1+HT*(Y(3)+AUX1+Y(5))
-      AUX2=HT*(Y(1)+3.8750*(Y(2)+Y(5))+2.6250*(Y(3)+Y(4))+Y(6))
-      SUM2=4.00*Y(5)
-      SUM2=AUX2-HT*(Y(4)+SUM2+Y(6))
-      AUX=4.00*Y(3)
-      IF(NDIM-6)5,5,2
-    2 DO 4 I=7,NDIM,2
-      SUM1=AUX1
-      SUM2=AUX2
-      AUX1=4.00*Y(I-1)
-      AUX1=SUM1+HT*(Y(I-2)+AUX1+Y(I))
-      IF(I-NDIM)3,6,6
-    3 AUX2=4.00*Y(I)
-      AUX2=SUM2+HT*(Y(I-1)+AUX2+Y(I+1))
-    4 CONTINUE
-    5 CONTINUE
-      XINTGR=AUX2
-      RETURN
-    6 CONTINUE
-      XINTGR=AUX1
-      RETURN
-      END
-*
 *================ LENG ===============================================
 *
       function LENG(STR,LS)

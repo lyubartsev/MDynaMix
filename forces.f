@@ -1692,13 +1692,13 @@ C  rectangular cell
         END DO! OF I
         RC0          = DSQRT(RSSQ)
 C  Cycle over all site pairs
-        DO 400 ITYP = 1    ,NTYPES
+        DO  ITYP = 1    ,NTYPES
           ISBEG       = ISADR(ITYP)+1
           ISEND       = ISADR(ITYP +1)
           NSPI        = NSPEC(ITYP)
-          DO 400   IS = ISBEG,ISEND
+          DO    IS = ISBEG,ISEND
             IST = INBT(IS)
-            DO 300 JTYP = ITYP ,NTYPES
+            DO  JTYP = ITYP ,NTYPES
               if(IEE(ITYP)*IEE(JTYP).eq.0)then
                 RC = RC0 + RAEX
               else
@@ -1710,7 +1710,7 @@ C  Cycle over all site pairs
               NSPJ        = NSPEC(JTYP)
               FNOPIJ      = DFLOAT(NSPI*NSPJ)
               if(ITYP.eq.JTYP)FNOPIJ=0.5*FNOPIJ
-              DO 300   JS = JSBEG,JSEND
+              DO    JS = JSBEG,JSEND
                 JST = INBT(JS)
                 if(B12LJ(IST,JST).gt.1.d-50.and.
      +            A6LJ(IST,JST).lt.-1.d-50)then
@@ -1720,9 +1720,11 @@ C  Cycle over all site pairs
      X                                - ( 1.D0/3.D0)*(SI3/RC**3))*FNOPIJ
       VRLRC0(MT)   = VRLRC0(MT)+EP*SI3*((-4.D0/3.D0)*(SI3/RC**3)**3
      X                                + (      2.D0)*(SI3/RC**3))*FNOPIJ
-	        end if
-  300       CONTINUE
-  400   CONTINUE         
+                 end if
+            end do  
+          end do
+        end do
+      end do        
       end if
       FCV       = UNITP/(3.*VOL)
       VIRD	= 0.

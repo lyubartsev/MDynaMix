@@ -974,9 +974,9 @@ CM
       NRCUBE   = NRX*NRY*NRZ
       NEMPTY   = NRCUBE-NOP
       L        = 0
-      DO 100 I = 1,NRX
-      DO 100 J = 1,NRY
-      DO 100 K = 1,NRZ
+      DO  I = 1,NRX
+      DO  J = 1,NRY
+      DO  K = 1,NRZ
       L        = L+1
       X(L)     = (DFLOAT(I)-0.5)*BOXL/NRX-0.5*BOXL
       Y(L)     = (DFLOAT(J)-0.5)*BOYL/NRY-0.5*BOYL
@@ -984,7 +984,9 @@ CM
 	if(ICELL.eq.1.and.(abs(X(L))+abs(Y(L))+abs(Z(L))).gt.0.75*BOXL)
      +   L=L-1
 	if(L.ge.NOP)go to 110
-  100 CONTINUE 
+      end do
+      end do
+      end do
 	if(L.lt.NOP)then
 	  NRX=NRX+1
 	  go to 10

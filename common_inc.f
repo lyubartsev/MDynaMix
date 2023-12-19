@@ -155,8 +155,8 @@ C   Q                  - charge
       COMMON /SITSITT/ THERMO(NTOT,INHM),TEMBS(NTOT)
      +               ,THERMS(NTOT,INHM)
 C   This arrays handle lists of neighbours    
-	COMMON /LISTNB/MBSH,MBLN,NBS1(NBSMAX),NBS2(NBSMAX),
-     +NNBB(NTOT),INBB(NTOT,NBDMAX)
+      COMMON /LISTNB/MBSH,MBLN,NBS1(NBSMAX),NBS2(NBSMAX),NNBB(NTOT)
+      common /LISTPAR/INBB(NTOT,NBDMAX)
       common /LIST1/NBL1(NBLMAX)
       common /LIST2/NBL2(NBLMAX)
 C   Addresses and references
