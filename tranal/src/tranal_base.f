@@ -319,11 +319,13 @@ C  MDynamix .xmol time
 	NCOR=0    
 	JBREAK=1                ! indicate break of trajectory
 	NX=0
+	write(*,*)' moltypes ',NTYPES
 *  Read molecular information
 	do ITYP=1,NTYPES
 	  LIST(ITYP)=1
 	  if(NFORM.eq.'MDYN')NSTS=NSITS(ITYP)
           CALL READMOL (SUMM,NX,ITYP,PATHDB,NAMOL(ITYP),IER)
+	  write(*,*)' passed readmol'
 	  if(NFORM.eq.'MDYN'.and.NSTS.ne.NSITS(ITYP))then
 	    write(*,*)' Molecule of type ',ITYP,' has ',NSTS,
      &' sites in the trajectory but ',NSITS(ITYP),' in the input file'
@@ -472,7 +474,8 @@ C  MDynamix .xmol time
 * Line 2 
  32	  read( 12,'(a)',end=45 ) STR
 	  if(STR(1:4).eq.'ATOM')then
-	    if(IPRINT.ge.6)write(*,*)' box sizes undetermined'
+	     if(IPRINT.ge.6)write(*,*)
+     &	     ' box sizes undetermined in the trajectory'
 	    IFLR=1
 	    go to 34
 	  end if
@@ -502,7 +505,8 @@ C  MDynamix .xmol time
  	      go to 44
 	    end if
           end do
-	  if(IPRINT.ge.6)write(*,*)' box sizes undetermined'
+	  if(IPRINT.ge.6)write(*,*)
+     &	  ' box sizes undetermined in the trajectory'
  44	  do J=20,110
             if(STR(J:J+4).eq.'EEnum')then
               read(STR(J+5:128),*,end=40,err=40)MEE
@@ -911,7 +915,12 @@ c - for each type
 	    MASS(IS)=1.
 	    CHARGE(IS)=0.
             SUMM    = SUMM+MASS(IS)
-	  end do
+            if(IPRINT.ge.6) then
+              write(*,'(a5,i5,2x,a4,a3,f8.4,a3,f6.3)')
+     +      'site ',IS,NM(IS),' M=',MASS(IS),' Q=',CHARGE(IS)
+            end if
+	 end do
+	 NX=NX+NSITS(NTYP)
         SUMMAS(NTYP)=SUMM       
 	return
 	end 

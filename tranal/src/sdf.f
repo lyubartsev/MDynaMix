@@ -233,7 +233,7 @@ CC              call MEANSTR(II,IML,E0,EX,EY,EZ,IML,IML)
 	          XAV2(I)=XAV2(I)+XL2**2
 	          YAV2(I)=YAV2(I)+YL2**2
 	          ZAV2(I)=ZAV2(I)+ZL2**2
-	if(IPRINT.ge.7)write(*,'(3I5,a4,3f9.3)')
+	if(IPRINT.ge.8)write(*,'(3I6,a4,3f9.3)')
      +  I,IS,ICS,NM(NSITE(IS)),XL2,YL2,ZL2
 	          IAA(I)=IAA(I)+1
 		  if(ICS.eq.2)then              !  1->2  3
@@ -246,7 +246,7 @@ CC              call MEANSTR(II,IML,E0,EX,EY,EZ,IML,IML)
 		  XAV(I1)=XAV(I1)+XL
 		  YAV(I1)=YAV(I1)+YL
 		  ZAV(I1)=ZAV(I1)+ZL
-	if(IPRINT.ge.7)write(*,'(3I5,a4,3f9.3)')
+	if(IPRINT.ge.7)write(*,'(3I6,a4,3f9.3)')
      +  I,ISS2,ICS,NM(NSITE(ISS2)),XL,YL,ZL
 	          XAV2(I1)=XAV2(I1)+XL**2
 	          YAV2(I1)=YAV2(I1)+YL**2
@@ -254,7 +254,7 @@ CC              call MEANSTR(II,IML,E0,EX,EY,EZ,IML,IML)
 		  XAV(I2)=XAV(I2)+XL3
 		  YAV(I2)=YAV(I2)+YL3
 		  ZAV(I2)=ZAV(I2)+ZL3
-	if(IPRINT.ge.7)
+	if(IPRINT.ge.8)
      +write(*,'(3I5,a4,3f9.3)')I,ISS3,ICS,NM(NSITE(ISS3)),XL3,YL3,ZL3
 	          XAV2(I2)=XAV2(I2)+XL3**2
 	          YAV2(I2)=YAV2(I2)+YL3**2
@@ -270,7 +270,7 @@ CC              call MEANSTR(II,IML,E0,EX,EY,EZ,IML,IML)
 	          XAV2(I)=XAV2(I)+XL3**2
 	          YAV2(I)=YAV2(I)+YL3**2
 	          ZAV2(I)=ZAV2(I)+ZL3**2
-	if(IPRINT.ge.7)write(*,'(3I5,a4,3f9.3)')
+	if(IPRINT.ge.8)write(*,'(3I6,a4,3f9.3)')
      +I,IS,ICS,NM(NSITE(IS)),XL3,YL3,ZL3
 	          IAA(I)=IAA(I)+1
 		  if(ICS.eq.5)then                !    312
@@ -283,7 +283,7 @@ CC              call MEANSTR(II,IML,E0,EX,EY,EZ,IML,IML)
 		  XAV(I1)=XAV(I1)+XL
 		  YAV(I1)=YAV(I1)+YL
 		  ZAV(I1)=ZAV(I1)+ZL
-	if(IPRINT.ge.7)write(*,'(3I5,a4,3f9.3)')
+	if(IPRINT.ge.8)write(*,'(3I6,a4,3f9.3)')
      +I,ISS2,ICS,NM(NSITE(ISS2)),XL,YL,ZL
 	          XAV2(I1)=XAV2(I1)+XL**2
 	          YAV2(I1)=YAV2(I1)+YL**2
@@ -292,7 +292,7 @@ CC              call MEANSTR(II,IML,E0,EX,EY,EZ,IML,IML)
 		  YAV(I2)=YAV(I2)+YL2
 		  ZAV(I2)=ZAV(I2)+ZL2
 	if(IPRINT.ge.7)
-     +  write(*,'(3I5,a4,3f9.3)')I,ISS3,ICS,NM(NSITE(ISS3)),XL2,YL2,ZL2
+     +  write(*,'(3I6,a4,3f9.3)')I,ISS3,ICS,NM(NSITE(ISS3)),XL2,YL2,ZL2
 	          XAV2(I2)=XAV2(I2)+XL2**2
 	          YAV2(I2)=YAV2(I2)+YL2**2
 	          ZAV2(I2)=ZAV2(I2)+ZL2**2
@@ -306,15 +306,15 @@ CC              call MEANSTR(II,IML,E0,EX,EY,EZ,IML,IML)
 	       XAV(I1)=XAV(I1)+XL
 	       YAV(I1)=YAV(I1)+YL
 	       ZAV(I1)=ZAV(I1)+ZL
-	       if(IPRINT.ge.7)
-     + write(*,'(2I5,a4,3f9.3)')I1,ISS2,NM(NSITE(ISS2)),XL,YL,ZL
+	       if(IPRINT.ge.8)
+     + write(*,'(2I6,a4,3f9.3)')I1,ISS2,NM(NSITE(ISS2)),XL,YL,ZL
 	       XAV2(I1)=XAV2(I1)+XL**2
 	       YAV2(I1)=YAV2(I1)+YL**2
 	       ZAV2(I1)=ZAV2(I1)+ZL**2
 	       XAV(I)=XAV(I)+XL2
 	       YAV(I)=YAV(I)+YL2
 	       ZAV(I)=ZAV(I)+ZL2
-	if(IPRINT.ge.7)write(*,'(2I5,a4,3f9.3)')
+	if(IPRINT.ge.8)write(*,'(2I6,2x,a6,3f9.3)')
      +I,IS,NM(NSITE(IS)),XL2,YL2,ZL2
 	       XAV2(I)=XAV2(I)+XL2**2
 	       YAV2(I)=YAV2(I)+YL2**2
@@ -328,7 +328,7 @@ CC              call MEANSTR(II,IML,E0,EX,EY,EZ,IML,IML)
 	   XAV(I)=XAV(I)+XL
 	   YAV(I)=YAV(I)+YL
 	   ZAV(I)=ZAV(I)+ZL
-	   if(IPRINT.ge.7)write(*,'(2I5,a4,3f9.3)')
+	   if(IPRINT.ge.8)write(*,'(2I6,2x,a6,3f9.3)')
      +I,IS,NM(NSITE(IS)),XL,YL,ZL
 	   XAV2(I)=XAV2(I)+XL**2
 	   YAV2(I)=YAV2(I)+YL**2
@@ -432,7 +432,7 @@ C    Output to CUBE Gaussian format
 	   else 
 	      IAT=10
 	   end if
-	   write(31,'(i5,4f10.6)')IAT,0.,XX,YY,ZZ
+	   write(31,'(i5,4f10.4)')IAT,0.,XX,YY,ZZ
 	 end do   
          do IX=1,NOMX
 	   do IY=1,NOMY

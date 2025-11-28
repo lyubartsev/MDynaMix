@@ -104,6 +104,10 @@ C    Computation of Bilayer electron density
 	        DED=15.-CHARGE(IS)
 	      else if(elm.eq.'S')then
 	        DED=16.-CHARGE(IS)
+	      else if(NM(IS)(1:2).eq.'Ti')then
+	        DED=22.-CHARGE(IS)
+	      else if(NM(IS)(1:2).eq.'Zn')then
+	        DED=30.-CHARGE(IS)
 	      else 
 	      write(*,*)' Atom type ',elm,' not supported ',IS,NM(IS)
 	        DED=0.
