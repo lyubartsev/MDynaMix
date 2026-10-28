@@ -7,7 +7,7 @@ objects = aver.o cpu_pgi.o input.o forces.o main.o mdee.o mdstep.o \
 
 default: $(objects) 
 	$(FC) -o $(TARGET) $(objects)
-   $(objects) : prcm.h dimpar.h
+   $(objects) : common_inc.f dimpar.h
 
 clean: 
 	rm -f $(TARGET) *.o

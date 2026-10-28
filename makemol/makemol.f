@@ -695,7 +695,7 @@ C
      +NFF(JT).eq.NT2(J).and.NFF(KT).eq.NT3(J).and.(NFF(LT).eq.NT4(J).
      +or.NT4(J)(1:1).eq.'X')).or.((NFF(LT).eq.NT1(J).or.NT1(J)(1:1)
      +.eq.'X').and.NFF(KT).eq.NT2(J).and.NFF(JT).eq.NT3(J).and.
-     +(NFF(IT).eq.NT4(J).or.NT1(J)(1:1).eq.'X')))then
+     +(NFF(IT).eq.NT4(J).or.NT4(J)(1:1).eq.'X')))then
 	        IFIND=IFIND+1
 	        ITT=ITT+1
 	        ITUK(ITT)=J
